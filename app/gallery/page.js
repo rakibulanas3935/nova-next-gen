@@ -60,15 +60,15 @@ const Gallery = () => {
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                    <motion.h1
+                    <motion.h2
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.1 }}
-                        className="text-5xl text-center md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400"
+                        className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500"
 
                     >
                         Gallery
-                    </motion.h1>
+                    </motion.h2>
 
 
                     <motion.p
