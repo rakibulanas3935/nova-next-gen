@@ -2,19 +2,21 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-// Dummy Data (Replace with dynamic content or API integration)
+// Blog data with images
 const blogPosts = [
     {
         title: "Exploring the Moon’s Shadow: Lunar Eclipse Highlights",
         excerpt:
             "Catch the latest lunar eclipse recap and what it tells us about our moon's orbit.",
         date: "May 12, 2025",
+        image: "/images/lunar-eclipse.jpg",
     },
     {
         title: "Top 5 Student Projects from Our Astronomy Club",
         excerpt:
             "We celebrate innovation with our club’s finest stargazing and astrophotography projects.",
         date: "May 22, 2025",
+        image: "/images/student-projects.jpg",
     },
 ];
 
@@ -44,10 +46,42 @@ const spaceNews = [
     },
 ];
 
+const BlogCard = ({
+    title,
+    subtitle,
+    date,
+    image,
+}) => (
+    <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="bg-white/5 hover:bg-white/10 transition-all rounded-2xl border border-white/10 shadow-sm hover:shadow-lg overflow-hidden"
+    >
+        <div className="w-full h-48 overflow-hidden">
+            <img
+                src={image}
+                alt={title}
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            />
+        </div>
+        <div className="p-6">
+            <h4 className="text-lg font-semibold text-white">{title}</h4>
+            <p className="text-sm text-gray-300 mt-2">{subtitle}</p>
+            <p className="text-xs text-gray-500 mt-4">{date}</p>
+        </div>
+    </motion.div>
+);
+
 const BlogNews = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
     return (
-        <section className="relative z-20 py-24 px-4 sm:px-6 lg:px-8 bg-black text-white">
+        <section
+            className="relative  !overflow-hidden z-20 py-24 px-4 sm:px-6 lg:px-8 bg-black text-white"
+            onMouseMove={(e) => setMousePosition({ x: e.clientX, y: e.clientY })}
+        >
             {/* Soft background light effect */}
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.1),transparent)] pointer-events-none" />
 
@@ -63,11 +97,12 @@ const BlogNews = () => {
                     left: '20%',
                 }}
             />
+
             {/* Stars background */}
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 z-0">
                 {[...Array(50)].map((_, i) => (
                     <motion.div
-                        key={i + 1}
+                        key={i}
                         className="absolute w-1 h-1 bg-white rounded-full"
                         initial={{ opacity: 0.1 }}
                         animate={{
@@ -86,7 +121,8 @@ const BlogNews = () => {
                     />
                 ))}
             </div>
-            <div className="max-w-6xl mx-auto space-y-16">
+
+            <div className="relative z-10 max-w-6xl mx-auto space-y-16">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -107,18 +143,13 @@ const BlogNews = () => {
                     <h3 className="text-2xl font-semibold mb-6 text-white">🌙 Recent Blog Posts</h3>
                     <div className="grid md:grid-cols-2 gap-6">
                         {blogPosts.map((post, i) => (
-                            <motion.div
+                            <BlogCard
                                 key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                                viewport={{ once: true }}
-                                className="bg-white/5 p-6 rounded-xl border border-white/10 hover:shadow-lg transition-all"
-                            >
-                                <h4 className="text-lg font-semibold">{post.title}</h4>
-                                <p className="text-sm text-gray-300 mt-2">{post.excerpt}</p>
-                                <p className="text-xs text-gray-500 mt-4">{post.date}</p>
-                            </motion.div>
+                                title={post.title}
+                                subtitle={post.excerpt}
+                                date={post.date}
+                                image={post.image}
+                            />
                         ))}
                     </div>
                 </div>

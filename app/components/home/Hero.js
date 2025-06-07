@@ -75,7 +75,7 @@ const Hero = () => {
 
             {/* Scroll indicator */}
             <motion.div
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+                className="absolute hidden md:block cursor-pointer bottom-8 left-1/2 transform -translate-x-1/2"
                 animate={{
                     y: [0, 10, 0],
                 }}
@@ -89,7 +89,7 @@ const Hero = () => {
                 </div>
             </motion.div>
             <motion.div
-                className="absolute right-[10%] top-[15%] w-[270px] h-[270px] rounded-full"
+                className="absolute hidden md:block right-[10%] top-[15%] w-[270px] h-[270px] rounded-full"
                 style={{
                     // y: moonY,
                     background: 'radial-gradient(circle at 70% 70%, #FFFFFF, #DFDFDF)',

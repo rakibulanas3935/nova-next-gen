@@ -71,7 +71,7 @@ const JoinPage = () => {
           {/* Replace the src URL with your actual Google Form embed URL */}
           <div className="w-full h-[600px] rounded-lg overflow-hidden border border-white/10">
             <iframe
-              src="https://docs.google.com/forms/d/e/1FAIpQLSeYourFormLinkHere/viewform?embedded=true"
+              src="https://docs.google.com/forms/d/e/1FAIpQLScq3NWjLzqZNcmYjl1kLZUGt7KPuvprbMqPgExYfv_J4IWPZA/viewform"
               width="100%"
               height="100%"
               frameBorder="0"

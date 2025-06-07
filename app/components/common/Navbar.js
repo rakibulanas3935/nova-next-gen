@@ -38,6 +38,7 @@ const Navbar = () => {
         { href: '/learn', label: 'Learn' },
         { href: '/gallery', label: 'Gallery' },
         { href: '/blog', label: 'Blog' },
+        { href: '/merchantdise', label: 'Merchandise' },
         { href: '/contact', label: 'Contact' },
     ];
 
@@ -46,11 +47,11 @@ const Navbar = () => {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="fixed w-full z-50"
+            className="fixed !overflow-hidden w-full z-50"
         >
             <div className={`mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
                 isScrolled ? 'bg-black/50' : 'bg-transparent'
-            } backdrop-blur-md border-b border-white/10 rounded-lg max-w-7xl my-2`}>
+            } backdrop-blur-md border-b border-white/10 rounded-lg max-w-7xl my-2 !overflow-hidden`}>
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <motion.div
