@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import SectionWrapper from "../common/SectionWrapper";
 
 const learnSections = [
   {
