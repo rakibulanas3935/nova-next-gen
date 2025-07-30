@@ -3,6 +3,7 @@ import "../globals.css";
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "../context/userContext";
 import DashboardSidebar from "./component/DashboardSideBar";
+import { EventProvider } from "../context/eventContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,17 +24,19 @@ export default function DashboardLayout({ children }) {
   return (
     <html lang="en">
       <UserProvider>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden text-white">
-            <DashboardSidebar/>
-             <div className="lg:ml-64">
-            {children}
+        <EventProvider>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden text-white">
+              <DashboardSidebar />
+              <div className="lg:ml-64">
+                {children}
+              </div>
             </div>
-          </div>
-          <ToastContainer />
-        </body>
+            <ToastContainer />
+          </body>
+        </EventProvider>
       </UserProvider>
     </html>
   );

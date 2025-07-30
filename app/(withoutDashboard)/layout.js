@@ -5,6 +5,7 @@ import { ToastContainer} from 'react-toastify';
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 import { UserProvider } from "../context/userContext";
+import { EventProvider } from "../context/eventContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <UserProvider>
+        <EventProvider>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -33,6 +35,7 @@ export default function RootLayout({ children }) {
         <Footer/>
         <ToastContainer/>
       </body>
+      </EventProvider>
       </UserProvider>
     </html>
   );
