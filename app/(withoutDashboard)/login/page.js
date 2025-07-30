@@ -4,12 +4,15 @@ import { motion } from "framer-motion";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import useAxiosPost from "@/app/utils/useAxiosPost";
 import { useUserContext } from "@/app/context/userContext";
 
 const Login = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const {setReload}=useUserContext()
     const [showPassword, setShowPassword] = useState(false);
+    const router = useRouter();
+    const [, postUserinfo, loading, setLoading] = useAxiosPost()
     const handleLogin = async (event) => {
         event.preventDefault();
         const form = event.target;
@@ -18,43 +21,20 @@ const Login = () => {
         const password = form.password.value;
 
         setLoading(true);
-       
-        try {
-            const response = await fetch(
-                " http://localhost:3000/api/v1/users/login",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ email, password }),
-                }
-            );
-
-            const res = await response.json();
-            console.log(res);
-
+        postUserinfo("http://localhost:3000/api/v1/users/login", {
+            email, password, useName
+        }, (res) => {
             if (res.status === "success") {
                 localStorage.setItem("token", res.token);
-                toast.success(res.message);
-
-                setTimeout(() => {
-                    setReload((prev) => !prev);
-                    router.push("/");
-                }, 2000);
-            } else {
-                toast.error(res.message);
+                setReload((prev) => !prev);
+                router.push("/");
+                
             }
-        } catch (error) {
-            console.log(error);
-            toast.error("Login failed. Please try again.");
-        } finally {
-            setLoading(false);
-        }
+        }, true)
+
     };
-    const [loading, setLoading] = useState(false);
-    const router = useRouter();
-    const { setReload } = useUserContext();
+
+
     return (
         <div className="min-h-screen overflow-x-hidden overflow-y-auto bg-[#0A0F1C]">
             {/* Animated background blob */}
