@@ -3,13 +3,18 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import { useUserContext } from '@/app/context/userContext';
+
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
+
     const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
     const { scrollY } = useScroll();
-
+    const { user } = useUserContext();
+    console.log('User', user)
     // Handle scroll event
     useEffect(() => {
         const handleScroll = () => {
@@ -20,14 +25,6 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Smooth parallax effects for navbar
-    const navBackground = useTransform(
-        scrollY,
-        [0, 100],
-        ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.8)"]
-    );
-    const navPadding = useTransform(scrollY, [0, 100], ["1.5rem", "1rem"]);
-    const navBlur = useTransform(scrollY, [0, 100], ["blur(0px)", "blur(12px)"]);
 
     const navLinks = [
         { href: '/', label: 'Home' },
@@ -40,7 +37,6 @@ const Navbar = () => {
         { href: '/blog', label: 'Blog' },
         { href: '/merchantdise', label: 'Merchandise' },
         { href: '/contact', label: 'Contact' },
-        { href: '/login', label: 'Login' },
     ];
 
     return (
@@ -48,11 +44,10 @@ const Navbar = () => {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="fixed !overflow-hidden w-full z-50"
+            className="fixed  w-full !z-[50]"
         >
-            <div className={`mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
-                isScrolled ? 'bg-black/50' : 'bg-transparent'
-            } backdrop-blur-md border-b border-white/10 rounded-lg max-w-7xl my-2 !overflow-hidden`}>
+            <div className={`mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 ${isScrolled ? 'bg-black/50' : 'bg-transparent'
+                } backdrop-blur-md border-b border-white/10 rounded-lg max-w-7xl my-2 !overflow-hidden`}>
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <motion.div
@@ -66,7 +61,7 @@ const Navbar = () => {
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:block">
-                        <div className="ml-10 flex items-center space-x-4">
+                        <div className=" flex items-center space-x-4">
                             {navLinks.map((link) => (
                                 <motion.div
                                     key={link.href}
@@ -75,16 +70,68 @@ const Navbar = () => {
                                 >
                                     <Link
                                         href={link.href}
-                                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                                            pathname === link.href
-                                                ? 'text-white bg-white/10'
-                                                : 'text-gray-300 hover:text-white hover:bg-white/10'
-                                        }`}
+                                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${pathname === link.href
+                                            ? 'text-white bg-white/10'
+                                            : 'text-gray-300 hover:text-white hover:bg-white/10'
+                                            }`}
                                     >
                                         {link.label}
                                     </Link>
                                 </motion.div>
                             ))}
+                            {
+                                user ? (
+                                    <div className="relative !z-50 profile-dropdown">
+                                        {/* Profile Icon */}
+                                        <div
+                                            className="w-10 h-10 rounded-full bg-[#1E40AF] cursor-pointer flex items-center justify-center"
+                                            onClick={() => setShowDropdown(prev => !prev)}
+                                        >
+                                            <span className="text-xl font-semibold text-white">
+                                                {user?.name.charAt(0)}
+                                            </span>
+                                        </div>
+
+                                        {/* Dropdown */}
+                                        {showDropdown && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: 20 }}
+                                                transition={{ duration: 0.25, ease: "easeOut" }}
+                                                className="absolute !z-[10000] right-0 mt-2 w-48 rounded-xl bg-white/10 backdrop-blur-md shadow-lg p-3 text-white"
+                                            >
+                                                <p className="px-3 py-2 hover:bg-white/20 rounded-lg cursor-pointer">
+                                                    Profile
+                                                </p>
+                                                <p className="px-3 py-2 hover:bg-white/20 rounded-lg cursor-pointer">
+                                                    Dashboard
+                                                </p>
+                                                <p className="px-3 py-2 hover:bg-white/20 rounded-lg cursor-pointer text-red-300">
+                                                    Logout
+                                                </p>
+                                            </motion.div>
+                                        )}
+                                    </div>
+
+                                ) : <motion.div
+                                    key={'/login'}
+                                    whileHover={{ y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <Link
+                                        href={'/login'}
+                                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${pathname === '/login'
+                                            ? 'text-white bg-white/10'
+                                            : 'text-gray-300 hover:text-white hover:bg-white/10'
+                                            }`}
+                                    >
+                                        Login
+                                    </Link>
+                                </motion.div>
+                            }
+
+
                         </div>
                     </div>
 
@@ -97,15 +144,12 @@ const Navbar = () => {
                         >
                             <span className="sr-only">Open main menu</span>
                             <div className="relative w-6 h-6">
-                                <span className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 ${
-                                    isMobileMenuOpen ? 'rotate-45 top-3' : 'top-1'
-                                }`} />
-                                <span className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 top-3 ${
-                                    isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
-                                }`} />
-                                <span className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 ${
-                                    isMobileMenuOpen ? '-rotate-45 top-3' : 'top-5'
-                                }`} />
+                                <span className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 top-3' : 'top-1'
+                                    }`} />
+                                <span className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 top-3 ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
+                                    }`} />
+                                <span className={`absolute block w-full h-0.5 bg-current transform transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 top-3' : 'top-5'
+                                    }`} />
                             </div>
                         </motion.button>
                     </div>
@@ -126,11 +170,10 @@ const Navbar = () => {
                             >
                                 <Link
                                     href={link.href}
-                                    className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors ${
-                                        pathname === link.href
-                                            ? 'text-white bg-white/10'
-                                            : 'text-gray-300 hover:text-white hover:bg-white/10'
-                                    }`}
+                                    className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors ${pathname === link.href
+                                        ? 'text-white bg-white/10'
+                                        : 'text-gray-300 hover:text-white hover:bg-white/10'
+                                        }`}
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     {link.label}

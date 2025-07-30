@@ -12,6 +12,7 @@ const Hero = () => {
 
     return (
         <div className="relative lg:h-[110vh] overflow-hidden bg-[#0A0F1C]">
+           
             {/* Stars background */}
             <div className="absolute inset-0">
                 {[...Array(50)].map((_, i) => (
