@@ -141,7 +141,7 @@ const LearnPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen py-20 px-4 sm:px-10  bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.1),transparent)] text-white"
+      className="min-h-screen py-20 px-4 sm:px-10  bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.1),transparent)] text-white "
     >
       <motion.div
         className="absolute w-32 h-32 rounded-full opacity-20"

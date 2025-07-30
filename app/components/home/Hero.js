@@ -8,21 +8,10 @@ import Header from '../common/Header'
 
 const Hero = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-    const { scrollY } = useScroll()
-
-    // const moonY = useTransform(scrollY, [0, 500], [0, -350])
-    const starsY = useTransform(scrollY, [0, 500], [0, 50])
-
-    // useEffect(() => {
-    //     const handleMouseMove = (e) => {
-    //         setMousePosition({ x: e.clientX, y: e.clientY })
-    //     }
-    //     window.addEventListener('mousemove', handleMouseMove)
-    //     return () => window.removeEventListener('mousemove', handleMouseMove)
-    // }, [])
+    
 
     return (
-        <div className="relative min-h-screen overflow-hidden bg-[#0A0F1C]">
+        <div className="relative lg:h-[110vh] overflow-hidden bg-[#0A0F1C]">
             {/* Stars background */}
             <div className="absolute inset-0">
                 {[...Array(50)].map((_, i) => (
@@ -71,11 +60,10 @@ const Hero = () => {
                     left: '20%',
                 }}
             />
-            {/* Moon */}
 
             {/* Scroll indicator */}
             <motion.div
-                className="absolute hidden md:block cursor-pointer bottom-8 left-1/2 transform -translate-x-1/2"
+                className="absolute hidden md:block cursor-pointer bottom-10 left-1/2 transform -translate-x-1/2"
                 animate={{
                     y: [0, 10, 0],
                 }}
@@ -110,7 +98,7 @@ const Hero = () => {
             </motion.div>
 
             {/* Main content */}
-            <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
+            <div className="relative pt-[10vh] z-10 flex flex-col items-center justify-center min-h-screen px-4">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

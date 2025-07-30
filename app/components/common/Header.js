@@ -11,6 +11,7 @@ const Header = () => {
             transition={{ duration: 0.5 }}
             className="relative z-40 mt-20 sm:mt-24"
         >
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="relative bg-gradient-to-br from-black/40 to-black/60 backdrop-blur-lg rounded-2xl border border-white/10 overflow-hidden">
                     {/* Animated background effect */}

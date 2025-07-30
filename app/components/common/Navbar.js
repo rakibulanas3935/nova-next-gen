@@ -40,6 +40,7 @@ const Navbar = () => {
         { href: '/blog', label: 'Blog' },
         { href: '/merchantdise', label: 'Merchandise' },
         { href: '/contact', label: 'Contact' },
+        { href: '/login', label: 'Login' },
     ];
 
     return (

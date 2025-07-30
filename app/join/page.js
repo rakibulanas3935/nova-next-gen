@@ -25,7 +25,7 @@ const JoinPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen py-20 px-6 sm:px-10 bg-black text-white"
+      className="min-h-screen py-20 px-6 sm:px-10 bg-[#0A0F1C] text-white"
     >
       <div className="max-w-5xl mx-auto space-y-14">
         <motion.h1

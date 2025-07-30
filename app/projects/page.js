@@ -23,7 +23,7 @@ const projectSections = [
 
 const ProjectsPage = () => {
   return (
-    <main className="min-h-screen bg-black text-white px-6 py-20">
+    <main className="min-h-screen  bg-[#0A0F1C] text-white px-6 py-20">
       <div className="max-w-6xl mx-auto space-y-16">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
