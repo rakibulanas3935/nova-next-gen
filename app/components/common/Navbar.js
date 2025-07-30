@@ -81,38 +81,21 @@ const Navbar = () => {
                             ))}
                             {
                                 user ? (
-                                    <div className="relative !z-50 profile-dropdown">
-                                        {/* Profile Icon */}
-                                        <div
-                                            className="w-10 h-10 rounded-full bg-[#1E40AF] cursor-pointer flex items-center justify-center"
-                                            onClick={() => setShowDropdown(prev => !prev)}
-                                        >
-                                            <span className="text-xl font-semibold text-white">
-                                                {user?.name.charAt(0)}
-                                            </span>
-                                        </div>
-
-                                        {/* Dropdown */}
-                                        {showDropdown && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 20 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: 20 }}
-                                                transition={{ duration: 0.25, ease: "easeOut" }}
-                                                className="absolute !z-[10000] right-0 mt-2 w-48 rounded-xl bg-white/10 backdrop-blur-md shadow-lg p-3 text-white"
-                                            >
-                                                <p className="px-3 py-2 hover:bg-white/20 rounded-lg cursor-pointer">
-                                                    Profile
-                                                </p>
-                                                <p className="px-3 py-2 hover:bg-white/20 rounded-lg cursor-pointer">
-                                                    Dashboard
-                                                </p>
-                                                <p className="px-3 py-2 hover:bg-white/20 rounded-lg cursor-pointer text-red-300">
-                                                    Logout
-                                                </p>
-                                            </motion.div>
-                                        )}
-                                    </div>
+                                    <motion.div
+                                    key={'/dashboard'}
+                                    whileHover={{ y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <Link
+                                        href={'/dashboard'}
+                                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${pathname === '/dashboard'
+                                            ? 'text-white bg-white/10'
+                                            : 'text-gray-300 hover:text-white hover:bg-white/10'
+                                            }`}
+                                    >
+                                        Dashboard
+                                    </Link>
+                                </motion.div>
 
                                 ) : <motion.div
                                     key={'/login'}

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Timeline from "./component/Timeline";
+
 
 const facts = [
     "Founded by Carlos Sarkis in 2019 after meeting Buzz Aldrin.",

@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { useUserContext } from "../context/userContext";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useUserContext } from "@/app/context/userContext";
 
 const Login = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });

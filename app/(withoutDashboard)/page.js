@@ -1,8 +1,9 @@
 "use client"
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
-import Header from "./components/common/Header";
-import Hero from "./components/home/Hero";
+import Hero from "../components/home/Hero";
+import Header from "../components/common/Header";
+
 
 export default function Home() {
     const containerRef = useRef(null);
