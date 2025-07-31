@@ -72,19 +72,19 @@ export default function EventPage() {
                                     </td>
                                     <td className="px-6 py-4 text-center space-x-2">
                                         <Link
-                                            href={`/dashboard/events/${event.id}`}
+                                            href={`/dashboard/events/${event?._id}`}
                                             className="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2"
                                         >
                                             <Eye size={16} />
                                         </Link>
                                         <Link
-                                            href={`/dashboard/events/${event.id}/edit`}
+                                            href={`/dashboard/events/${event?._id}/edit`}
                                             className="inline-flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 text-white rounded-md p-2"
                                         >
                                             <Pencil size={16} />
                                         </Link>
                                         <button
-                                            onClick={() => handleDelete(event._id)}
+                                            onClick={() => handleDelete(event?._id)}
                                             className="inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-white rounded-md p-2"
                                         >
                                             <Trash size={16} />

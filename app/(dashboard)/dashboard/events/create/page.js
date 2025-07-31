@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Button from '@/app/components/shared/Button';
 import useAxiosPost from '@/app/utils/useAxiosPost';
 import RichTextEditor from '../../../component/RichTextEditor';
+import useAxiosPostFile from '@/app/utils/useAxiosPostFile';
 
 export default function CreateEventPage() {
   const [formData, setFormData] = useState({
@@ -14,7 +15,7 @@ export default function CreateEventPage() {
     description: '',
   });
 
-  const [, postEvent, loading] = useAxiosPost();
+  const [, postEvent, loading] = useAxiosPostFile();
 
   const handleSubmit = (e) => {
     e.preventDefault();

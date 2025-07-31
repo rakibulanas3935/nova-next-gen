@@ -3,13 +3,26 @@
 import { useEffect } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import Underline from '@tiptap/extension-underline';
+import Strike from '@tiptap/extension-strike';
+import CodeBlock from '@tiptap/extension-code-block';
+import Blockquote from '@tiptap/extension-blockquote';
 
 export default function RichTextEditor({ value, onChange }) {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      Underline,
+      Strike,
+      CodeBlock,
+      Blockquote,
+    ],
     content: value || '',
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      const html = editor.getHTML();
+      if (html !== value) {
+        onChange(html);
+      }
     },
     editorProps: {
       attributes: {
@@ -23,9 +36,10 @@ export default function RichTextEditor({ value, onChange }) {
     immediatelyRender: false,
   });
 
+  // Sync prop -> editor if value changes outside
   useEffect(() => {
     if (editor && value !== editor.getHTML()) {
-      editor.commands.setContent(value || '');
+      editor.commands.setContent(value || '', false);
     }
   }, [value, editor]);
 
@@ -48,7 +62,7 @@ export default function RichTextEditor({ value, onChange }) {
   return (
     <div className="backdrop-blur-md border border-white/20 bg-white/10 rounded-xl shadow-xl">
       {/* Toolbar */}
-      <div className="flex gap-2 border-b border-white/10 p-3 rounded-t-xl bg-white/5">
+      <div className="flex flex-wrap gap-2 border-b border-white/10 p-3 rounded-t-xl bg-white/5">
         <ToolbarButton
           icon="B"
           isActive={editor.isActive('bold')}
@@ -58,6 +72,16 @@ export default function RichTextEditor({ value, onChange }) {
           icon="I"
           isActive={editor.isActive('italic')}
           command={() => editor.chain().focus().toggleItalic().run()}
+        />
+        <ToolbarButton
+          icon="U"
+          isActive={editor.isActive('underline')}
+          command={() => editor.chain().focus().toggleUnderline().run()}
+        />
+        <ToolbarButton
+          icon="S"
+          isActive={editor.isActive('strike')}
+          command={() => editor.chain().focus().toggleStrike().run()}
         />
         <ToolbarButton
           icon="H1"
@@ -78,6 +102,16 @@ export default function RichTextEditor({ value, onChange }) {
           icon="1."
           isActive={editor.isActive('orderedList')}
           command={() => editor.chain().focus().toggleOrderedList().run()}
+        />
+        <ToolbarButton
+          icon="“”"
+          isActive={editor.isActive('blockquote')}
+          command={() => editor.chain().focus().toggleBlockquote().run()}
+        />
+        <ToolbarButton
+          icon="{}"
+          isActive={editor.isActive('codeBlock')}
+          command={() => editor.chain().focus().toggleCodeBlock().run()}
         />
         <ToolbarButton
           icon="↩"

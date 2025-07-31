@@ -3,24 +3,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import GuestSpeakersSection from "./component/GuestSpeakersSection";
 import PastEventsGallery from "./component/PastEventsGallery";
-
-const upcomingEvents = [
-    {
-        title: "Stargazing Night",
-        date: "June 10, 2025",
-        description: "Join us for a guided night of stargazing with telescopes and snacks.",
-    },
-    {
-        title: "Planetarium Visit",
-        date: "June 20, 2025",
-        description: "A fun and educational visit to the National Planetarium.",
-    },
-    {
-        title: "Space Movie Night",
-        date: "June 25, 2025",
-        description: "Watch 'Interstellar' under the stars on a projector screen.",
-    },
-];
+import { useEventContext } from "@/app/context/eventContext";
+import Image from "next/image";
+import Link from "next/link";
 
 const pastEvents = [
     {
@@ -41,12 +26,14 @@ const pastEvents = [
 ];
 
 const EventsPage = () => {
+    const { event } = useEventContext()
+
     return (
         <motion.section
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
-            className="px-4 pt-20 sm:px-6 lg:px-8 max-w-6xl mx-auto"
+            className="relative z-30 pb-20 pt-24 px-4 sm:px-6 lg:px-8 !overflow-hidden bg-[#0A0F1C]"
         >
             <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500 text-center">
                 Events & Activities
@@ -58,22 +45,55 @@ const EventsPage = () => {
 
             {/* Upcoming Events */}
             <section className="mt-12">
-                <h2 className="text-2xl font-semibold text-white mb-4">Upcoming Events</h2>
-                <div className="grid gap-6 md:grid-cols-2">
-                    {upcomingEvents.map((event, idx) => (
-                        <motion.div
-                            key={idx}
-                            whileHover={{ scale: 1.02 }}
-                            transition={{ duration: 0.3 }}
-                            className="bg-white/5 border border-white/10 rounded-lg p-5 shadow-sm backdrop-blur-sm"
-                        >
-                            <h3 className="text-xl font-semibold text-white">{event.title}</h3>
-                            <p className="text-sm text-purple-300 mt-1">{event.date}</p>
-                            <p className="text-sm text-gray-300 mt-2">{event.description}</p>
-                        </motion.div>
+                <h2 className="text-2xl font-semibold text-white mb-4">All Events</h2>
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {event?.data?.events?.map((ev, idx) => (
+                        <Link href={`/events/${ev?._id}`} key={idx + 1}>
+                            <motion.div
+
+                                whileHover={{ scale: 1.02 }}
+                                transition={{ duration: 0.3 }}
+                                className="bg-white/5 border border-white/10 rounded-xl shadow-md overflow-hidden backdrop-blur-sm cursor-pointer"
+                            >
+                                {/* Event Image using Next.js <Image /> */}
+                                {/* {ev.poster && (
+                                <div className="relative w-full h-40">
+                                    <Image
+                                        src={ev?.poster}
+                                        alt={ev?.title}
+                                        height={100}
+                                        width={100}
+                                        className="object-cover"
+                                    />
+                                </div>
+                            )} */}
+
+                                {/* Event Content */}
+                                <div className="p-5">
+                                    <h3 className="text-xl font-bold text-white">{ev.title}</h3>
+                                    <p className="text-sm text-purple-300 mt-1">
+                                        {Date(ev?.eventTime).toLocaleString("en-US", {
+                                            weekday: 'short',
+                                            month: 'short',
+                                            day: 'numeric',
+                                            year: 'numeric',
+                                            hour: 'numeric',
+                                            minute: '2-digit',
+                                        })}
+                                    </p>
+
+                                    {/* Rich Text Description */}
+                                    <div
+                                        className="prose prose-sm prose-invert mt-3 text-gray-300 max-w-none"
+                                        dangerouslySetInnerHTML={{ __html: ev.description }}
+                                    />
+                                </div>
+                            </motion.div>
+                        </Link>
                     ))}
                 </div>
             </section>
+
             <GuestSpeakersSection />
             {/* Past Events */}
             <section className="py-16">
