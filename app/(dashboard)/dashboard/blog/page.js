@@ -6,13 +6,12 @@ import { Pencil, Trash, Eye, Plus } from 'lucide-react';
 import useAxiosPost from '@/app/utils/useAxiosPost';
 import ConfirmModal from '../../component/ConfirmModal';
 import { useBlogContext } from '@/app/context/blogContext';
-import { useUserContext } from '@/app/context/userContext';
 
 
 
 export default function BlogPage() {
-    const { users, setReload } = useUserContext()
-    console.log(users)
+    const { blogs, loading, setReload } = useBlogContext()
+    console.log(blogs)
     const [, deleteEvent,] = useAxiosPost({}, "delete");
 
 
@@ -25,7 +24,7 @@ export default function BlogPage() {
     };
 
     const confirmDelete = () => {
-        deleteEvent(`http://localhost:3000/api/v1/users/${selectedId}`, {}, (res) => {
+        deleteEvent(`http://localhost:3000/api/v1/blogs/${selectedId}`, {}, (res) => {
             setReload(true)
         }, true)
     };
@@ -34,12 +33,12 @@ export default function BlogPage() {
         <div className="min-h-screen bg-[#0A0F1C] text-white p-8">
             <div className="max-w-6xl mx-auto">
                 <div className="flex justify-between items-center mb-6">
-                    <h1 className="text-2xl font-semibold">ALl User List</h1>
+                    <h1 className="text-2xl font-semibold">Blog Configuration</h1>
                     <Link
-                        href="/dashboard/create-user/new-user"
+                        href="/dashboard/blog/create"
                         className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg shadow transition"
                     >
-                        <Plus className="w-4 h-4" /> Create User
+                        <Plus className="w-4 h-4" /> Create Blog
                     </Link>
                 </div>
 
@@ -48,31 +47,36 @@ export default function BlogPage() {
                     <table className="min-w-full divide-y divide-white/10">
                         <thead className="bg-white/10 text-white">
                             <tr>
-                                <th className="px-6 py-3 text-left text-sm font-medium">Name</th>
-                                <th className="px-6 py-3 text-left text-sm font-medium">User Name</th>
-                                <th className="px-6 py-3 text-left text-sm font-medium">Email</th>
-
-
+                                <th className="px-6 py-3 text-left text-sm font-medium">Title</th>
+                                <th className="px-6 py-3 text-left text-sm font-medium">Time</th>
+                               
                                 <th className="px-6 py-3 text-center text-sm font-medium">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/10">
-                            {users?.data?.users?.map((user) => (
-                                <tr key={user?._id} className="hover:bg-white/10 transition">
-                                    <td className="px-6 py-4">{user?.name}</td>
+                            {blogs?.data?.blogs?.map((blog) => (
+                                <tr key={blog?._id} className="hover:bg-white/10 transition">
+                                    <td className="px-6 py-4">{blog?.title}</td>
                                     <td className="px-6 py-4">
-                                        {user?.userName}
+                                        {new Date(blog?.createdAt).toLocaleString()}
                                     </td>
-                                    <td className="px-6 py-4">
-                                        {user?.email}
-                                    </td>
-
+                                   
                                     <td className="px-6 py-4 text-center space-x-2">
-
-
+                                        <Link
+                                            href={`/dashboard/blogs/${blog?._id}`}
+                                            className="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2"
+                                        >
+                                            <Eye size={16} />
+                                        </Link>
+                                        <Link
+                                            href={`/dashboard/blog/${blog?._id}/edit`}
+                                            className="inline-flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 text-white rounded-md p-2"
+                                        >
+                                            <Pencil size={16} />
+                                        </Link>
                                         <button
-                                            onClick={() => handleDelete(user?._id)}
-                                            className="inline-flex items-center justify-center cursor-pointer bg-red-400 hover:bg-red-600 text-white rounded-md p-2"
+                                            onClick={() => handleDelete(blog?._id)}
+                                            className="inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-white rounded-md p-2"
                                         >
                                             <Trash size={16} />
                                         </button>
@@ -80,7 +84,7 @@ export default function BlogPage() {
                                 </tr>
                             ))}
 
-                            {users?.data?.blogs?.length === 0 && (
+                            {blogs?.data?.blogs?.length === 0 && (
                                 <tr>
                                     <td colSpan={4} className="px-6 py-6 text-center text-gray-400">
                                         No events found.
@@ -88,17 +92,17 @@ export default function BlogPage() {
                                 </tr>
                             )}
 
-
+                           
                         </tbody>
                     </table>
                 </div>
-                <ConfirmModal
-                    open={showConfirm}
-                    onClose={() => setShowConfirm(false)}
-                    onConfirm={confirmDelete}
-                    title="Delete this event?"
-                    description="This action is permanent and cannot be undone."
-                />
+ <ConfirmModal
+                                open={showConfirm}
+                                onClose={() => setShowConfirm(false)}
+                                onConfirm={confirmDelete}
+                                title="Delete this event?"
+                                description="This action is permanent and cannot be undone."
+                            />
 
             </div>
         </div>

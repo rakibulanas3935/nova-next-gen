@@ -1,6 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useBlogContext } from "@/app/context/blogContext";
+import Image from "next/image";
+import { Clock3 } from "lucide-react";
+import Link from "next/link";
 
 // Blog data with images
 const blogPosts = [
@@ -47,36 +51,58 @@ const spaceNews = [
 ];
 
 const BlogCard = ({
+    id,
     title,
     subtitle,
     date,
     image,
 }) => (
+    <Link href={`/blog/${id}`}>
     <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="bg-white/5 hover:bg-white/10 transition-all rounded-2xl border border-white/10 shadow-sm hover:shadow-lg overflow-hidden"
+        className="bg-white/5 cursor-pointer hover:bg-white/10 transition-all rounded-2xl border border-white/10 shadow-sm hover:shadow-lg overflow-hidden"
     >
         <div className="w-full h-48 overflow-hidden">
-            <img
-                src={image}
-                alt={title}
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-            />
+            <div className="relative w-full h-64 sm:h-96">
+                <Image
+                    src={image}
+                    alt={title}
+                    fill
+
+                    placeholder="blur"
+                    blurDataURL="/blur.jpg" // fallback blur
+                    priority
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+            </div>
+
+
+
         </div>
         <div className="p-6">
             <h4 className="text-lg font-semibold text-white">{title}</h4>
-            <p className="text-sm text-gray-300 mt-2">{subtitle}</p>
-            <p className="text-xs text-gray-500 mt-4">{date}</p>
+            <p className="text-xs flex text-gray-500 mt-4">
+                <Clock3 className="w-4 h-4 mr-2" />
+                {new Date(date).toLocaleString('en-US', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                    hour: 'numeric',
+                    minute: '2-digit',
+                })}
+            </p>
         </div>
     </motion.div>
+    </Link>
 );
 
 const BlogNews = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
+    const { blogs } = useBlogContext()
     return (
         <section
             className="relative  !overflow-hidden z-20 py-24 px-4 sm:px-6 lg:px-8 bg-black text-white"
@@ -142,13 +168,14 @@ const BlogNews = () => {
                 <div>
                     <h3 className="text-2xl font-semibold mb-6 text-white">🌙 Recent Blog Posts</h3>
                     <div className="grid md:grid-cols-2 gap-6">
-                        {blogPosts.map((post, i) => (
+                        {blogs?.data?.blogs?.map((post, i) => (
                             <BlogCard
-                                key={i}
-                                title={post.title}
-                                subtitle={post.excerpt}
-                                date={post.date}
-                                image={post.image}
+                                key={i+1}
+                                title={post?.title}
+                                id={post?._id}
+                                // subtitle={post.excerpt}
+                                date={post?.createdAt}
+                                image={post?.blogImage}
                             />
                         ))}
                     </div>

@@ -7,6 +7,7 @@ import {
   useCallback,
   useMemo,
 } from "react";
+import useAxiosGet from "../utils/useAxiosGet";
 
 const UserContext = createContext();
 
@@ -14,9 +15,9 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [reload, setReload] = useState(false);
-
+  const [users, getAllusers, userLoading, setALluser] = useAxiosGet([])
   const fetchCurrentUser = useCallback(async () => {
-    setLoading(true); 
+    setLoading(true);
     try {
       const response = await fetch(
         " http://localhost:3000/api/v1/users/current-user",
@@ -46,9 +47,12 @@ const UserProvider = ({ children }) => {
     fetchCurrentUser();
   }, [fetchCurrentUser]);
 
+  useEffect(() => {
+    getAllusers(`http://localhost:3000/api/v1/users`)
+  }, [reload])
   const userContextValue = useMemo(
-    () => ({ user, setUser, loading, setReload }),
-    [user, loading]
+    () => ({ user, users,setUser, loading, setReload }),
+    [user, loading,users]
   );
 
   return (

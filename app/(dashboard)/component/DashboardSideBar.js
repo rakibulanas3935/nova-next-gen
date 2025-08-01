@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import {
     Home, Calendar, BookOpen, FolderOpen, Image,
     FileText, ShoppingBag, Users, Menu, X, Search,
-    Bell, Settings, User
+    Bell, Settings, User,
+    LogOut
 } from 'lucide-react';
 import Link from 'next/link';
 import { useUserContext } from '@/app/context/userContext';
+import { useRouter } from 'next/navigation';
 
 // Sample Data
 const barData = [
@@ -29,7 +31,7 @@ const DashboardSidebar = () => {
     const [activeItem, setActiveItem] = useState('dashboard');
     const [activeItemName, setActiveItemName] = useState('Dashboard');
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const { user } = useUserContext()
+    const { user,setReload } = useUserContext()
 
     const menuItems = [
         {
@@ -91,7 +93,7 @@ const DashboardSidebar = () => {
     ];
 
 
-
+     const router = useRouter();
     return (
         <>
             {/* Sidebar Background Blur */}
@@ -133,6 +135,24 @@ const DashboardSidebar = () => {
                                     </button>
                                 </Link>
                             ))}
+                          
+                                    <button
+
+                                        onClick={() => {
+                                            localStorage.clear();
+                                            router.push('/')
+                                            setReload(true)
+
+                                            setSidebarOpen(false);
+                                            setActiveItemName('logout')
+                                        }}
+                                        className={`w-full flex items-center px-4 py-3 rounded-xl space-x-3 transition-all text-gray-300 hover:bg-white/10 hover:text-white
+                                            `}
+                                    >
+                                        <LogOut size={20} />
+                                        <span>Log Out</span>
+                                    </button>
+                                
                     </nav>
 
                 </div>

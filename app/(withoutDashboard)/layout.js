@@ -6,6 +6,7 @@ import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 import { UserProvider } from "../context/userContext";
 import { EventProvider } from "../context/eventContext";
+import { BlogProvider } from "../context/blogContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <UserProvider>
         <EventProvider>
+           <BlogProvider>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -35,6 +37,7 @@ export default function RootLayout({ children }) {
         <Footer/>
         <ToastContainer/>
       </body>
+      </BlogProvider>
       </EventProvider>
       </UserProvider>
     </html>

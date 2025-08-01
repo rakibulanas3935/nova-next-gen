@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { UserProvider } from "../context/userContext";
 import DashboardSidebar from "./component/DashboardSideBar";
 import { EventProvider } from "../context/eventContext";
+import { BlogProvider } from "../context/blogContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +26,7 @@ export default function DashboardLayout({ children }) {
     <html lang="en">
       <UserProvider>
         <EventProvider>
+          <BlogProvider>
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
@@ -36,6 +38,7 @@ export default function DashboardLayout({ children }) {
             </div>
             <ToastContainer />
           </body>
+          </BlogProvider>
         </EventProvider>
       </UserProvider>
     </html>
