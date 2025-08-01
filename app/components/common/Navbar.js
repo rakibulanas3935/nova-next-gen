@@ -55,7 +55,7 @@ const Navbar = () => {
                         className="flex-shrink-0"
                     >
                         <Link href="/" className="text-white text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
-                            NovaNextGen
+                            Deep Sky Society
                         </Link>
                     </motion.div>
 
