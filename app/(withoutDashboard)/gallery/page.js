@@ -1,20 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-
-const images = [
-    "/gallery/sky-space-dark-galaxy.jpg",
-    "/gallery/sky-space-dark-galaxy.jpg",
-    "/gallery/sky-space-dark-galaxy.jpg",
-    "/gallery/sky-space-dark-galaxy.jpg",
-    "/gallery/sky-space-dark-galaxy.jpg",
-    "/gallery/sky-space-dark-galaxy.jpg",
-    "/gallery/sky-space-dark-galaxy.jpg",
-    "/gallery/sky-space-dark-galaxy.jpg",
-];
+import { useGalleryContext } from "@/app/context/galleryContext";
+import Image from "next/image";
 
 const Gallery = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+    const { gallery } = useGalleryContext()
+    console.log("galer", gallery)
     return (
         <div className=" min-h-screen overflow-hidden bg-[#0A0F1C]">
             <motion.div
@@ -81,22 +74,25 @@ const Gallery = () => {
                     </motion.p>
 
                     <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        {images.map((src, index) => (
+                        {gallery?.data?.images?.map((src, index) => (
                             <motion.div
-                                key={index}
+                                key={index + 1}
                                 whileHover={{ scale: 1.05 }}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 * index }}
-                                className="relative overflow-hidden rounded-xl shadow-md border border-white/10 bg-white/5 backdrop-blur-sm"
+                                className="relative cursor-pointer overflow-hidden rounded-xl shadow-md border border-white/10 bg-white/5 backdrop-blur-sm"
                             >
-                                <img
+                                <Image
                                     src={src}
                                     alt={`Gallery image ${index + 1}`}
+                                    width={400}
+                                    height={240}
                                     className="w-full h-60 object-cover transition-transform duration-300 ease-in-out hover:scale-110"
                                 />
                             </motion.div>
                         ))}
+
                     </div>
                 </div>
             </motion.section>

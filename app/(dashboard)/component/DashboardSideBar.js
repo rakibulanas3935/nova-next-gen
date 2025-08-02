@@ -108,7 +108,7 @@ const DashboardSidebar = () => {
             <div className={`fixed top-0 left-0 h-full w-64 bg-white/10 backdrop-blur-md border-r border-white/20 z-50 transform transition-transform duration-300 lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                 <div className="p-6">
                     <div className="flex justify-between items-center mb-6">
-                        <Link href={'/'}><h1 className="text-2xl font-bold cursor-pointer">Nova Next Gen</h1></Link>
+                        <Link href={'/'}><h1 className="text-2xl font-bold cursor-pointer">Deep Sky Society</h1></Link>
                         <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white hover:text-gray-300">
                             <X size={24} />
                         </button>

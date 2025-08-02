@@ -46,7 +46,7 @@ const Footer = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-2xl font-bold text-white mb-3 bg-gradient-to-r from-purple-400 to-blue-500 text-transparent bg-clip-text">
-            NovaNextGen
+            Deep Sky Society
           </h2>
           <p className="text-gray-400 leading-relaxed">
             Exploring space. Empowering minds. We are the next generation of cosmic thinkers.

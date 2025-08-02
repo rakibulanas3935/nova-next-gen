@@ -34,7 +34,7 @@ const JoinPage = () => {
           transition={{ duration: 0.6 }}
           className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500"
         >
-          Join NovaNextGen Club
+          Join Deep Sky Society Club
         </motion.h1>
 
         {joinData.map((item, index) => (

@@ -6,6 +6,7 @@ import DashboardSidebar from "./component/DashboardSideBar";
 import { EventProvider } from "../context/eventContext";
 import { BlogProvider } from "../context/blogContext";
 import { ProjectProvider } from "../context/projectContext";
+import { GalleryProvider } from "../context/galleryContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,17 +30,19 @@ export default function DashboardLayout({ children }) {
         <EventProvider>
           <BlogProvider>
             <ProjectProvider>
-              <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-              >
-                <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden text-white">
-                  <DashboardSidebar />
-                  <div className="lg:ml-64">
-                    {children}
+              <GalleryProvider>
+                <body
+                  className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                >
+                  <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden text-white">
+                    <DashboardSidebar />
+                    <div className="lg:ml-64">
+                      {children}
+                    </div>
                   </div>
-                </div>
-                <ToastContainer />
-              </body>
+                  <ToastContainer />
+                </body>
+              </GalleryProvider>
             </ProjectProvider>
           </BlogProvider>
         </EventProvider>
