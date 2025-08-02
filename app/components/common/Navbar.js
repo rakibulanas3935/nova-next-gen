@@ -35,7 +35,7 @@ const Navbar = () => {
         { href: '/learn', label: 'Learn' },
         { href: '/gallery', label: 'Gallery' },
         { href: '/blog', label: 'Blog' },
-        { href: '/merchantdise', label: 'Merchandise' },
+        // { href: '/merchantdise', label: 'Merchandise' },
         { href: '/contact', label: 'Contact' },
     ];
 
@@ -163,6 +163,41 @@ const Navbar = () => {
                                 </Link>
                             </motion.div>
                         ))}
+                        {
+                                user ? (
+                                    <motion.div
+                                    key={'/dashboard'}
+                                    whileHover={{ y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <Link
+                                        href={'/dashboard'}
+                                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${pathname === '/dashboard'
+                                            ? 'text-white bg-white/10'
+                                            : 'text-gray-300 hover:text-white hover:bg-white/10'
+                                            }`}
+                                    >
+                                        Dashboard
+                                    </Link>
+                                </motion.div>
+
+                                ) : <motion.div
+                                    key={'/login'}
+                                    whileHover={{ y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <Link
+                                        href={'/login'}
+                                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${pathname === '/login'
+                                            ? 'text-white bg-white/10'
+                                            : 'text-gray-300 hover:text-white hover:bg-white/10'
+                                            }`}
+                                    >
+                                        Login
+                                    </Link>
+                                </motion.div>
+                            }
+
                     </div>
                 </motion.div>
             </div>

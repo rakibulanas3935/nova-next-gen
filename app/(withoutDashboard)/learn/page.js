@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { useLearnContext } from "@/app/context/learnContext";
 
 const learnSections = [
   {
@@ -121,7 +122,7 @@ const LearnPage = () => {
   const [expandedIndex, setExpandedIndex] = useState(null);
   const [quizAnswers, setQuizAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
-
+  const {learn}=useLearnContext()
   const toggleSection = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
@@ -140,7 +141,7 @@ const LearnPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen py-20 px-4 sm:px-10  bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.1),transparent)] text-white "
+      className="min-h-screen !overflow-hidden py-20 px-4 sm:px-10 bg-[#0A0F1C]  bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.1),transparent)] text-white "
     >
       <motion.div
         className="absolute w-32 h-32 rounded-full opacity-20"
@@ -182,11 +183,11 @@ const LearnPage = () => {
 
       <div className="max-w-5xl mx-auto space-y-16">
         <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">
-          Learn Astronomy
+          Learn 
         </h1>
 
         {/* Learn Sections */}
-        {learnSections.map((item, i) => (
+        {learn?.data?.learns?.map((item, i) => (
           <motion.div
             key={i}
             initial={{ y: 40, opacity: 0 }}
@@ -196,27 +197,22 @@ const LearnPage = () => {
             className="p-6 sm:p-8 bg-white/5 border border-white/10 rounded-xl backdrop-blur-md"
           >
             <div
-              className={`flex justify-between items-center ${item.expandable ? "cursor-pointer" : ""
-                }`}
-              onClick={() => item.expandable && toggleSection(i)}
+              className={`flex justify-between items-center`}
+             
             >
               <h2 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-sky-400">
                 {item.title}
               </h2>
-              {item.expandable &&
-                (expandedIndex === i ? (
-                  <ChevronUp size={20} />
-                ) : (
-                  <ChevronDown size={20} />
-                ))}
+              
             </div>
-            <p className="mt-2 text-sm text-gray-300">{item.description}</p>
-            {item.expandable && expandedIndex === i && item.content}
+            <p className="mt-2 text-sm text-gray-300"
+            dangerouslySetInnerHTML={{ __html: item.description }}/>
+            
           </motion.div>
         ))}
 
         {/* Interactive Quiz */}
-        <div className="space-y-6">
+        {/* <div className="space-y-6">
           <h2 className="text-2xl font-semibold text-white">🚀 Interactive Quiz</h2>
           {quizQuestions.map((q, i) => (
             <div
@@ -263,10 +259,10 @@ const LearnPage = () => {
               Submit Quiz
             </button>
           )}
-        </div>
+        </div> */}
 
         {/* Fun Facts */}
-        <div className="space-y-4">
+        {/* <div className="space-y-4">
           <h2 className="text-2xl font-semibold text-white">🌟 Fun Facts</h2>
           <ul className="list-disc list-inside space-y-2 text-sm text-gray-300">
             {funFacts.map((fact, i) => (
@@ -281,7 +277,7 @@ const LearnPage = () => {
               </motion.li>
             ))}
           </ul>
-        </div>
+        </div> */}
       </div>
     </motion.section>
   );

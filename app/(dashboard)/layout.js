@@ -7,6 +7,7 @@ import { EventProvider } from "../context/eventContext";
 import { BlogProvider } from "../context/blogContext";
 import { ProjectProvider } from "../context/projectContext";
 import { GalleryProvider } from "../context/galleryContext";
+import { LearnProvider } from "../context/learnContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function DashboardLayout({ children }) {
           <BlogProvider>
             <ProjectProvider>
               <GalleryProvider>
+                <LearnProvider>
                 <body
                   className={`${geistSans.variable} ${geistMono.variable} antialiased`}
                 >
@@ -42,6 +44,7 @@ export default function DashboardLayout({ children }) {
                   </div>
                   <ToastContainer />
                 </body>
+                </LearnProvider>
               </GalleryProvider>
             </ProjectProvider>
           </BlogProvider>
