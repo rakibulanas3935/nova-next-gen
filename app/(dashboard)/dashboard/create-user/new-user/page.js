@@ -22,7 +22,7 @@ const CreateUser = () => {
     const password = form.password.value;
 
     setLoading(true);
-    postUserinfo("http://localhost:3000/api/v1/users/signup", {
+    postUserinfo("https://nova-next-gen-server.onrender.com/api/v1/users/signup", {
       email, password, userName, name, passwordConfirm: password
     }, (res) => {
       

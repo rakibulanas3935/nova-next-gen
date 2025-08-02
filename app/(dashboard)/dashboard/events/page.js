@@ -24,7 +24,7 @@ export default function EventPage() {
     };
 
     const confirmDelete = () => {
-        deleteEvent(`http://localhost:3000/api/v1/events/${selectedId}`, {}, (res) => {
+        deleteEvent(`https://nova-next-gen-server.onrender.com/api/v1/events/${selectedId}`, {}, (res) => {
             setReload(true)
         }, true)
     };

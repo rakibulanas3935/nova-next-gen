@@ -16,7 +16,7 @@ const EventProvider = ({ children }) => {
 
     // Fetch all events whenever component mounts or reload changes
     useEffect(() => {
-        getAllEvent(`http://localhost:3000/api/v1/events`);
+        getAllEvent(`https://nova-next-gen-server.onrender.com/api/v1/events`);
     }, [reload]);
 
     const EventContextValue = useMemo(

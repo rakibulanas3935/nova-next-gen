@@ -13,7 +13,7 @@ export default function EventDetailPage() {
 
   useEffect(() => {
     if (id) {
-      getSingleEvent(`http://localhost:3000/api/v1/events/${id}`);
+      getSingleEvent(`https://nova-next-gen-server.onrender.com/api/v1/events/${id}`);
     }
   }, [id]);
 

@@ -24,7 +24,7 @@ export default function EditEventPage() {
 
 
     useEffect(() => {
-        getSingleEvent(`http://localhost:3000/api/v1/events/${id}`, (res) => {
+        getSingleEvent(`https://nova-next-gen-server.onrender.com/api/v1/events/${id}`, (res) => {
             const event = res?.data?.event;
             setFormData({
                 title: event.title || '',
@@ -45,7 +45,7 @@ export default function EditEventPage() {
         data.append('description', formData.description);
         if (formData.poster) data.append('poster', formData.poster);
 
-        updateEvent(`http://localhost:3000/api/v1/events/${id}`, data, () => {
+        updateEvent(`https://nova-next-gen-server.onrender.com/api/v1/events/${id}`, data, () => {
             setReload(true)
             setFormData({
                 title: '',

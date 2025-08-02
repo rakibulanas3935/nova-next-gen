@@ -16,7 +16,7 @@ const GalleryProvider = ({ children }) => {
 
     // Fetch all gallerys whenever component mounts or reload changes
     useEffect(() => {
-        getAllgallery(`http://localhost:3000/api/v1/gallery/approved`);
+        getAllgallery(`https://nova-next-gen-server.onrender.com/api/v1/gallery/approved`);
     }, [reload]);
 
     const GalleryContextValue = useMemo(

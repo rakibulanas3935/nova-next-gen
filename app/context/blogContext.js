@@ -16,7 +16,7 @@ const BlogProvider = ({ children }) => {
 
     // Fetch all blogss whenever component mounts or reload changes
     useEffect(() => {
-        getAllBlogs(`http://localhost:3000/api/v1/blogs`);
+        getAllBlogs(`https://nova-next-gen-server.onrender.com/api/v1/blogs`);
     }, [reload]);
 
     const BlogContextValue = useMemo(

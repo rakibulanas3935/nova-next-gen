@@ -42,7 +42,7 @@ export default function ImageGalleryUpload() {
     if (user?._id) {
       formData.append('createdBy', user?._id);
     }
-    galleryEvent('http://localhost:3000/api/v1/gallery', formData, () => {
+    galleryEvent('https://nova-next-gen-server.onrender.com/api/v1/gallery', formData, () => {
 
     }, true);
   };

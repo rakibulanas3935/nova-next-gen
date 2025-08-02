@@ -28,7 +28,7 @@ export default function CreateEventPage() {
     if (user?._id) {
       data.append('createdBy', user?._id);
     }
-    postEvent('http://localhost:3000/api/v1/projects', data, () => {
+    postEvent('https://nova-next-gen-server.onrender.com/api/v1/projects', data, () => {
       setFormData({
         title: '',
         eventTime: '',

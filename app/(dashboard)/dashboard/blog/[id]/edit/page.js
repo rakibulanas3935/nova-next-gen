@@ -22,7 +22,7 @@ export default function EditEventPage() {
 
 
     useEffect(() => {
-        getSingleBlog(`http://localhost:3000/api/v1/blogs/${id}`, (res) => {
+        getSingleBlog(`https://nova-next-gen-server.onrender.com/api/v1/blogs/${id}`, (res) => {
             const blog = res?.data?.blog;
             setFormData({
                 title: blog.title || '',
@@ -40,7 +40,7 @@ export default function EditEventPage() {
         data.append('description', formData.description);
         if (formData.blogImage) data.append('blogImage', formData.blogImage);
 
-        updateBlog(`http://localhost:3000/api/v1/blogs/${id}`, data, () => {
+        updateBlog(`https://nova-next-gen-server.onrender.com/api/v1/blogs/${id}`, data, () => {
             setReload(true)
             setFormData({
                 title: '',

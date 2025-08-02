@@ -26,7 +26,7 @@ export default function CreateEventPage() {
     data.append('description', formData.description);
     if (formData.poster) data.append('poster', formData.poster);
 
-    postEvent('http://localhost:3000/api/v1/events/create', data, () => {
+    postEvent('https://nova-next-gen-server.onrender.com/api/v1/events/create', data, () => {
       setFormData({
         title: '',
         eventTime: '',
