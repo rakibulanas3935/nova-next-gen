@@ -4,9 +4,10 @@ import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Loader, Clock3, ArrowLeft } from 'lucide-react';
+import {  Clock3, ArrowLeft } from 'lucide-react';
 import useAxiosGet from '@/app/utils/useAxiosGet';
 import Link from 'next/link';
+import CommonLoader from '@/app/components/common/CommonLoader';
 
 export default function EventDetailPage() {
   const { id } = useParams();
@@ -22,12 +23,7 @@ export default function EventDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-        <div className="flex items-center gap-3 text-slate-300">
-          <Loader className="w-6 h-6 animate-spin text-blue-400" />
-          <span className="text-lg font-medium">Loading event...</span>
-        </div>
-      </div>
+      <CommonLoader />
     );
   }
 
@@ -95,7 +91,7 @@ export default function EventDetailPage() {
             <div className="space-y-8">
               <div className="space-y-6">
                 {/* Title */}
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold">
+                <h1 className="text-2xl sm:text-2xl lg:text-3xl font-bold">
                   <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent bg-size-200 animate-gradient">
                     {event.title}
                   </span>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useLearnContext } from "@/app/context/learnContext";
+import CommonLoader from "@/app/components/common/CommonLoader";
 
 const learnSections = [
   {
@@ -122,7 +123,7 @@ const LearnPage = () => {
   const [expandedIndex, setExpandedIndex] = useState(null);
   const [quizAnswers, setQuizAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
-  const {learn}=useLearnContext()
+  const {learn,learnLoading}=useLearnContext()
   const toggleSection = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
@@ -135,6 +136,9 @@ const LearnPage = () => {
     setShowResults(true);
   };
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  if(learnLoading){
+    return <CommonLoader/>
+  }
   return (
 
     <motion.section

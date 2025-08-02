@@ -6,6 +6,7 @@ import PastEventsGallery from "./component/PastEventsGallery";
 import { useEventContext } from "@/app/context/eventContext";
 import Image from "next/image";
 import Link from "next/link";
+import CommonLoader from "@/app/components/common/CommonLoader";
 
 const pastEvents = [
     {
@@ -26,8 +27,12 @@ const pastEvents = [
 ];
 
 const EventsPage = () => {
-    const { event } = useEventContext()
-
+    const { event, eventLoading } = useEventContext()
+    if (eventLoading) {
+        return (
+            <CommonLoader />
+        );
+    }
     return (
         <motion.section
             initial={{ opacity: 0 }}

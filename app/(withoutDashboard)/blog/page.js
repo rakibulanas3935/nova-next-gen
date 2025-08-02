@@ -5,6 +5,7 @@ import { useBlogContext } from "@/app/context/blogContext";
 import Image from "next/image";
 import { Clock3 } from "lucide-react";
 import Link from "next/link";
+import CommonLoader from "@/app/components/common/CommonLoader";
 
 // Blog data with images
 const blogPosts = [
@@ -102,7 +103,10 @@ const BlogCard = ({
 
 const BlogNews = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const { blogs } = useBlogContext()
+    const { blogs ,blogsLoading} = useBlogContext()
+    if(blogsLoading){
+        return <CommonLoader/>
+    }
     return (
         <section
             className="relative  !overflow-hidden z-20 py-24 px-4 sm:px-6 lg:px-8 bg-black text-white"

@@ -83,13 +83,13 @@ const DashboardSidebar = () => {
             icon: FileText,
             isAdmin: true,
         },
-        {
-            name: "Merchandise",
-            value: "merchandise",
-            route: "/dashboard/merchandise",
-            icon: ShoppingBag,
-            isAdmin: true,
-        },
+        // {
+        //     name: "Merchandise",
+        //     value: "merchandise",
+        //     route: "/dashboard/merchandise",
+        //     icon: ShoppingBag,
+        //     isAdmin: true,
+        // },
     ];
 
 

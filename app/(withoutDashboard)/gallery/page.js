@@ -3,11 +3,14 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useGalleryContext } from "@/app/context/galleryContext";
 import Image from "next/image";
+import CommonLoader from "@/app/components/common/CommonLoader";
 
 const Gallery = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-    const { gallery } = useGalleryContext()
-    console.log("galer", gallery)
+    const { gallery,galleryLoading } = useGalleryContext()
+    if(galleryLoading){
+        return <CommonLoader/>
+    }
     return (
         <div className=" min-h-screen overflow-hidden bg-[#0A0F1C]">
             <motion.div
