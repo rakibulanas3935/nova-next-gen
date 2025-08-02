@@ -12,16 +12,18 @@ const ProjectContext = createContext();
 
 const ProjectProvider = ({ children }) => {
     const [projects, getAllprojects, projectsLoading, setprojects] = useAxiosGet([]);
+    const [approvedProjects, getAllApprovedProjects, ApprovedProjectsLoading, setApprovedProjects] = useAxiosGet([]);
     const [reload, setReload] = useState(false);
 
     // Fetch all projectss whenever component mounts or reload changes
     useEffect(() => {
         getAllprojects(`http://localhost:3000/api/v1/projects/`);
+        getAllApprovedProjects(`http://localhost:3000/api/v1/projects/approve`);
     }, [reload]);
 
     const ProjectContextValue = useMemo(
-        () => ({ projects, setprojects, setReload, projectsLoading }),
-        [projects, projectsLoading]
+        () => ({ projects, setprojects, setReload, projectsLoading ,approvedProjects,ApprovedProjectsLoading}),
+        [projects, projectsLoading,approvedProjects,ApprovedProjectsLoading]
     );
 
     return (

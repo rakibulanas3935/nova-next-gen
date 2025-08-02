@@ -29,7 +29,7 @@ export default function ProjectsPage() {
   const handleApproveReject = (id) => {
     // ✅ Immediate approval without modal
     updateApproved(
-      `http://localhost:3000/api/v1/projects/${id}/approve`,
+      `http://localhost:3000/api/v1/gallery/${id}/approve`,
       {
         user: {
           _id: user?._id,
@@ -51,7 +51,7 @@ export default function ProjectsPage() {
   const confirmAction = () => {
     if (actionType === "reject") {
       deleteProject(
-        `http://localhost:3000/api/v1/projects/${selectedId}/reject`,
+        `http://localhost:3000/api/v1/gallery/${selectedId}/reject`,
         {
           user: {
             _id: user?._id,

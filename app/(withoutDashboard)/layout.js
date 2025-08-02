@@ -8,6 +8,7 @@ import { UserProvider } from "../context/userContext";
 import { EventProvider } from "../context/eventContext";
 import { BlogProvider } from "../context/blogContext";
 import { GalleryProvider } from "../context/galleryContext";
+import { ProjectProvider } from "../context/projectContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
       <UserProvider>
         <EventProvider>
           <BlogProvider>
+            <ProjectProvider>
             <GalleryProvider>
               <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -40,6 +42,7 @@ export default function RootLayout({ children }) {
                 <ToastContainer />
               </body>
             </GalleryProvider>
+            </ProjectProvider>
           </BlogProvider>
         </EventProvider>
       </UserProvider>
