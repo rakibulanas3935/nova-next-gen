@@ -72,7 +72,7 @@ export default function EventPage() {
                                     </td>
                                     <td className="px-6 py-4 text-center space-x-2">
                                         <Link
-                                            href={`/dashboard/events/${event?._id}`}
+                                            href={`/events/${event?._id}`}
                                             className="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2"
                                         >
                                             <Eye size={16} />

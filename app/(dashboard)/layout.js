@@ -20,8 +20,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Dashboard | NovaNextGen",
-  description: "Dashboard area of NovaNextGen",
+  title: "Dashboard | Deep Sky Society",
+  description: "Dashboard area of Deep Sky Society",
 };
 
 export default function DashboardLayout({ children }) {

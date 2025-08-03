@@ -103,7 +103,7 @@ export default function ProjectsPage() {
                   </td>
                   <td className="px-6 py-4 text-center space-x-2">
                     <Link
-                      href={`/dashboard/events/${project?._id}`}
+                      href={`/projects/${project?._id}`}
                       className="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2"
                     >
                       <Eye size={16} />

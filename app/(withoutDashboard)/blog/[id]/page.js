@@ -56,7 +56,7 @@ export default function BlogDetailPage() {
             className="mb-8"
           >
             <Link
-              href="/blogs"
+              href="/blog"
               className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 rounded-lg transition-all duration-200 group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
