@@ -19,11 +19,13 @@ import {
   Legend,
 } from "recharts";
 import CommonLoader from "@/app/components/common/CommonLoader";
+import { useUserContext } from "@/app/context/userContext";
 
 const COLORS = ["#6366f1", "#14b8a6"];
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
+  const {userLoading}=useUserContext()
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 

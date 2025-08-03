@@ -6,12 +6,12 @@ import { Pencil, Trash, Eye, Plus } from 'lucide-react';
 import useAxiosPost from '@/app/utils/useAxiosPost';
 import ConfirmModal from '../../component/ConfirmModal';
 import { useBlogContext } from '@/app/context/blogContext';
+import CommonLoader from '@/app/components/common/CommonLoader';
 
 
 
 export default function BlogPage() {
-    const { blogs, loading, setReload } = useBlogContext()
-    console.log(blogs)
+    const { blogs, blogsLoading, setReload } = useBlogContext()
     const [, deleteEvent,] = useAxiosPost({}, "delete");
 
 
@@ -28,6 +28,10 @@ export default function BlogPage() {
             setReload(true)
         }, true)
     };
+
+    if (blogsLoading) {
+        return <CommonLoader />
+    }
 
     return (
         <div className="min-h-screen bg-[#0A0F1C] text-white p-8">

@@ -1,19 +1,17 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { useUserContext } from '@/app/context/userContext';
+import CommonLoader from './CommonLoader';
 
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [showDropdown, setShowDropdown] = useState(false);
-
     const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
-    const { scrollY } = useScroll();
-    const { user } = useUserContext();
+    const { user,userLoading } = useUserContext();
     console.log('User', user)
     // Handle scroll event
     useEffect(() => {

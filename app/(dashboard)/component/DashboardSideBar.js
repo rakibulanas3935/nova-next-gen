@@ -9,29 +9,13 @@ import {
 import Link from 'next/link';
 import { useUserContext } from '@/app/context/userContext';
 import { useRouter } from 'next/navigation';
-
-// Sample Data
-const barData = [
-    { name: "Jan", users: 30 },
-    { name: "Feb", users: 45 },
-    { name: "Mar", users: 60 },
-    { name: "Apr", users: 50 },
-    { name: "May", users: 80 },
-    { name: "Jun", users: 70 },
-];
-
-const pieData = [
-    { name: "Active", value: 70 },
-    { name: "Inactive", value: 30 },
-];
-
-const COLORS = ["#6366f1", "#14b8a6"];
+import CommonLoader from '@/app/components/common/CommonLoader';
 
 const DashboardSidebar = () => {
     const [activeItem, setActiveItem] = useState('dashboard');
     const [activeItemName, setActiveItemName] = useState('Dashboard');
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const { user,setReload } = useUserContext()
+    const { user,setReload,userLoading } = useUserContext()
 
     const menuItems = [
         {
@@ -92,8 +76,10 @@ const DashboardSidebar = () => {
         // },
     ];
 
-
      const router = useRouter();
+     if(userLoading || !user){
+        return <CommonLoader/>
+     }
     return (
         <>
             {/* Sidebar Background Blur */}

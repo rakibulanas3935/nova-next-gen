@@ -7,6 +7,7 @@ import useAxiosGet from '@/app/utils/useAxiosGet';
 import { useParams } from 'next/navigation';
 import { useEventContext } from '@/app/context/eventContext';
 import RichTextEditor from '@/app/(dashboard)/component/RichTextEditor';
+import CommonLoader from '@/app/components/common/CommonLoader';
 
 export default function EditEventPage() {
     const {setReload}=useEventContext()
@@ -56,11 +57,9 @@ export default function EditEventPage() {
             });
         }, true);
     };
-const onBodyNarrationChange = ({ value }) => {
-    console.log('value',value)
-  };
-
-
+    if(loading){
+        return <CommonLoader/>
+    }
     return (
         <div className="min-h-screen bg-[#0A0F1C] text-white py-12 px-4">
             <div className="max-w-3xl mx-auto bg-white/10 border border-white/10 backdrop-blur-md rounded-2xl p-8 shadow-xl space-y-6">

@@ -51,8 +51,8 @@ const UserProvider = ({ children }) => {
     getAllusers(`https://nova-next-gen-server.onrender.com/api/v1/users`)
   }, [reload])
   const userContextValue = useMemo(
-    () => ({ user, users,setUser, loading, setReload }),
-    [user, loading,users]
+    () => ({ user, users,setUser, loading, setReload,userLoading }),
+    [user, loading,users,userLoading]
   );
 
   return (
