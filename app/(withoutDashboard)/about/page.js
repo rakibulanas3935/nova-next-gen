@@ -115,7 +115,7 @@ const AboutUs = () => {
                                         This summer, I’ll continue that journey by working under the mentorship of Professor Romain Teyssier, a leading expert in computational astrophysics at Princeton University. <br />
                                         But somewhere along the way, I realized something important:
                                         I didn’t want to explore the universe alone. <br />
-                                        That’s why I founded NovaNextGen.
+                                        That’s why I founded Deep Sky Society.
                                     </p>
                                 )
                         },
@@ -127,7 +127,7 @@ const AboutUs = () => {
                                         As my fascination with astronomy grew, I started noticing something surprising: many of my friends were just as curious — but didn’t know where to start. They hadn’t read Hawking, or watched rocket launches, or stayed up late wondering how black holes bend time. Not because they didn’t care — but because no one had ever invited them into that world. <br /><br />
                                         There were no clubs where we could talk about space, no real access to advanced science, no one to help connect questions to real research. <br /><br />
                                         So I built what I wished had existed: a community. <br />
-                                        NovaNextGen began as a small group of classmates at Saint Louis de Gonzague – Franklin, gathering to ask big questions and explore the cosmos together. We hosted talks, trivia nights, telescope sessions, and speaker events. We welcomed anyone who had ever looked up at the stars and wondered.
+                                        Deep Sky Society began as a small group of classmates at Saint Louis de Gonzague – Franklin, gathering to ask big questions and explore the cosmos together. We hosted talks, trivia nights, telescope sessions, and speaker events. We welcomed anyone who had ever looked up at the stars and wondered.
                                         And it worked. <br /><br />
                                         What began as a school initiative soon grew into something much larger — a platform now connecting students across schools, cities, and countries. We all share one belief: <br />
                                         that the universe belongs to anyone bold enough to ask questions.
@@ -138,15 +138,15 @@ const AboutUs = () => {
                                 ),
                         },
                         {
-                            title: "About NovaNextGen",
+                            title: "About Deep Sky Society",
                             content:
                                 (
                                     <p>
-                                        NovaNextGen was born in the halls of Saint Louis de Gonzague – Franklin, but it quickly grew beyond them. What started as a small group of students gazing up at the night sky has become a fast-growing platform for young people passionate about space, science, and shaping the future of exploration.
+                                        Deep Sky Society was born in the halls of Saint Louis de Gonzague – Franklin, but it quickly grew beyond them. What started as a small group of students gazing up at the night sky has become a fast-growing platform for young people passionate about space, science, and shaping the future of exploration.
                                         <br /> <br />
                                         We believe the next generation of scientists, engineers, and innovators is already here — they just need the spark.
                                         <br /> <br />
-                                        At NovaNextGen, we create that spark through hands-on learning, collaboration, and exposure to real-world science. Our community includes both complete beginners and experienced student researchers, all united by curiosity and the thrill of discovery.
+                                        At Deep Sky Society, we create that spark through hands-on learning, collaboration, and exposure to real-world science. Our community includes both complete beginners and experienced student researchers, all united by curiosity and the thrill of discovery.
                                         <br />
                                         Here’s what we do:
                                         <br /><br />
@@ -158,12 +158,12 @@ const AboutUs = () => {
                                             <li>🌍 Build partnerships and friendships across schools, countries, and backgrounds</li>
                                         </ul>
                                         <br /><br />
-                                        NovaNextGen is about more than learning — it's about participating.
+                                        Deep Sky Society is about more than learning — it's about participating.
                                         We’re not waiting to be inspired.
                                         <br /> <br />
                                         We’re becoming the explorers, coders, and creators of the future — right now.
                                         <br /> <br />
-                                        Whether you're dreaming of Mars, simulating wormholes, coding AI models, or just learning what a nebula is — you belong at NovaNextGen.
+                                        Whether you're dreaming of Mars, simulating wormholes, coding AI models, or just learning what a nebula is — you belong at Deep Sky Society.
                                     </p>
                                 )
 
@@ -175,11 +175,11 @@ const AboutUs = () => {
                                     <p>
                                         Saint Louis de Gonzague – Franklin is one of France’s most prestigious secondary schools, renowned for academic excellence, Jesuit values, and a strong culture of leadership and service. Located in Paris, it challenges students to think beyond themselves and act for the common good.
                                         <br /> <br />
-                                        As a student at Franklin, I’ve been fortunate to learn in an environment that rewards curiosity, values integrity, and encourages bold thinking. It’s where I first imagined what NovaNextGen could be — and where I found the support to bring it to life.
+                                        As a student at Franklin, I’ve been fortunate to learn in an environment that rewards curiosity, values integrity, and encourages bold thinking. It’s where I first imagined what Deep Sky Society could be — and where I found the support to bring it to life.
                                         <br /> <br />
                                         With the help of friends, mentors, and teachers, we turned our curiosity into action.
                                         But the wonder of the cosmos can’t be contained by any one school.
-                                        <br /> <br />Today, NovaNextGen is expanding well beyond Franklin, welcoming students from many other schools and regions. While we remain proud of our roots, we’re even prouder of how far we’ve come — and how far we still aim to go.
+                                        <br /> <br />Today, Deep Sky Society is expanding well beyond Franklin, welcoming students from many other schools and regions. While we remain proud of our roots, we’re even prouder of how far we’ve come — and how far we still aim to go.
                                     </p>
                                 )
                         },
@@ -187,7 +187,7 @@ const AboutUs = () => {
                             title: "Our Goals & Values",
                             content: (
                                 <p>
-                                    At NovaNextGen, we believe science is for everyone — and that the future of exploration must reflect the diversity, imagination, and drive of the next generation.
+                                    At Deep Sky Society, we believe science is for everyone — and that the future of exploration must reflect the diversity, imagination, and drive of the next generation.
                                     <br />
 
                                     These are the values that guide everything we do:
@@ -202,7 +202,7 @@ const AboutUs = () => {
                                     <br />
                                     🌍 Promote Diversity, Equity & Inclusion
                                     <br />
-                                    NovaNextGen welcomes students of all identities, backgrounds, and perspectives. Because the universe is vast — and so are the viewpoints we need to understand it.
+                                    Deep Sky Society welcomes students of all identities, backgrounds, and perspectives. Because the universe is vast — and so are the viewpoints we need to understand it.
                                     <br />
                                     💡 Give Back Through Meaningful Work <br />
                                     We believe knowledge should serve a greater good. Whether by mentoring others, sharing resources, or working on public science projects, we aim to make an impact beyond ourselves.

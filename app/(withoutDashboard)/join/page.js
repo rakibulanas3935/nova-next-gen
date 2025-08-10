@@ -5,7 +5,7 @@ const joinData = [
   {
     title: "Who Can Join?",
     description:
-      "NovaNextGen welcomes all space enthusiasts! Ideal for ages 13+, especially those curious about astronomy, physics, or technology.",
+      "Deep Sky Society welcomes all space enthusiasts! Ideal for ages 13+, especially those curious about astronomy, physics, or technology.",
   },
   {
     title: "Meeting Times & Locations",

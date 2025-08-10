@@ -81,7 +81,7 @@ const Footer = () => {
           transition={{ delay: 0.4, duration: 0.6 }}
         >
           <h3 className="text-white font-semibold mb-4">Contact</h3>
-          <p className="text-gray-400 mb-2">Email: hello@novanextgen.space</p>
+          <p className="text-gray-400 mb-2">Email: hello@Deep Sky Society.space</p>
           <p className="text-gray-400">Phone: +880-1234-567890</p>
         </motion.div>
 
@@ -108,7 +108,7 @@ const Footer = () => {
         transition={{ delay: 0.8, duration: 0.6 }}
         className="relative z-10 mt-12 text-center text-gray-500 text-xs"
       >
-        © {new Date().getFullYear()} NovaNextGen. All rights reserved.
+        © {new Date().getFullYear()} Deep Sky Society. All rights reserved.
       </motion.div>
     </motion.footer>
   );
