@@ -28,7 +28,8 @@ export default function Home() {
                 <Hero />
             </motion.div>
 
-            <div className="py-20 relative min-h-screen overflow-hidden bg-[#0A0F1C]">
+            <div className="py-20 relative min-h-screen overflow-hidden bg-gradient-to-b from-[#05010e] via-[#120851] to-[#05010e]">
+                
                 <motion.div
                     className="absolute w-32 h-32 rounded-full opacity-20"
                     animate={{

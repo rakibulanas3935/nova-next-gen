@@ -11,9 +11,16 @@ const ProjectsPage = () => {
   if (ApprovedProjectsLoading) {
     return <CommonLoader />
   }
+
   return (
     <main className="min-h-screen bg-[#0A0F1C] text-white px-6 py-20 relative overflow-hidden">
-      {/* Background glow */}
+      {/* Space & Nebula Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#05010e] via-[#120851] to-[#05010e]" />
+      <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-purple-700/30 rounded-full blur-[200px]" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[180px]" />
+      <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-pink-500/20 rounded-full blur-[150px]" />
+
+      {/* Existing animated purple glow */}
       <motion.div
         className="absolute w-[500px] h-[500px] bg-purple-700 rounded-full blur-3xl opacity-20"
         style={{ top: "-100px", left: "-100px", zIndex: 1 }}
@@ -56,10 +63,6 @@ const ProjectsPage = () => {
                     </div>
                   )}
                   <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-                  {/* <div
-                  className="text-gray-300 text-sm leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: project.description }}
-                /> */}
                   {project.liveLink && (
                     <a
                       href={project.liveLink}

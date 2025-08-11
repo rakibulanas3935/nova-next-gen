@@ -25,9 +25,54 @@ const JoinPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen py-20 px-6 sm:px-10 bg-[#0A0F1C] text-white"
+      className="relative min-h-screen py-20 px-6 sm:px-10 overflow-hidden text-white"
     >
-      <div className="max-w-5xl mx-auto space-y-14">
+      {/* Space gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#05010e] via-[#120851] to-[#05010e]" />
+
+      {/* Nebula glow layers */}
+      <motion.div
+        className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-purple-700/30 rounded-full blur-[200px]"
+        animate={{ x: [0, 20, -20, 0], y: [0, -15, 15, 0] }}
+        transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[180px]"
+        animate={{ x: [0, -20, 20, 0], y: [0, 10, -10, 0] }}
+        transition={{ duration: 50, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-pink-500/20 rounded-full blur-[150px]"
+        animate={{ x: [0, 15, -15, 0], y: [0, -20, 20, 0] }}
+        transition={{ duration: 45, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Stars background */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(60)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full"
+            initial={{ opacity: 0.1 }}
+            animate={{
+              opacity: [0.1, 1, 0.1],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: Math.random() * 3 + 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Content */}
+      <div className="relative max-w-5xl mx-auto space-y-14">
         <motion.h1
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -49,7 +94,9 @@ const JoinPage = () => {
             <h2 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-sky-400">
               {item.title}
             </h2>
-            <p className="mt-2 whitespace-pre-line text-gray-300">{item.description}</p>
+            <p className="mt-2 whitespace-pre-line text-gray-300">
+              {item.description}
+            </p>
           </motion.div>
         ))}
 
@@ -68,7 +115,6 @@ const JoinPage = () => {
             Fill out this form to officially join our community.
           </p>
 
-          {/* Replace the src URL with your actual Google Form embed URL */}
           <div className="w-full h-[600px] rounded-lg overflow-hidden border border-white/10">
             <iframe
               src="https://docs.google.com/forms/d/e/1FAIpQLSfOUvKRlwcPl8G_T3n38n_hPnAI_66ICKhVjE4y9S9FZH9qaw/viewform?embedded=true"
