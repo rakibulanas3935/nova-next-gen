@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {  Clock3, ArrowLeft } from 'lucide-react';
@@ -9,10 +9,11 @@ import useAxiosGet from '@/app/utils/useAxiosGet';
 import Link from 'next/link';
 import CommonLoader from '@/app/components/common/CommonLoader';
 
+
 export default function EventDetailPage() {
   const { id } = useParams();
   const [singleEvent, getSingleEvent, loading] = useAxiosGet([]);
-
+   const router = useRouter();
   useEffect(() => {
     if (id) {
       getSingleEvent(`https://nova-next-gen-server.onrender.com/api/v1/events/${id}`);
@@ -55,13 +56,13 @@ export default function EventDetailPage() {
             transition={{ delay: 0.1 }}
             className="mb-8"
           >
-            <Link
-              href="/events"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 rounded-lg transition-all duration-200 group"
+             <button
+              onClick={() => router.back()}
+              className="inline-flex cursor-pointer items-center gap-2 px-4 py-2 text-sm font-medium text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 rounded-lg transition-all duration-200 group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
               Back to Events
-            </Link>
+            </button>
           </motion.div>
 
           {/* Main Content */}

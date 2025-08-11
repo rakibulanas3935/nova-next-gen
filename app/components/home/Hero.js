@@ -2,6 +2,9 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useEventContext } from "@/app/context/eventContext";
+import CommonLoader from "../common/CommonLoader";
+import Link from "next/link";
 
 export default function Hero() {
     const [timeLeft, setTimeLeft] = useState({
@@ -10,13 +13,19 @@ export default function Hero() {
         minutes: 0,
         seconds: 0,
     });
+    const { upcomingEvent, upComingEventEventLoading } = useEventContext();
 
-    // Countdown
     useEffect(() => {
-        const targetDate = new Date("2025-09-15T18:00:00").getTime();
+        // Don't start countdown until data is loaded and available
+        if (upComingEventEventLoading) return;
+
+        const eventTime = upcomingEvent?.data?.events[0]?.eventTime;
+        if (!eventTime) return;
+
+        const targetDate = new Date(eventTime).getTime();
 
         const timer = setInterval(() => {
-            const now = new Date().getTime();
+            const now = Date.now();
             const diff = targetDate - now;
 
             if (diff <= 0) {
@@ -34,7 +43,16 @@ export default function Hero() {
         }, 1000);
 
         return () => clearInterval(timer);
-    }, []);
+    }, [upComingEventEventLoading, upcomingEvent?.data?.events]);
+
+    // ✅ Show loader for the whole hero section while loading
+    if (upComingEventEventLoading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-[#05010e]">
+                <CommonLoader />
+            </div>
+        );
+    }
 
     return (
         <div className="relative min-h-screen overflow-hidden bg-[#05010e] text-white">
@@ -78,15 +96,9 @@ export default function Hero() {
                     boxShadow:
                         "inset -25px -25px 40px rgba(0,0,0,0.3), 0 0 80px rgba(200,200,255,0.4)",
                 }}
-                animate={{
-                    y: [0, 15, 0],
-                }}
-                transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                }}
+                animate={{ y: [0, 15, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
             >
-                {/* Moon craters with shadow */}
                 <div className="absolute top-[30%] left-[20%] w-[40px] h-[40px] rounded-full bg-[rgba(0,0,0,0.1)] shadow-inner shadow-black/40" />
                 <div className="absolute top-[50%] left-[50%] w-[30px] h-[30px] rounded-full bg-[rgba(0,0,0,0.1)] shadow-inner shadow-black/40" />
                 <div className="absolute top-[20%] right-[30%] w-[25px] h-[25px] rounded-full bg-[rgba(0,0,0,0.1)] shadow-inner shadow-black/40" />
@@ -97,15 +109,15 @@ export default function Hero() {
                 initial={{ x: -200, y: 0, rotate: 0 }}
                 animate={{
                     x: [-200, 1400],
-                    y: [50, 20, -30, 0, -10], // combination of curves and flats
-                    rotate: [0, 5, -5, 10], // gentle tilts
+                    y: [50, 20, -30, 0, -10],
+                    rotate: [0, 5, -5, 10],
                 }}
                 transition={{
                     duration: 15,
                     repeat: Infinity,
                     repeatDelay: 2,
-                    ease: ["easeInOut", "linear", "easeInOut", "linear"], // mix of smooth and straight
-                    times: [0, 0.2, 0.5, 0.8, 1], // sync curves/straights with position
+                    ease: ["easeInOut", "linear", "easeInOut", "linear"],
+                    times: [0, 0.2, 0.5, 0.8, 1],
                 }}
                 className="absolute top-1/2 left-0 flex flex-col items-center"
             >
@@ -118,8 +130,6 @@ export default function Hero() {
                 />
             </motion.div>
 
-
-
             {/* Main content */}
             <div className="relative z-10 flex flex-col items-center text-center pt-32">
                 <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(180,150,255,0.4)]">
@@ -131,9 +141,10 @@ export default function Hero() {
                 </p>
 
                 {/* Countdown box */}
+                <Link href={`/events/${upcomingEvent?.data?.events[0]?._id}`}>
                 <div className="bg-[#0b1230]/80 border border-purple-500 rounded-xl p-6 w-[350px] shadow-lg shadow-purple-500/30 backdrop-blur-md">
                     <h2 className="text-xl font-semibold mb-4">
-                        Next Solar <span className="text-blue-400 font-bold">Eclipse</span>
+                        {upcomingEvent?.data?.events[0]?.title}
                     </h2>
                     <div className="flex justify-center gap-4 text-center">
                         {Object.entries(timeLeft).map(([label, value]) => (
@@ -144,6 +155,7 @@ export default function Hero() {
                         ))}
                     </div>
                 </div>
+                </Link>
 
                 {/* Button */}
                 <motion.a

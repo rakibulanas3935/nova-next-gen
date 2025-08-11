@@ -5,6 +5,7 @@ import Button from '@/app/components/shared/Button';
 import useAxiosPost from '@/app/utils/useAxiosPost';
 import RichTextEditor from '../../../component/RichTextEditor';
 import useAxiosPostFile from '@/app/utils/useAxiosPostFile';
+import { useEventContext } from '@/app/context/eventContext';
 
 export default function CreateEventPage() {
   const [formData, setFormData] = useState({
@@ -16,7 +17,7 @@ export default function CreateEventPage() {
   });
 
   const [, postEvent, loading] = useAxiosPostFile();
-
+  const {setReload}=useEventContext()
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData();
@@ -34,6 +35,7 @@ export default function CreateEventPage() {
         poster: null,
         description: '',
       });
+      setReload(true)
     }, true);
   };
 

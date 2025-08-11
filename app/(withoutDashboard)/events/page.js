@@ -1,34 +1,17 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import GuestSpeakersSection from "./component/GuestSpeakersSection";
-import PastEventsGallery from "./component/PastEventsGallery";
 import { useEventContext } from "@/app/context/eventContext";
-import Image from "next/image";
 import Link from "next/link";
 import CommonLoader from "@/app/components/common/CommonLoader";
 
-const pastEvents = [
-    {
-        title: "Astro Webinar with Dr. Jahan",
-        date: "May 12, 2025",
-        media: "https://via.placeholder.com/400x200?text=Webinar+Recap",
-    },
-    {
-        title: "Meteor Shower Watch",
-        date: "April 28, 2025",
-        media: "https://via.placeholder.com/400x200?text=Meteor+Shower+Photos",
-    },
-    {
-        title: "Women in Space Talk",
-        date: "March 8, 2025",
-        media: "https://via.placeholder.com/400x200?text=Event+Recap+Video",
-    },
-];
-
 const EventsPage = () => {
-    const { event, eventLoading } = useEventContext();
-    if (eventLoading) {
+    const { event, eventLoading,upcomingEvent,upComingEventEventLoading } = useEventContext();
+    
+    // useEffect(()=>{
+    //     getAllUpComingEvent(`https://nova-next-gen-server.onrender.com/api/v1/events`)
+    // },[])
+    if (eventLoading || upComingEventEventLoading) {
         return <CommonLoader />;
     }
 
@@ -50,20 +33,20 @@ const EventsPage = () => {
                     Events & Activities
                 </h1>
 
-                <p className="text-center text-gray-300 mt-2">
+                <p className="text-center text-gray-300">
                     Explore what’s happening and what we’ve done.
                 </p>
 
                 {/* Upcoming Events */}
                 <section className="mt-12">
-                    <h2 className="text-2xl font-semibold text-white mb-4">All Events</h2>
+                    <h2 className="text-2xl font-semibold text-white mb-4">Upcoming Events</h2>
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {event?.data?.events?.map((ev, idx) => (
+                        {upcomingEvent?.data?.events?.map((ev, idx) => (
                             <Link href={`/events/${ev?._id}`} key={idx + 1}>
                                 <motion.div
                                     whileHover={{ scale: 1.02 }}
                                     transition={{ duration: 0.3 }}
-                                    className="bg-white/5 border border-white/10 rounded-xl shadow-md overflow-hidden backdrop-blur-sm cursor-pointer"
+                                    className="bg-white/5 h-[130px] border border-white/10 rounded-xl shadow-md overflow-hidden backdrop-blur-sm cursor-pointer"
                                 >
                                     <div className="p-5">
                                         <h3 className="text-xl font-bold text-white">{ev.title}</h3>
@@ -78,10 +61,43 @@ const EventsPage = () => {
                                             })}
                                         </p>
 
-                                        <div
+                                        {/* <div
                                             className="prose prose-sm prose-invert mt-3 text-gray-300 max-w-none"
                                             dangerouslySetInnerHTML={{ __html: ev.description }}
-                                        />
+                                        /> */}
+                                    </div>
+                                </motion.div>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+                <section className="mt-12">
+                    <h2 className="text-2xl font-semibold text-white mb-4">All Events</h2>
+                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {event?.data?.events?.map((ev, idx) => (
+                            <Link href={`/events/${ev?._id}`} key={idx + 1}>
+                                <motion.div
+                                    whileHover={{ scale: 1.02 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="bg-white/5 border  h-[130px]  border-white/10 rounded-xl shadow-md overflow-hidden backdrop-blur-sm cursor-pointer"
+                                >
+                                    <div className="p-5">
+                                        <h3 className="text-xl font-bold text-white">{ev.title}</h3>
+                                        <p className="text-sm text-purple-300 mt-1">
+                                            {new Date(ev?.eventTime).toLocaleString("en-US", {
+                                                weekday: 'short',
+                                                month: 'short',
+                                                day: 'numeric',
+                                                year: 'numeric',
+                                                hour: 'numeric',
+                                                minute: '2-digit',
+                                            })}
+                                        </p>
+
+                                        {/* <div
+                                            className="prose prose-sm prose-invert mt-3 text-gray-300 max-w-none"
+                                            dangerouslySetInnerHTML={{ __html: ev.description }}
+                                        /> */}
                                     </div>
                                 </motion.div>
                             </Link>

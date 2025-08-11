@@ -103,7 +103,7 @@ const Login = () => {
                                     transition={{ delay: 0.2 }}
                                     className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400"
                                 >
-                                    Login To the nova next Gen
+                                    Login To the Deep Sky Society
                                 </motion.h2>
 
                                 <form className="space-y-4" onSubmit={handleLogin}>
