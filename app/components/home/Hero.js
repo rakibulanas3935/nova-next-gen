@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEventContext } from "@/app/context/eventContext";
 import CommonLoader from "../common/CommonLoader";
 import Link from "next/link";
+import { Loader } from "lucide-react";
 
 export default function Hero() {
     const [timeLeft, setTimeLeft] = useState({
@@ -13,19 +14,16 @@ export default function Hero() {
         minutes: 0,
         seconds: 0,
     });
-    const { upcomingEvent, upComingEventEventLoading } = useEventContext();
+    const { upcomingEvent, upComingEventEventLoading } = useEventContext()
 
     useEffect(() => {
-        // Don't start countdown until data is loaded and available
-        if (upComingEventEventLoading) return;
-
         const eventTime = upcomingEvent?.data?.events[0]?.eventTime;
-        if (!eventTime) return;
+        if (!eventTime) return; // Don't start timer until we have a valid date
 
         const targetDate = new Date(eventTime).getTime();
 
         const timer = setInterval(() => {
-            const now = Date.now();
+            const now = new Date().getTime();
             const diff = targetDate - now;
 
             if (diff <= 0) {
@@ -43,16 +41,8 @@ export default function Hero() {
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [upComingEventEventLoading, upcomingEvent?.data?.events]);
+    }, [upcomingEvent?.data?.events[0]?.eventTime]);
 
-    // ✅ Show loader for the whole hero section while loading
-    if (upComingEventEventLoading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center bg-[#05010e]">
-                <CommonLoader />
-            </div>
-        );
-    }
 
     return (
         <div className="relative min-h-screen overflow-hidden bg-[#05010e] text-white">
@@ -96,9 +86,15 @@ export default function Hero() {
                     boxShadow:
                         "inset -25px -25px 40px rgba(0,0,0,0.3), 0 0 80px rgba(200,200,255,0.4)",
                 }}
-                animate={{ y: [0, 15, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                animate={{
+                    y: [0, 15, 0],
+                }}
+                transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                }}
             >
+                {/* Moon craters with shadow */}
                 <div className="absolute top-[30%] left-[20%] w-[40px] h-[40px] rounded-full bg-[rgba(0,0,0,0.1)] shadow-inner shadow-black/40" />
                 <div className="absolute top-[50%] left-[50%] w-[30px] h-[30px] rounded-full bg-[rgba(0,0,0,0.1)] shadow-inner shadow-black/40" />
                 <div className="absolute top-[20%] right-[30%] w-[25px] h-[25px] rounded-full bg-[rgba(0,0,0,0.1)] shadow-inner shadow-black/40" />
@@ -109,15 +105,15 @@ export default function Hero() {
                 initial={{ x: -200, y: 0, rotate: 0 }}
                 animate={{
                     x: [-200, 1400],
-                    y: [50, 20, -30, 0, -10],
-                    rotate: [0, 5, -5, 10],
+                    y: [50, 20, -30, 0, -10], // combination of curves and flats
+                    rotate: [0, 5, -5, 10], // gentle tilts
                 }}
                 transition={{
                     duration: 15,
                     repeat: Infinity,
                     repeatDelay: 2,
-                    ease: ["easeInOut", "linear", "easeInOut", "linear"],
-                    times: [0, 0.2, 0.5, 0.8, 1],
+                    ease: ["easeInOut", "linear", "easeInOut", "linear"], // mix of smooth and straight
+                    times: [0, 0.2, 0.5, 0.8, 1], // sync curves/straights with position
                 }}
                 className="absolute top-1/2 left-0 flex flex-col items-center"
             >
@@ -129,6 +125,8 @@ export default function Hero() {
                     className="drop-shadow-[0_0_20px_rgba(255,150,50,0.6)]"
                 />
             </motion.div>
+
+
 
             {/* Main content */}
             <div className="relative z-10 flex flex-col items-center text-center pt-32">
@@ -142,21 +140,30 @@ export default function Hero() {
 
                 {/* Countdown box */}
                 <Link href={`/events/${upcomingEvent?.data?.events[0]?._id}`}>
-                <div className="bg-[#0b1230]/80 border border-purple-500 rounded-xl p-6 w-[350px] shadow-lg shadow-purple-500/30 backdrop-blur-md">
-                    <h2 className="text-xl font-semibold mb-4">
-                        {upcomingEvent?.data?.events[0]?.title}
-                    </h2>
-                    <div className="flex justify-center gap-4 text-center">
-                        {Object.entries(timeLeft).map(([label, value]) => (
-                            <div key={label}>
-                                <p className="text-3xl font-bold text-blue-300">{value}</p>
-                                <p className="uppercase text-xs text-gray-400">{label}</p>
+                    <div className="bg-[#0b1230]/80 border border-purple-500 rounded-xl p-6 w-[350px] h-[180px] shadow-lg shadow-purple-500/30 backdrop-blur-md flex items-center justify-center">
+                        {upComingEventEventLoading ? (
+                            <div className="flex flex-col items-center gap-3 text-slate-300">
+                                <Loader className="w-6 h-6 animate-spin text-blue-400" />
+                                <span className="text-lg font-medium">Loading ...</span>
                             </div>
-                        ))}
+                        ) : (
+                            <div className="flex flex-col items-center justify-center w-full">
+                                <h2 className="text-xl font-semibold mb-4 text-center">
+                                    {upcomingEvent?.data?.events[0]?.title}
+                                </h2>
+                                <div className="flex justify-center gap-4 text-center">
+                                    {Object.entries(timeLeft).map(([label, value]) => (
+                                        <div key={label}>
+                                            <p className="text-3xl font-bold text-blue-300">{value}</p>
+                                            <p className="uppercase text-xs text-gray-400">{label}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
-                </div>
-                </Link>
 
+                </Link>
                 {/* Button */}
                 <motion.a
                     href="/join"
