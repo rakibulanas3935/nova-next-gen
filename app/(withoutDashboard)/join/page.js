@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 
 const joinData = [
   {
@@ -106,28 +107,30 @@ const JoinPage = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="p-6 sm:p-8 bg-white/5 border border-white/10 rounded-xl backdrop-blur-md"
+          className="p-6 sm:p-8 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md shadow-lg"
         >
           <h2 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-sky-400">
             Membership Form
           </h2>
-          <p className="mt-2 text-gray-300 mb-4">
+          <p className="mt-2 text-gray-300 mb-6">
             Fill out this form to officially join our community.
           </p>
 
-          <div className="w-full h-[600px] rounded-lg overflow-hidden border border-white/10">
-            <iframe
-              src="https://docs.google.com/forms/d/e/1FAIpQLSfOUvKRlwcPl8G_T3n38n_hPnAI_66ICKhVjE4y9S9FZH9qaw/viewform?embedded=true"
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              className="w-full h-full"
-              loading="lazy"
-              title="Membership Form"
-            >
-              Loading…
-            </iframe>
-          </div>
+          <motion.a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfOUvKRlwcPl8G_T3n38n_hPnAI_66ICKhVjE4y9S9FZH9qaw/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl 
+                   bg-gradient-to-r from-indigo-500 to-sky-500 
+                   text-white font-medium shadow-md 
+                   hover:shadow-lg hover:from-indigo-600 hover:to-sky-600 
+                   transition-all duration-300"
+          >
+            Open Form
+            <ExternalLink className="w-4 h-4" />
+          </motion.a>
         </motion.div>
       </div>
     </motion.section>

@@ -24,7 +24,7 @@ export default function BlogPage() {
     };
 
     const confirmDelete = () => {
-        deleteEvent(`https://nova-next-gen-server.onrender.com/api/v1/blogs/${selectedId}`, {}, (res) => {
+        deleteEvent(`https://deep-sky-server.onrender.com/api/v1/blogs/${selectedId}`, {}, (res) => {
             setReload(true)
         }, true)
     };

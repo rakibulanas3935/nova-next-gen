@@ -22,7 +22,7 @@ export default function CreateEventPage() {
     data.append('description', formData.description);
     if (formData.blogImage) data.append('blogImage', formData.blogImage);
 
-    postEvent('https://nova-next-gen-server.onrender.com/api/v1/blogs', data, () => {
+    postEvent('https://deep-sky-server.onrender.com/api/v1/blogs', data, () => {
       setFormData({
         title: '',
         blogImage: null,

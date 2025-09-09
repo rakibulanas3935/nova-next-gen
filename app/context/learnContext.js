@@ -16,7 +16,7 @@ const LearnProvider = ({ children }) => {
 
     // Fetch all learns whenever component mounts or reload changes
     useEffect(() => {
-        getAlllearn(`https://nova-next-gen-server.onrender.com/api/v1/learn`);
+        getAlllearn(`https://deep-sky-server.onrender.com/api/v1/learn`);
     }, [reload]);
 
     const LearnContextValue = useMemo(

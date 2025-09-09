@@ -27,7 +27,7 @@ export default function EditProjectPage() {
 
 
     useEffect(() => {
-        getSingleProject(`https://nova-next-gen-server.onrender.com/api/v1/projects/${id}`, (res) => {
+        getSingleProject(`https://deep-sky-server.onrender.com/api/v1/projects/${id}`, (res) => {
             const project = res?.data?.project;
             setFormData({
                 title: project.title || '',
@@ -49,7 +49,7 @@ export default function EditProjectPage() {
         if (user?._id) {
             data.append('createdBy', user?._id);
         }
-        updateProject(`https://nova-next-gen-server.onrender.com/api/v1/projects/${id}`, data, () => {
+        updateProject(`https://deep-sky-server.onrender.com/api/v1/projects/${id}`, data, () => {
             setReload(true)
         }, true);
     };

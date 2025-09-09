@@ -22,7 +22,7 @@ export default function EditLearnPage() {
 
   useEffect(() => {
     if (!id) return;
-    getSingleLearn(`https://nova-next-gen-server.onrender.com/api/v1/learn/${id}`, (res) => {
+    getSingleLearn(`https://deep-sky-server.onrender.com/api/v1/learn/${id}`, (res) => {
       const learn = res?.data?.learn;
       setFormData({
         title: learn?.title || '',
@@ -34,7 +34,7 @@ export default function EditLearnPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateLearn(
-      `https://nova-next-gen-server.onrender.com/api/v1/learn/${id}`,
+      `https://deep-sky-server.onrender.com/api/v1/learn/${id}`,
       formData,
       () => {
         setReload(true);

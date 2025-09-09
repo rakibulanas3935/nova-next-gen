@@ -24,7 +24,7 @@ export default function LearnPage() {
     };
 
     const confirmDelete = () => {
-        deleteEvent(`https://nova-next-gen-server.onrender.com/api/v1/learn/${selectedId}`, {}, (res) => {
+        deleteEvent(`https://deep-sky-server.onrender.com/api/v1/learn/${selectedId}`, {}, (res) => {
             setReload(true)
         }, true)
     };

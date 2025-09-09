@@ -16,7 +16,7 @@ export default function EventDetailPage() {
    const router = useRouter();
   useEffect(() => {
     if (id) {
-      getSingleEvent(`https://nova-next-gen-server.onrender.com/api/v1/events/${id}`);
+      getSingleEvent(`https://deep-sky-server.onrender.com/api/v1/events/${id}`);
     }
   }, [id]);
 
@@ -124,7 +124,7 @@ export default function EventDetailPage() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all duration-300 group"
                     >
-                      🔗 Join Meeting
+                      🔗 Read More
                     </Link>
                   </motion.div>
                 )}

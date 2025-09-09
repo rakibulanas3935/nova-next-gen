@@ -21,7 +21,7 @@ const Login = () => {
         const password = form.password.value;
 
         setLoading(true);
-        postUserinfo("https://nova-next-gen-server.onrender.com/api/v1/users/login", {
+        postUserinfo("https://deep-sky-server.onrender.com/api/v1/users/login", {
             email, password, useName
         }, (res) => {
             if (res.status === "success") {

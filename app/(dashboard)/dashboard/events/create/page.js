@@ -27,7 +27,7 @@ export default function CreateEventPage() {
     data.append('description', formData.description);
     if (formData.poster) data.append('poster', formData.poster);
 
-    postEvent('https://nova-next-gen-server.onrender.com/api/v1/events/create', data, () => {
+    postEvent('https://deep-sky-server.onrender.com/api/v1/events/create', data, () => {
       setFormData({
         title: '',
         eventTime: '',
@@ -35,7 +35,7 @@ export default function CreateEventPage() {
         poster: null,
         description: '',
       });
-      setReload(true)
+      setReload(prev=>!prev)
     }, true);
   };
 

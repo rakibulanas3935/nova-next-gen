@@ -17,8 +17,8 @@ const ProjectProvider = ({ children }) => {
 
     // Fetch all projectss whenever component mounts or reload changes
     useEffect(() => {
-        getAllprojects(`https://nova-next-gen-server.onrender.com/api/v1/projects/`);
-        getAllApprovedProjects(`https://nova-next-gen-server.onrender.com/api/v1/projects/approve`);
+        getAllprojects(`https://deep-sky-server.onrender.com/api/v1/projects/`);
+        getAllApprovedProjects(`https://deep-sky-server.onrender.com/api/v1/projects/approve`);
     }, [reload]);
 
     const ProjectContextValue = useMemo(

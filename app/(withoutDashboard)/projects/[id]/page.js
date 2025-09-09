@@ -15,7 +15,7 @@ export default function ProjectDetailPage() {
 
     useEffect(() => {
         if (id) {
-            getSingleProject(`https://nova-next-gen-server.onrender.com/api/v1/projects/${id}`);
+            getSingleProject(`https://deep-sky-server.onrender.com/api/v1/projects/${id}`);
         }
     }, [id]);
 

@@ -24,8 +24,8 @@ export default function EventPage() {
     };
 
     const confirmDelete = () => {
-        deleteEvent(`https://nova-next-gen-server.onrender.com/api/v1/events/${selectedId}`, {}, (res) => {
-            setReload(true)
+        deleteEvent(`https://deep-sky-server.onrender.com/api/v1/events/${selectedId}`, {}, (res) => {
+            setReload(prev=>!prev)
         }, true)
     };
 
@@ -49,7 +49,7 @@ export default function EventPage() {
                             <tr>
                                 <th className="px-6 py-3 text-left text-sm font-medium">Title</th>
                                 <th className="px-6 py-3 text-left text-sm font-medium">Time</th>
-                                <th className="px-6 py-3 text-left text-sm font-medium">Meeting Link</th>
+                                <th className="px-6 py-3 text-left text-sm font-medium">External Link</th>
                                 <th className="px-6 py-3 text-center text-sm font-medium">Actions</th>
                             </tr>
                         </thead>
@@ -67,7 +67,7 @@ export default function EventPage() {
                                             rel="noopener noreferrer"
                                             className="text-blue-400 underline"
                                         >
-                                            Join Link
+                                            External Link
                                         </a>
                                     </td>
                                     <td className="px-6 py-4 text-center space-x-2">

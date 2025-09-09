@@ -16,8 +16,8 @@ const EventProvider = ({ children }) => {
     const [upcomingEvent, getAllUpComingEvent, upComingEventEventLoading, setUpcomignEvent] = useAxiosGet([]);
     // Fetch all events whenever component mounts or reload changes
     useEffect(() => {
-        getAllEvent(`https://nova-next-gen-server.onrender.com/api/v1/events`);
-        getAllUpComingEvent(`https://nova-next-gen-server.onrender.com/api/v1/events/top-five`);
+        getAllEvent(`https://deep-sky-server.onrender.com/api/v1/events`);
+        getAllUpComingEvent(`https://deep-sky-server.onrender.com/api/v1/events/top-five`);
     }, [reload]);
 
     const EventContextValue = useMemo(

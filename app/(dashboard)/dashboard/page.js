@@ -31,7 +31,7 @@ const Dashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      const res = await axios.get("https://nova-next-gen-server.onrender.com/api/v1/dashboard");
+      const res = await axios.get("https://deep-sky-server.onrender.com/api/v1/dashboard");
       setDashboardData(res.data.data);
     } catch (err) {
       setError("Failed to load dashboard data");

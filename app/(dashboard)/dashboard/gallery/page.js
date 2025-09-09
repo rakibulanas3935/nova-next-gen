@@ -21,7 +21,7 @@ export default function ProjectsPage() {
   const [actionType, setActionType] = useState(null); // 'reject'
 
   useEffect(() => {
-    getAllGalerys('https://nova-next-gen-server.onrender.com/api/v1/gallery')
+    getAllGalerys('https://deep-sky-server.onrender.com/api/v1/gallery')
   }, [])
 
   console.log("gallerys", gallerys)
@@ -29,7 +29,7 @@ export default function ProjectsPage() {
   const handleApproveReject = (id) => {
     // ✅ Immediate approval without modal
     updateApproved(
-      `https://nova-next-gen-server.onrender.com/api/v1/gallery/${id}/approve`,
+      `https://deep-sky-server.onrender.com/api/v1/gallery/${id}/approve`,
       {
         user: {
           _id: user?._id,
@@ -51,7 +51,7 @@ export default function ProjectsPage() {
   const confirmAction = () => {
     if (actionType === "reject") {
       deleteProject(
-        `https://nova-next-gen-server.onrender.com/api/v1/gallery/${selectedId}/reject`,
+        `https://deep-sky-server.onrender.com/api/v1/gallery/${selectedId}/reject`,
         {
           user: {
             _id: user?._id,

@@ -15,7 +15,7 @@ export default function BlogDetailPage() {
 
   useEffect(() => {
     if (id) {
-      getSingleBlog(`https://nova-next-gen-server.onrender.com/api/v1/blogs/${id}`);
+      getSingleBlog(`https://deep-sky-server.onrender.com/api/v1/blogs/${id}`);
     }
   }, [id]);
 

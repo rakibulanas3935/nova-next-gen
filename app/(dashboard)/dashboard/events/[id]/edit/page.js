@@ -25,7 +25,7 @@ export default function EditEventPage() {
 
 
     useEffect(() => {
-        getSingleEvent(`https://nova-next-gen-server.onrender.com/api/v1/events/${id}`, (res) => {
+        getSingleEvent(`https://deep-sky-server.onrender.com/api/v1/events/${id}`, (res) => {
             const event = res?.data?.event;
             setFormData({
                 title: event.title || '',
@@ -46,7 +46,7 @@ export default function EditEventPage() {
         data.append('description', formData.description);
         if (formData.poster) data.append('poster', formData.poster);
 
-        updateEvent(`https://nova-next-gen-server.onrender.com/api/v1/events/${id}`, data, () => {
+        updateEvent(`https://deep-sky-server.onrender.com/api/v1/events/${id}`, data, () => {
             setReload(true)
             setFormData({
                 title: '',
@@ -64,7 +64,7 @@ export default function EditEventPage() {
         <div className="min-h-screen bg-[#0A0F1C] text-white py-12 px-4">
             <div className="max-w-3xl mx-auto bg-white/10 border border-white/10 backdrop-blur-md rounded-2xl p-8 shadow-xl space-y-6">
                 <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    Create Event
+                    Update Event
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Title */}

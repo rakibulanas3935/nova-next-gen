@@ -22,7 +22,7 @@ export default function ProjectsPage() {
   const handleApproveReject = (id) => {
     // ✅ Immediate approval without modal
     updateApproved(
-      `https://nova-next-gen-server.onrender.com/api/v1/projects/${id}/approve`,
+      `https://deep-sky-server.onrender.com/api/v1/projects/${id}/approve`,
       {
         user: {
           _id: user?._id,
@@ -44,7 +44,7 @@ export default function ProjectsPage() {
   const confirmAction = () => {
     if (actionType === "reject") {
         deleteProject(
-            `https://nova-next-gen-server.onrender.com/api/v1/projects/${selectedId}/reject`,
+            `https://deep-sky-server.onrender.com/api/v1/projects/${selectedId}/reject`,
             {
                 user: {
                     _id: user?._id,

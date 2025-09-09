@@ -19,7 +19,7 @@ export default function CreateLearnPage() {
     e.preventDefault();
 
     postData(
-      'https://nova-next-gen-server.onrender.com/api/v1/learn',
+      'https://deep-sky-server.onrender.com/api/v1/learn',
       formData,
       () => {
         setFormData({ title: '', description: '' });

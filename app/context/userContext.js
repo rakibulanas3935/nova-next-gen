@@ -20,7 +20,7 @@ const UserProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await fetch(
-        " https://nova-next-gen-server.onrender.com/api/v1/users/current-user",
+        " https://deep-sky-server.onrender.com/api/v1/users/current-user",
         {
           method: "GET",
           headers: {
@@ -48,7 +48,7 @@ const UserProvider = ({ children }) => {
   }, [fetchCurrentUser]);
 
   useEffect(() => {
-    getAllusers(`https://nova-next-gen-server.onrender.com/api/v1/users`)
+    getAllusers(`https://deep-sky-server.onrender.com/api/v1/users`)
   }, [reload])
   const userContextValue = useMemo(
     () => ({ user, users,setUser, loading, setReload,userLoading }),

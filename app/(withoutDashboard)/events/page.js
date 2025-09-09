@@ -9,7 +9,7 @@ const EventsPage = () => {
     const { event, eventLoading,upcomingEvent,upComingEventEventLoading } = useEventContext();
     
     // useEffect(()=>{
-    //     getAllUpComingEvent(`https://nova-next-gen-server.onrender.com/api/v1/events`)
+    //     getAllUpComingEvent(`https://deep-sky-server.onrender.com/api/v1/events`)
     // },[])
     if (eventLoading || upComingEventEventLoading) {
         return <CommonLoader />;
@@ -23,22 +23,32 @@ const EventsPage = () => {
             className="relative z-30 pb-20 pt-24 px-4 sm:px-6 lg:px-8 !overflow-hidden bg-[#0A0F1C]"
         >
             {/* Space & Nebula Background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#05010e] via-[#120851] to-[#05010e]" />
+            {/* <div className="absolute inset-0 bg-gradient-to-b from-[#05010e] via-[#120851] to-[#05010e]" />
             <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-purple-700/30 rounded-full blur-[200px]" />
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[180px]" />
-            <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-pink-500/20 rounded-full blur-[150px]" />
+            <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-pink-500/20 rounded-full blur-[150px]" /> */}
+              <video
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="/nova_next_gen.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-            <div className="max-w-5xl mx-auto space-y-14 relative z-10">
+            <div className="max-w-5xl mx-auto space-y-6 relative z-10">
                 <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500 text-center">
                     Events & Activities
                 </h1>
 
-                <p className="text-center text-gray-300">
+                {/* <p className="text-center text-gray-300">
                     Explore what’s happening and what we’ve done.
-                </p>
+                </p> */}
 
                 {/* Upcoming Events */}
-                <section className="mt-12">
+                <section className="mt-4">
                     <h2 className="text-2xl font-semibold text-white mb-4">Upcoming Events</h2>
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                         {upcomingEvent?.data?.events?.map((ev, idx) => (

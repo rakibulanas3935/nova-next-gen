@@ -50,7 +50,7 @@ const Header = () => {
                                     transition={{ delay: 0.3 }}
                                     className="mt-4 text-lg text-gray-300"
                                 >
-                                   Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus sint similique vel aperiam debitis, natus eos recusandae nisi amet! Deserunt sint sit excepturi aspernatur ipsum vel iste perspiciatis odit ab?
+                                   Deep Sky Society inspires curiosity and exploration of the universe by bringing people together for stargazing, workshops, and educational programs that make astronomy accessible and engaging for all.
                                 </motion.p>
 
                                 <motion.div 
