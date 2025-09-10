@@ -186,7 +186,7 @@ const BlogNews = () => {
                 </div>
 
                 {/* Sky Events */}
-                <div>
+                {/* <div>
                     <h3 className="text-2xl font-semibold mb-6 text-white">🌌 Upcoming Sky Events</h3>
                     <div className="grid md:grid-cols-2 gap-6">
                         {skyEvents.map((event, i) => (
@@ -204,10 +204,10 @@ const BlogNews = () => {
                             </motion.div>
                         ))}
                     </div>
-                </div>
+                </div> */}
 
                 {/* Space News */}
-                <div>
+                {/* <div>
                     <h3 className="text-2xl font-semibold mb-6 text-white">🚀 Space News Highlights</h3>
                     <div className="grid md:grid-cols-2 gap-6">
                         {spaceNews.map((news, i) => (
@@ -225,7 +225,7 @@ const BlogNews = () => {
                             </motion.div>
                         ))}
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
     );
