@@ -15,18 +15,29 @@ const ProjectsPage = () => {
   return (
     <main className="min-h-screen bg-[#0A0F1C] text-white px-6 py-20 relative overflow-hidden">
       {/* Space & Nebula Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#05010e] via-[#120851] to-[#05010e]" />
+      {/* <div className="absolute inset-0 bg-gradient-to-b from-[#05010e] via-[#120851] to-[#05010e]" />
       <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-purple-700/30 rounded-full blur-[200px]" />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[180px]" />
-      <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-pink-500/20 rounded-full blur-[150px]" />
+      <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-pink-500/20 rounded-full blur-[150px]" /> */}
+           <video
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="/nova_next_gen.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
 
       {/* Existing animated purple glow */}
-      <motion.div
+      {/* <motion.div
         className="absolute w-[500px] h-[500px] bg-purple-700 rounded-full blur-3xl opacity-20"
         style={{ top: "-100px", left: "-100px", zIndex: 1 }}
         animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.2, 0.15] }}
         transition={{ duration: 8, repeat: Infinity }}
-      />
+      /> */}
 
       <div className="max-w-6xl mx-auto relative z-10 space-y-16">
         <motion.h1

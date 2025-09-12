@@ -27,32 +27,35 @@ export default function Home() {
             <motion.div style={{ y: headerY }}>
                 <Hero />
             </motion.div>
-
-            <div className="py-20 relative min-h-screen overflow-hidden bg-gradient-to-b from-[#05010e] via-[#120851] to-[#05010e]">
-                
+            <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#05010e] via-[#0a041f] to-[#05010e]">
+                {/* Nebula Glow */}
                 <motion.div
-                    className="absolute w-32 h-32 rounded-full opacity-20"
-                    animate={{
-                        x: mousePosition.x * -0.03,
-                        y: mousePosition.y * -0.03,
-                    }}
+                    className="absolute inset-0"
                     style={{
-                        background: 'radial-gradient(circle, rgba(59,130,246,1) 0%, rgba(79,70,229,0) 70%)',
-                        bottom: '20%',
-                        left: '20%',
+                        background:
+                            "radial-gradient(circle at 70% 40%, rgba(236, 175, 21, 0.25), transparent 60%), radial-gradient(circle at 30% 70%, rgba(59,130,246,0.15), transparent 70%)",
+                    }}
+                    animate={{
+                        backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+                    }}
+                    transition={{
+                        duration: 25,
+                        repeat: Infinity,
+                        ease: "linear",
                     }}
                 />
-             {/* Stars background */}
+
+
+
+
+                {/* Stars */}
                 <div className="absolute inset-0">
-                    {[...Array(50)].map((_, i) => (
+                    {[...Array(100)].map((_, i) => (
                         <motion.div
-                            key={i + 1}
-                            className="absolute w-1 h-1 bg-white rounded-full"
-                            initial={{ opacity: 0.1 }}
-                            animate={{
-                                opacity: [0.1, 1, 0.1],
-                                scale: [1, 1.2, 1],
-                            }}
+                            key={i}
+                            className="absolute w-[2px] h-[2px] bg-white rounded-full"
+                            initial={{ opacity: 0.1, scale: 1 }}
+                            animate={{ opacity: [0.1, 1, 0.1], scale: [1, 1.3, 1] }}
                             transition={{
                                 duration: Math.random() * 3 + 2,
                                 repeat: Infinity,
@@ -65,8 +68,12 @@ export default function Home() {
                         />
                     ))}
                 </div>
+
+                {/* Content */}
                 <Header />
             </div>
+
+
 
         </motion.main>
     );

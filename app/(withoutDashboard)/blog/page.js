@@ -127,6 +127,16 @@ const BlogNews = () => {
                     left: '20%',
                 }}
             />
+     <video
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="/nova_next_gen.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
             {/* Stars background */}
             <div className="absolute inset-0 z-0">

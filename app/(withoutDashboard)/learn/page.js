@@ -161,6 +161,17 @@ export default function LearnPage() {
       transition={{ duration: 0.6 }}
       className="min-h-screen py-20 px-4 sm:px-10 bg-[#0A0F1C] text-white relative"
     >
+           <video
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="/nova_next_gen.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
       <div className="max-w-5xl mx-auto space-y-16 relative z-10">
         {/* Page Title */}
         <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">

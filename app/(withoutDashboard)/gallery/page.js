@@ -13,6 +13,17 @@ const Gallery = () => {
     }
     return (
         <div className=" min-h-screen overflow-hidden bg-[#0A0F1C]">
+                 <video
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="/nova_next_gen.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
             <motion.div
                 className="absolute w-32 h-32 rounded-full opacity-20"
                 animate={{

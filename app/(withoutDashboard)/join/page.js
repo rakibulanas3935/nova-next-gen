@@ -28,15 +28,27 @@ const JoinPage = () => {
       transition={{ duration: 0.5 }}
       className="relative min-h-screen py-20 px-6 sm:px-10 overflow-hidden text-white"
     >
+
+           <video
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="/nova_next_gen.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
       {/* Space gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#05010e] via-[#120851] to-[#05010e]" />
+      {/* <div className="absolute inset-0 bg-gradient-to-b from-[#05010e] via-[#120851] to-[#05010e]" /> */}
 
       {/* Nebula glow layers */}
-      <motion.div
+      {/* <motion.div
         className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-purple-700/30 rounded-full blur-[200px]"
         animate={{ x: [0, 20, -20, 0], y: [0, -15, 15, 0] }}
         transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
-      />
+      /> */}
       <motion.div
         className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[180px]"
         animate={{ x: [0, -20, 20, 0], y: [0, 10, -10, 0] }}
