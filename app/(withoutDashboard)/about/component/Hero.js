@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Loader } from "lucide-react";
 import { useEventContext } from "@/app/context/eventContext";
 
-export default function Hero() {
+export default function Hero({title,description}) {
   return (
     <div className="relative min-h-screen overflow-hidden text-white">
       {/* Video Background */}
@@ -24,11 +24,10 @@ export default function Hero() {
       {/* Main content */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-center px-4">
         <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-          Explore the Cosmos
+          {title}
         </h1>
         <p className="text-lg md:text-xl text-gray-300 max-w-xl mx-auto">
-          Join our community of stargazers and embark on a journey through the
-          wonders of the universe.
+         {description}
         </p>
       </div>
     </div>

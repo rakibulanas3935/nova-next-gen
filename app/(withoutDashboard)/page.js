@@ -25,7 +25,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
         >
             <motion.div style={{ y: headerY }}>
-                <Hero />
+                <Hero title="Space Projects" description="See the cool astronomy projects we’re building to explore and understand the wonders of space."/>
             </motion.div>
             <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#05010e] via-[#0a041f] to-[#05010e]">
                 {/* Nebula Glow */}

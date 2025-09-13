@@ -27,7 +27,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
         >
             <motion.div style={{ y: headerY }}>
-                <Hero title="Know More ABout US" section="About" />
+                <Hero title="Beyond the Stars" description="Learn about our mission, our journey, and the dedicated explorers who bring the wonders of the universe closer to you." />
             </motion.div>
             <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#05010e] via-[#0a041f] to-[#05010e]">
                 {/* Nebula Glow */}
