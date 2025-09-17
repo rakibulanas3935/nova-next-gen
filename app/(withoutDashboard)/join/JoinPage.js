@@ -8,11 +8,7 @@ const joinData = [
     description:
       "Deep Sky Society welcomes all space enthusiasts! Ideal for ages 13+, especially those curious about astronomy, physics, or technology.",
   },
-  {
-    title: "Meeting Times & Locations",
-    description:
-      "We meet every Saturday at 7PM online via Zoom, and monthly at the local planetarium. Hybrid options are available for remote members.",
-  },
+ 
   {
     title: "Benefits of Joining",
     description:

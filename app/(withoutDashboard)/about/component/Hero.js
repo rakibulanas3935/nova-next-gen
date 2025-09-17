@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Loader } from "lucide-react";
 import { useEventContext } from "@/app/context/eventContext";
 
-export default function Hero({title,description}) {
+export default function Hero({title,description,path="/deep_sky_banner2.mp4"}) {
   return (
     <div className="relative min-h-screen overflow-hidden text-white">
       {/* Video Background */}
@@ -17,7 +17,7 @@ export default function Hero({title,description}) {
         muted
         playsInline
       >
-        <source src="/nova_next_gen.mp4" type="video/mp4" />
+        <source src={path} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
    <div className="absolute inset-0 bg-black/65 z-0" />

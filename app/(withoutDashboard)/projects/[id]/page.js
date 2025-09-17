@@ -40,17 +40,7 @@ export default function ProjectDetailPage() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-                 <video
-        className="absolute top-0 left-0 w-full h-full object-cover"
-        autoPlay
-        loop
-        muted
-        playsInline
-      >
-        <source src="/nova_next_gen.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
+             
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

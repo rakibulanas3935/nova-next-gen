@@ -86,7 +86,7 @@ const Footer = () => {
         </motion.div>
 
         {/* Column 4: Social Media */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
@@ -98,7 +98,7 @@ const Footer = () => {
             <a href="https://linkedin.com" target="_blank" className="hover:text-blue-400 transition"><FaLinkedin /></a>
             <a href="https://github.com" target="_blank" className="hover:text-gray-100 transition"><FaGithub /></a>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
 
       {/* Bottom Bar */}

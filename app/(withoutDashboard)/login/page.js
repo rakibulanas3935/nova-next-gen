@@ -52,6 +52,17 @@ const Login = () => {
                 }}
             />
 
+              <video
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src={"/deep_sky_banner2.mp4"} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
             {/* Stars background */}
             <div className="absolute inset-0">
                 {[...Array(50)].map((_, i) => (
@@ -147,12 +158,12 @@ const Login = () => {
                                         >
                                             Forgot Password?
                                         </Link>
-                                        <Link
+                                        {/* <Link
                                             href="/register"
                                             className="hover:underline hover:text-white transition"
                                         >
                                             Register
-                                        </Link>
+                                        </Link> */}
                                     </div>
 
                                     {/* Submit button */}

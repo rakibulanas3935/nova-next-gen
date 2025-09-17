@@ -26,7 +26,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
         >
             <motion.div style={{ y: headerY }}>
-                <Hero title="Cosmic Learning" description="Discover fun and easy ways to learn about stars, planets, and the universe with our astronomy resources." />
+                <Hero title="Cosmic Learning" description="Discover fun and easy ways to learn about stars, planets, and the universe with our astronomy resources." path="/deep_sky_2.mp4" />
             </motion.div>
             <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#05010e] via-[#0a041f] to-[#05010e]">
                 {/* Nebula Glow */}

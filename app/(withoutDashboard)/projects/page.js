@@ -26,7 +26,7 @@ export default function Projects() {
             transition={{ duration: 0.8 }}
         >
             <motion.div style={{ y: headerY }}>
-                <Hero title="Space Projects" description="See the cool astronomy projects we’re building to explore and understand the wonders of space." />
+                <Hero title="Space Projects" description="See the cool astronomy projects we’re building to explore and understand the wonders of space." path="/nova_next_gen.mp4"/>
             </motion.div>
             <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#05010e] via-[#0a041f] to-[#05010e]">
                 {/* Nebula Glow */}
