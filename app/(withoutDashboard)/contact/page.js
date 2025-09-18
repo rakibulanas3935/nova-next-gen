@@ -131,7 +131,7 @@ const Contact = () => {
                                         </p>
                                     </div>
 
-                                    <div className="flex gap-4 mt-4">
+                                    {/* <div className="flex gap-4 mt-4">
                                         {[
                                             { icon: Twitter, href: "https://twitter.com" },
                                             { icon: Facebook, href: "https://facebook.com" },
@@ -148,7 +148,7 @@ const Contact = () => {
                                                 <Icon size={24} />
                                             </motion.a>
                                         ))}
-                                    </div>
+                                    </div> */}
                                 </motion.div>
                             </div>
                         </div>

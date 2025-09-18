@@ -1,6 +1,20 @@
 "use client";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import Link from "next/link";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About Us" },
+  { href: "/join", label: "Join" },
+  { href: "/events", label: "Events" },
+  { href: "/projects", label: "Projects" },
+  { href: "/learn", label: "Learn" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/blog", label: "Blog" },
+  // { href: '/merchantdise', label: 'Merchandise' },
+  { href: "/contact", label: "Contact" },
+];
 
 const joinData = [
   {
@@ -8,11 +22,15 @@ const joinData = [
     description:
       "Deep Sky Society welcomes all space enthusiasts! Ideal for ages 13+, especially those curious about astronomy, physics, or technology.",
   },
- 
   {
     title: "Benefits of Joining",
-    description:
-      "• Access to telescope sessions\n• Join real space projects\n• Learn from experts\n• Get featured in our blog\n• Participate in astrophotography, movie nights, and webinars!",
+    description: `• Access to telescope sessions
+• Join real space projects
+• Learn from experts
+• Get featured in our blog
+• Participate in astrophotography, movie nights, and webinars!
+• Stay updated with our latest events and activities
+• Explore astronomy insights in our blog section`,
   },
 ];
 
@@ -24,16 +42,7 @@ const JoinPage = () => {
       transition={{ duration: 0.5 }}
       className="relative min-h-screen py-20 px-6 sm:px-10 overflow-hidden text-white"
     >
-
-      {/* Space gradient background */}
-      {/* <div className="absolute inset-0 bg-gradient-to-b from-[#05010e] via-[#120851] to-[#05010e]" /> */}
-
-      {/* Nebula glow layers */}
-      {/* <motion.div
-        className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-purple-700/30 rounded-full blur-[200px]"
-        animate={{ x: [0, 20, -20, 0], y: [0, -15, 15, 0] }}
-        transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
-      /> */}
+      {/* Background glows */}
       <motion.div
         className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[180px]"
         animate={{ x: [0, -20, 20, 0], y: [0, 10, -10, 0] }}
@@ -45,7 +54,7 @@ const JoinPage = () => {
         transition={{ duration: 45, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Stars background */}
+      {/* Stars */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(60)].map((_, i) => (
           <motion.div
@@ -95,6 +104,25 @@ const JoinPage = () => {
             <p className="mt-2 whitespace-pre-line text-gray-300">
               {item.description}
             </p>
+
+            {/* Show navigation links separately only for "Benefits" */}
+            {item.title === "Benefits of Joining" && (
+              <div className="mt-6 flex flex-wrap gap-3">
+                {navLinks
+                  .filter((link) =>
+                    ["/events", "/blog", "/projects", "/learn"].includes(link.href)
+                  )
+                  .map((link, idx) => (
+                    <Link
+                      key={idx}
+                      href={link.href}
+                      className="px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-sky-500 text-white text-sm font-medium shadow hover:from-indigo-600 hover:to-sky-600 transition-all"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+              </div>
+            )}
           </motion.div>
         ))}
 
