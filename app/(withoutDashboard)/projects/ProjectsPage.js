@@ -1,15 +1,28 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useProjectContext } from "@/app/context/projectContext";
 import Image from "next/image";
 import CommonLoader from "@/app/components/common/CommonLoader";
+import { useUserContext } from "@/app/context/userContext";
+import { useRouter } from "next/navigation";
+import ConfirmModal from "@/app/components/common/ConfirmModal";
 
 const ProjectsPage = () => {
   const { approvedProjects, ApprovedProjectsLoading } = useProjectContext();
-
+  const { user } = useUserContext()
   if (ApprovedProjectsLoading) return <CommonLoader />;
+    const router = useRouter();
+
+  const [showModal, setShowModal] = useState(false);
+  const handleClick = (project) => {
+    if (!user) {
+      setShowModal(true);
+    } else {
+      window.open(project?.liveLink, "_blank", "noopener,noreferrer");
+    }
+  };
 
   return (
     <main className="relative min-h-screen  text-white overflow-hidden">
@@ -90,23 +103,28 @@ const ProjectsPage = () => {
                     >
                       Details
                     </Link>
-                    {project.liveLink && (
-                      <a
-                        href={project.liveLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 text-center px-4 py-2 rounded-lg 
-                                   bg-gradient-to-r from-purple-600 to-cyan-600 
-                                   hover:from-cyan-500 hover:to-purple-500 
-                                   transition-colors duration-300"
-                      >
-                        Live
-                      </a>
-                    )}
+                    <button
+                      onClick={()=>handleClick(project)}
+                      className="flex-1 text-center px-4 py-2 rounded-lg 
+                   bg-gradient-to-r from-purple-600 to-cyan-600 
+                   hover:from-cyan-500 hover:to-purple-500 
+                   transition-colors duration-300 text-white"
+                    >
+                      Live
+                    </button>
+
+                   
+
                   </div>
                 </div>
               </motion.div>
             ))}
+
+             <ConfirmModal
+                      open={showModal}
+                      onClose={() => setShowModal(false)}
+                      onConfirm={() => router.push("/join")}
+                    />
           </div>
         )}
       </div>

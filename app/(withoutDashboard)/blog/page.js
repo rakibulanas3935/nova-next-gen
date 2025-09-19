@@ -27,7 +27,7 @@ export default function Blog() {
             transition={{ duration: 0.8 }}
         >
             <motion.div style={{ y: headerY }}>
-                <Hero title="Cosmic Chronicles" description="Read the latest stories, insights, and discoveries from the world of astronomy and space exploration." />
+                <Hero title="Cosmic Chronicles" description="Read the latest stories, insights, and discoveries from the world of astronomy and space exploration." path="/deep_sky_blog.mp4" />
             </motion.div>
             <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#05010e] via-[#0a041f] to-[#05010e]">
                 {/* Nebula Glow */}

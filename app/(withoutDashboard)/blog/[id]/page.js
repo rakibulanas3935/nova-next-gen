@@ -8,8 +8,9 @@ import { Loader, Clock3, ArrowLeft } from 'lucide-react';
 import useAxiosGet from '@/app/utils/useAxiosGet';
 import Link from 'next/link';
 import CommonLoader from '@/app/components/common/CommonLoader';
+import withAuth from '@/app/components/common/withAuth';
 
-export default function BlogDetailPage() {
+ function BlogDetailPage() {
   const { id } = useParams();
   const [singleBlog, getSingleBlog, loading] = useAxiosGet([]);
 
@@ -125,3 +126,4 @@ export default function BlogDetailPage() {
     </div>
   );
 }
+export default withAuth(BlogDetailPage)

@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Loader, ArrowLeft, ExternalLink } from 'lucide-react';
@@ -9,10 +9,13 @@ import useAxiosGet from '@/app/utils/useAxiosGet';
 import Link from 'next/link';
 import CommonLoader from '@/app/components/common/CommonLoader';
 
+import { useUserContext } from '@/app/context/userContext';
+import ConfirmModal from '@/app/components/common/ConfirmModal';
+
 export default function ProjectDetailPage() {
     const { id } = useParams();
     const [singleProject, getSingleProject, loading] = useAxiosGet([]);
-
+    const {user}=useUserContext()
     useEffect(() => {
         if (id) {
             getSingleProject(`https://deep-sky-server.onrender.com/api/v1/projects/${id}`);
@@ -20,10 +23,19 @@ export default function ProjectDetailPage() {
     }, [id]);
 
     const project = singleProject?.data?.project;
+    const router = useRouter();
 
+    const [showModal, setShowModal] = useState(false);
+    const handleClick = (project) => {
+        if (!user) {
+            setShowModal(true);
+        } else {
+            window.open(project?.liveLink, "_blank", "noopener,noreferrer");
+        }
+    };
     if (loading) {
         return (
-            <CommonLoader/>
+            <CommonLoader />
         );
     }
 
@@ -40,7 +52,7 @@ export default function ProjectDetailPage() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-             
+
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -103,7 +115,7 @@ export default function ProjectDetailPage() {
                                     <p className="text-slate-400">
                                         Created by{' '}
                                         <span className="text-white font-semibold">
-                                            {'NASA' ||project.createdBy?.name}
+                                            {'NASA' || project.createdBy?.name}
                                         </span>
                                     </p>
                                 </div>
@@ -124,18 +136,24 @@ export default function ProjectDetailPage() {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.4 }}
                                 >
-                                    <Link
-                                        href={project.liveLink}
-                                        target="_blank"
+                                    <button
+
+                                        onClick={() => handleClick(project)}
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 group"
                                     >
                                         <ExternalLink className="w-5 h-5 group-hover:scale-110 transition-transform" />
                                         Visit Live Project
-                                    </Link>
+                                    </button>
                                 </motion.div>
                             )}
                         </div>
+                        <ConfirmModal
+                            open={showModal}
+                            onClose={() => setShowModal(false)}
+                            onConfirm={() => router.push("/join")}
+                           
+                        />
                     </motion.div>
                 </div>
             </motion.div>

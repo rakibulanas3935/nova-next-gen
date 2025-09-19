@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaInstagram, FaYoutube, FaLinkedin, FaGithub } from "react-icons/fa";
+import { ExternalLink } from "lucide-react";
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -81,8 +82,13 @@ const Footer = () => {
           transition={{ delay: 0.4, duration: 0.6 }}
         >
           <h3 className="text-white font-semibold mb-4">Contact</h3>
-          <p className="text-gray-400 mb-2">Email: hello@Deep Sky Society.space</p>
-          <p className="text-gray-400">Phone: +880-1234-567890</p>
+          <Link href={'/contact'}
+
+            className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 group"
+          >
+            <ExternalLink className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            Visit Contact info
+          </Link>
         </motion.div>
 
         {/* Column 4: Social Media */}

@@ -28,7 +28,7 @@ export default function Event() {
             transition={{ duration: 0.8 }}
         >
             <motion.div style={{ y: headerY }}>
-                <Hero title="Stellar Sessions" description="Dive into our dynamic astronomy events that light up curiosity and bring the universe closer than ever." />
+                <Hero title="Stellar Sessions" description="Dive into our dynamic astronomy events that light up curiosity and bring the universe closer than ever." path="/deep_sky_join.mp4" />
             </motion.div>
             <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#05010e] via-[#0a041f] to-[#05010e]">
                 {/* Nebula Glow */}

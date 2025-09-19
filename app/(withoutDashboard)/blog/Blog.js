@@ -6,6 +6,9 @@ import Image from "next/image";
 import { Clock3 } from "lucide-react";
 import Link from "next/link";
 import CommonLoader from "@/app/components/common/CommonLoader";
+import { useUserContext } from "@/app/context/userContext";
+import { useRouter } from "next/navigation";
+import ConfirmModal from "@/app/components/common/ConfirmModal";
 
 // Blog data with images
 const blogPosts = [
@@ -57,48 +60,49 @@ const BlogCard = ({
     subtitle,
     date,
     image,
+    handleClick
 }) => (
-    <Link href={`/blog/${id}`}>
-    <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="bg-white/5 cursor-pointer hover:bg-white/10 transition-all rounded-2xl border border-white/10 shadow-sm hover:shadow-lg overflow-hidden"
-    >
-        <div className="w-full h-48 overflow-hidden">
-            <div className="relative w-full h-64 sm:h-96">
-                <Image
-                    src={image}
-                    alt={title}
-                    fill
+    <button onClick={()=>handleClick(id)}>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="bg-white/5 cursor-pointer hover:bg-white/10 transition-all rounded-2xl border border-white/10 shadow-sm hover:shadow-lg overflow-hidden"
+        >
+            <div className="w-full h-48 overflow-hidden">
+                <div className="relative w-full h-64 sm:h-96">
+                    <Image
+                        src={image}
+                        alt={title}
+                        fill
 
-                    placeholder="blur"
-                    blurDataURL="/blur.jpg" // fallback blur
-                    priority
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
+                        placeholder="blur"
+                        blurDataURL="/blur.jpg" // fallback blur
+                        priority
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                </div>
+
+
+
             </div>
-
-
-
-        </div>
-        <div className="p-6">
-            <h4 className="text-lg font-semibold text-white">{title}</h4>
-            <p className="text-xs flex text-gray-500 mt-4">
-                <Clock3 className="w-4 h-4 mr-2" />
-                {new Date(date).toLocaleString('en-US', {
-                    weekday: 'long',
-                    month: 'long',
-                    day: 'numeric',
-                    year: 'numeric',
-                    hour: 'numeric',
-                    minute: '2-digit',
-                })}
-            </p>
-        </div>
-    </motion.div>
-    </Link>
+            <div className="p-6">
+                <h4 className="text-lg font-semibold text-white">{title}</h4>
+                <p className="text-xs flex text-gray-500 mt-4">
+                    <Clock3 className="w-4 h-4 mr-2" />
+                    {new Date(date).toLocaleString('en-US', {
+                        weekday: 'long',
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric',
+                        hour: 'numeric',
+                        minute: '2-digit',
+                    })}
+                </p>
+            </div>
+        </motion.div>
+    </button>
 );
 
 const BlogNews = () => {
@@ -107,6 +111,16 @@ const BlogNews = () => {
     if(blogsLoading){
         return <CommonLoader/>
     }
+    const { user } = useUserContext()
+    const router = useRouter();
+    const [showModal, setShowModal] = useState(false);
+    const handleClick = (id) => {
+        if (!user) {
+            setShowModal(true);
+        } else {
+            router.push(`/blog/${id}`)
+        }
+    };  
     return (
         <section
             className="relative  !overflow-hidden z-20 py-24 px-4 sm:px-6 lg:px-8  text-white"
@@ -178,6 +192,7 @@ const BlogNews = () => {
                                 key={i+1}
                                 title={post?.title}
                                 id={post?._id}
+                                handleClick={handleClick}
                                 // subtitle={post.excerpt}
                                 date={post?.createdAt}
                                 image={post?.blogImage}
@@ -186,47 +201,12 @@ const BlogNews = () => {
                     </div>
                 </div>
 
-                {/* Sky Events */}
-                {/* <div>
-                    <h3 className="text-2xl font-semibold mb-6 text-white">🌌 Upcoming Sky Events</h3>
-                    <div className="grid md:grid-cols-2 gap-6">
-                        {skyEvents.map((event, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                                viewport={{ once: true }}
-                                className="bg-white/5 p-6 rounded-xl border border-white/10 hover:shadow-md"
-                            >
-                                <h4 className="text-lg font-medium">{event.event}</h4>
-                                <p className="text-sm text-gray-300 mt-2">{event.description}</p>
-                                <p className="text-xs text-gray-500 mt-4">{event.date}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div> */}
-
-                {/* Space News */}
-                {/* <div>
-                    <h3 className="text-2xl font-semibold mb-6 text-white">🚀 Space News Highlights</h3>
-                    <div className="grid md:grid-cols-2 gap-6">
-                        {spaceNews.map((news, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                                viewport={{ once: true }}
-                                className="bg-white/5 p-6 rounded-xl border border-white/10 hover:shadow-md"
-                            >
-                                <h4 className="text-lg font-medium">{news.title}</h4>
-                                <p className="text-sm text-gray-400 mt-1">Source: {news.source}</p>
-                                <p className="text-xs text-gray-500 mt-2">{news.date}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div> */}
+                <ConfirmModal
+                                           open={showModal}
+                                           onClose={() => setShowModal(false)}
+                                           onConfirm={() => router.push("/join")}
+                                          
+                                       />
             </div>
         </section>
     );

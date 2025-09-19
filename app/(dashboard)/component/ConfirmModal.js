@@ -42,7 +42,7 @@ export default function ConfirmModal({ open, onClose, onConfirm, title = 'Are yo
                 }}
                 className="px-4 py-2 rounded-md bg-red-600 hover:bg-red-700 transition text-white font-medium"
               >
-                Confirm
+                Join Now
               </button>
             </div>
           </motion.div>
