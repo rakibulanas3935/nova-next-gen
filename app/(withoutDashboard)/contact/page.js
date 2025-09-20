@@ -124,11 +124,11 @@ const Contact = () => {
                                     <h3 className="text-xl font-semibold text-white">Connect with us</h3>
                                     <div className="space-y-2 text-gray-300">
                                         <p className="flex items-center gap-2">
-                                            <Mail size={18} /> support@example.com
+                                            <Mail size={18} /> deepskysociety@gmail.com
                                         </p>
-                                        <p className="flex items-center gap-2">
+                                        {/* <p className="flex items-center gap-2">
                                             <Mail size={18} /> feedback@example.com
-                                        </p>
+                                        </p> */}
                                     </div>
 
                                     {/* <div className="flex gap-4 mt-4">

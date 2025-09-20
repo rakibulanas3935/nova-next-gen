@@ -76,7 +76,7 @@ const Footer = () => {
         </motion.div>
 
         {/* Column 3: Contact Info */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
@@ -89,7 +89,7 @@ const Footer = () => {
             <ExternalLink className="w-5 h-5 group-hover:scale-110 transition-transform" />
             Visit Contact info
           </Link>
-        </motion.div>
+        </motion.div> */}
 
         {/* Column 4: Social Media */}
         {/* <motion.div

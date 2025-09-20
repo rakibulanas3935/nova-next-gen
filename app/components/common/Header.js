@@ -88,14 +88,14 @@ const Header = () => {
                                 className="relative lg:h-full"
                             >
                                 <div className="grid grid-cols-2 gap-4 h-full">
-                                    {['Members', 'Events', 'Projects', 'Awards'].map((label, index) => (
+                                    {['Members', 'Events', 'Projects', 'Blogs'].map((label, index) => (
                                         <motion.div
                                             key={label}
                                             whileHover={{ scale: 1.05 }}
                                             className="flex flex-col items-center justify-center p-6 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10"
                                         >
                                             <span className="text-3xl font-bold text-white">
-                                                {[200, 50, 30, 15][index]}+
+                                                {[1200, 50, 30,40][index]}+
                                             </span>
                                             <span className="mt-2 text-sm text-gray-300">
                                                 {label}
