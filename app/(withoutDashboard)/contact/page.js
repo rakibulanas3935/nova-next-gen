@@ -28,7 +28,7 @@ const Contact = () => {
 
     }
     return (
-        <div className=" min-h-screen overflow-hidden bg-[#0A0F1C]">
+        <div className=" min-h-screen !overflow-hidden bg-[#0A0F1C]">
             <video
                 className="absolute top-0 left-0 w-full h-full object-cover"
                 autoPlay
