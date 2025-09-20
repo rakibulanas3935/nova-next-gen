@@ -82,7 +82,7 @@ const Contact = () => {
                 transition={{ duration: 0.8 }}
                 className="relative z-40 pt-20 pb-10 sm:pt-24 sm:pb-10"
             >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="relative bg-gradient-to-br from-black/40 to-black/60 backdrop-blur-lg rounded-2xl border border-white/10 overflow-hidden">
                         {/* Background Animation */}
                         <motion.div
@@ -98,9 +98,9 @@ const Contact = () => {
                         />
 
                         <div className="relative px-6 py-8 sm:px-8 sm:py-12">
-                            <div className="grid gap-8 lg:grid-cols-2 lg:gap-16">
+                            <div className="grid gap-8 lg:grid-cols-1 lg:gap-16">
                                 {/* Form Section */}
-                                <div className="flex flex-col justify-center space-y-6">
+                                <div className="flex flex-col  justify-center space-y-6">
                                     <motion.h2
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
@@ -167,7 +167,7 @@ const Contact = () => {
                                 </div>
 
                                 {/* Contact Info + Socials */}
-                                <motion.div
+                                {/* <motion.div
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: 0.5 }}
@@ -178,30 +178,11 @@ const Contact = () => {
                                         <p className="flex items-center gap-2">
                                             <Mail size={18} /> deepskysociety@gmail.com
                                         </p>
-                                        {/* <p className="flex items-center gap-2">
-                                            <Mail size={18} /> feedback@example.com
-                                        </p> */}
+                                   
                                     </div>
 
-                                    {/* <div className="flex gap-4 mt-4">
-                                        {[
-                                            { icon: Twitter, href: "https://twitter.com" },
-                                            { icon: Facebook, href: "https://facebook.com" },
-                                            { icon: Linkedin, href: "https://linkedin.com" },
-                                        ].map(({ icon: Icon, href }, index) => (
-                                            <motion.a
-                                                key={index}
-                                                whileHover={{ scale: 1.2 }}
-                                                href={href}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-white hover:text-purple-400 transition"
-                                            >
-                                                <Icon size={24} />
-                                            </motion.a>
-                                        ))}
-                                    </div> */}
-                                </motion.div>
+                                 
+                                </motion.div> */}
                             </div>
                         </div>
                     </div>
