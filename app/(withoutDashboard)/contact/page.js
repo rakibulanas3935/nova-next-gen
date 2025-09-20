@@ -3,21 +3,42 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Mail, Twitter, Linkedin, Facebook } from "lucide-react";
+import useAxiosPost from "@/app/utils/useAxiosPost";
+import { toast } from "react-toastify";
 
 const Contact = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+    const [message, postMessage, messageLoading] = useAxiosPost({})
+    const handlePost = async (e) => {
+        e.preventDefault();
+        const name = e.target.name.value;
+        const email = e.target.email.value;
+        const message = e.target.message.value;
+
+        if (!name || !email || !message) {
+            toast.warn("Please fill in all fields!");
+            return;
+        }
+
+        postMessage(`https://deep-sky-server.onrender.com/api/v1/message`, { name, email, message }, (res) => {
+            if (res?.success) {
+                e.target.reset();
+            }
+        }, true)
+
+    }
     return (
         <div className=" min-h-screen overflow-hidden bg-[#0A0F1C]">
-                 <video
-        className="absolute top-0 left-0 w-full h-full object-cover"
-        autoPlay
-        loop
-        muted
-        playsInline
-      >
-        <source src="/nova_next_gen.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+            <video
+                className="absolute top-0 left-0 w-full h-full object-cover"
+                autoPlay
+                loop
+                muted
+                playsInline
+            >
+                <source src="/nova_next_gen.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
 
             <motion.div
                 className="absolute w-32 h-32 rounded-full opacity-20"
@@ -88,29 +109,60 @@ const Contact = () => {
                                     >
                                         Get in Touch
                                     </motion.h2>
-                                    <form className="space-y-4">
+                                    <form onSubmit={handlePost} className="space-y-4">
                                         <input
                                             type="text"
+                                            name="name"
                                             placeholder="Your Name"
                                             className="w-full px-4 py-3 rounded-lg bg-white/10 text-white border border-white/20 backdrop-blur-sm focus:outline-none"
                                         />
                                         <input
                                             type="email"
+                                            name="email"
                                             placeholder="Your Email"
                                             className="w-full px-4 py-3 rounded-lg bg-white/10 text-white border border-white/20 backdrop-blur-sm focus:outline-none"
                                         />
                                         <textarea
                                             placeholder="Your Message"
+                                            name="message"
                                             rows={5}
                                             className="w-full px-4 py-3 rounded-lg bg-white/10 text-white border border-white/20 backdrop-blur-sm focus:outline-none"
                                         />
                                         <motion.button
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
-                                            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg text-white font-semibold transition-all hover:shadow-lg hover:shadow-purple-500/25"
+                                            type="submit"
+                                            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg text-white font-semibold transition-all hover:shadow-lg hover:shadow-purple-500/25 flex items-center justify-center gap-2"
                                         >
-                                            Send Message
+                                            {messageLoading ? (
+                                                <>
+                                                    <svg
+                                                        className="animate-spin h-5 w-5 text-white"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <circle
+                                                            className="opacity-25"
+                                                            cx="12"
+                                                            cy="12"
+                                                            r="10"
+                                                            stroke="currentColor"
+                                                            strokeWidth="4"
+                                                        ></circle>
+                                                        <path
+                                                            className="opacity-75"
+                                                            fill="currentColor"
+                                                            d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 11-8 8z"
+                                                        ></path>
+                                                    </svg>
+                                                    Sending...
+                                                </>
+                                            ) : (
+                                                "Send Message"
+                                            )}
                                         </motion.button>
+
                                     </form>
                                 </div>
 
