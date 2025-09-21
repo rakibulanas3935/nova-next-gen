@@ -36,7 +36,7 @@ const Contact = () => {
                 muted
                 playsInline
             >
-                <source src="/nova_next_gen.mp4" type="video/mp4" />
+                <source src="/deep sky-contact.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
 
