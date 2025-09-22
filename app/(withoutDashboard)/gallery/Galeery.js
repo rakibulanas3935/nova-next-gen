@@ -77,14 +77,14 @@ const Gallery = () => {
             Portraits of the Cosmos
           </motion.h2>
 
-          <motion.p
+          {/* <motion.p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
             className="mt-4 text-center text-lg text-gray-300 max-w-2xl mx-auto"
           >
             Explore moments we've captured.
-          </motion.p>
+          </motion.p> */}
 
           {/* Loader */}
           {loading && page === 1 ? (
