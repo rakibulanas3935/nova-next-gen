@@ -30,6 +30,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+       <head>
+        {/* <link rel="icon" href="/favicon.ico" sizes="any" /> */}
+        {/* For PNG version */}
+        <link rel="icon" type="image/png" href="/logo.png" />
+      </head>
       <UserProvider>
         <EventProvider>
           <BlogProvider>
