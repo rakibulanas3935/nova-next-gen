@@ -113,9 +113,8 @@ const AboutUs = () => {
                                         Since then, I’ve been on a mission — not to the Moon (yet), but to understand the cosmos. <br /><br />
                                         In summer 2024, I attended an advanced astronomy course at Stanford University, where I studied stellar evolution, planetary formation, and the large-scale structure of the universe, guided by top faculty and surrounded by brilliant peers from across the globe. <br /><br />
                                         Later that year, I was selected for the Inspirit AI Scholars program, taught by Stanford and MIT researchers. My capstone project focused on using machine learning to detect exoplanets — training an AI to recognize how a planet dims a star’s light as it passes in front of it. That experience opened my eyes to how artificial intelligence is transforming the frontiers of space science. <br /><br />
-                                        This summer, I’ll continue that journey by working under the mentorship of Professor Romain Teyssier, a leading expert in computational astrophysics at Princeton University. <br />
-                                        But somewhere along the way, I realized something important:
-                                        I didn’t want to explore the universe alone. <br />
+                                        In the summer 2025, l continued that journey by working under the mentorship of Professor Romain Teyssier, a leading expert in computational astrophysics at Princeton University. The main objective was to develop a clean and reusable Python-based workflow for analyzing galaxy simulation data produced by his famous RAMSES code. <br />
+                                        But somewhere along the way, I realized something important: I didn’t want to explore the universe alone.
                                         That’s why I founded Deep Sky Society.
                                     </p>
                                 )
