@@ -74,7 +74,7 @@ const Gallery = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500"
           >
-            Gallery
+            Portraits of the Cosmos
           </motion.h2>
 
           <motion.p
@@ -83,7 +83,7 @@ const Gallery = () => {
             transition={{ delay: 0.2 }}
             className="mt-4 text-center text-lg text-gray-300 max-w-2xl mx-auto"
           >
-            Explore moments we've captured—from events to creative showcases.
+            Explore moments we've captured.
           </motion.p>
 
           {/* Loader */}
