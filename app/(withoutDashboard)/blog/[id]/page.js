@@ -73,13 +73,13 @@ import withAuth from '@/app/components/common/withAuth';
             className="grid lg:grid-cols-2 gap-8 lg:gap-12"
           >
             {/* Blog Image */}
-            {blog.blogImage && (
+            {blog?.blogImage && (
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300" />
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm">
                   <Image
-                    src={blog.blogImage}
-                    alt={blog.title}
+                    src={blog?.blogImage}
+                    alt={blog?.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                     priority
@@ -94,14 +94,14 @@ import withAuth from '@/app/components/common/withAuth';
                 {/* Title */}
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
                   <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent bg-size-200 animate-gradient">
-                    {blog.title}
+                    {blog?.title}
                   </span>
                 </h1>
 
                 {/* Created At */}
                 <div className="flex items-center gap-3 text-slate-400">
                   <Clock3 className="w-4 h-4 text-purple-400" />
-                  {new Date(blog.createdAt).toLocaleString('en-US', {
+                  {new Date(blog?.dateTime||blog?.createdAt).toLocaleString('en-US', {
                     weekday: 'long',
                     month: 'long',
                     day: 'numeric',

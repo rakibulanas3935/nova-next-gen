@@ -10,50 +10,6 @@ import { useUserContext } from "@/app/context/userContext";
 import { useRouter } from "next/navigation";
 import ConfirmModal from "@/app/components/common/ConfirmModal";
 
-// Blog data with images
-const blogPosts = [
-    {
-        title: "Exploring the Moon’s Shadow: Lunar Eclipse Highlights",
-        excerpt:
-            "Catch the latest lunar eclipse recap and what it tells us about our moon's orbit.",
-        date: "May 12, 2025",
-        image: "/images/lunar-eclipse.jpg",
-    },
-    {
-        title: "Top 5 Student Projects from Our Astronomy Club",
-        excerpt:
-            "We celebrate innovation with our club’s finest stargazing and astrophotography projects.",
-        date: "May 22, 2025",
-        image: "/images/student-projects.jpg",
-    },
-];
-
-const skyEvents = [
-    {
-        event: "Perseid Meteor Shower",
-        date: "August 12, 2025",
-        description: "One of the brightest meteor showers of the year, visible globally.",
-    },
-    {
-        event: "Total Solar Eclipse",
-        date: "October 2, 2025",
-        description: "Visible from South America. Use protection while viewing!",
-    },
-];
-
-const spaceNews = [
-    {
-        title: "NASA Announces Europa Clipper Launch Schedule",
-        source: "NASA",
-        date: "May 25, 2025",
-    },
-    {
-        title: "James Webb Captures Earliest Galaxies Yet",
-        source: "Space.com",
-        date: "May 18, 2025",
-    },
-];
-
 const BlogCard = ({
     id,
     title,
@@ -62,7 +18,7 @@ const BlogCard = ({
     image,
     handleClick
 }) => (
-    <button onClick={()=>handleClick(id)}>
+    <button onClick={() => handleClick(id)}>
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -107,10 +63,8 @@ const BlogCard = ({
 
 const BlogNews = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const { blogs ,blogsLoading} = useBlogContext()
-    if(blogsLoading){
-        return <CommonLoader/>
-    }
+    const { blogs, blogsLoading } = useBlogContext()
+   
     const { user } = useUserContext()
     const router = useRouter();
     const [showModal, setShowModal] = useState(false);
@@ -120,7 +74,10 @@ const BlogNews = () => {
         } else {
             router.push(`/blog/${id}`)
         }
-    };  
+    };
+     if (blogsLoading) {
+        return <CommonLoader />
+    }
     return (
         <section
             className="relative  !overflow-hidden z-20 py-24 px-4 sm:px-6 lg:px-8  text-white"
@@ -189,12 +146,12 @@ const BlogNews = () => {
                     <div className="grid md:grid-cols-2 gap-6">
                         {blogs?.data?.blogs?.map((post, i) => (
                             <BlogCard
-                                key={i+1}
+                                key={i + 1}
                                 title={post?.title}
                                 id={post?._id}
                                 handleClick={handleClick}
                                 // subtitle={post.excerpt}
-                                date={post?.createdAt}
+                                date={post?.dateTime||post?.createdAt}
                                 image={post?.blogImage}
                             />
                         ))}
@@ -202,11 +159,11 @@ const BlogNews = () => {
                 </div>
 
                 <ConfirmModal
-                                           open={showModal}
-                                           onClose={() => setShowModal(false)}
-                                           onConfirm={() => router.push("/join")}
-                                          
-                                       />
+                    open={showModal}
+                    onClose={() => setShowModal(false)}
+                    onConfirm={() => router.push("/join")}
+
+                />
             </div>
         </section>
     );
