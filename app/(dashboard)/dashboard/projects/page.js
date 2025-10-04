@@ -80,7 +80,7 @@ export default function ProjectsPage() {
                 <th className="px-6 py-3 text-left text-sm font-medium">Created By</th>
                 <th className="px-6 py-3 text-left text-sm font-medium">Live Link</th>
                 <th className="px-6 py-3 text-left text-sm font-medium">Status</th>
-                <th className="px-6 py-3 text-center text-sm font-medium">Actions</th>
+                <th className="px-6 py-3 text-center text-sm font-medium w-[24rem]">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">

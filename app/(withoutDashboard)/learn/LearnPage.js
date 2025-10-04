@@ -161,7 +161,7 @@ export default function LearnPage() {
       transition={{ duration: 0.6 }}
       className="min-h-screen py-20 px-4 sm:px-10  text-white relative"
     >
-           
+
 
       <div className="max-w-5xl mx-auto space-y-16 relative z-10">
         {/* Page Title */}
@@ -218,16 +218,20 @@ export default function LearnPage() {
                       key={option}
                       onClick={() => handleAnswer(i, option)}
                       disabled={showResults}
-                      className={`px-4 py-2 rounded-lg border text-sm transition ${
-                        show
-                          ? correct
+                      className={`px-4 py-2 rounded-lg cursor-pointer border text-sm transition ${showResults
+                          ? option === q.answer
                             ? "bg-green-500/20 border-green-500"
-                            : "bg-red-500/20 border-red-500"
-                          : "border-white/20 hover:bg-white/10"
-                      }`}
+                            : quizAnswers[i] === option
+                              ? "bg-red-500/20 border-red-500"
+                              : "border-white/20"
+                          : quizAnswers[i] === option
+                            ? "bg-blue-500/20 border-blue-500" // highlight selected option
+                            : "border-white/20 hover:bg-white/10"
+                        }`}
                     >
                       {option}
                     </button>
+
                   );
                 })}
               </div>
@@ -304,11 +308,10 @@ export default function LearnPage() {
             </button>
             {gameResult && (
               <p
-                className={`mt-2 font-medium ${
-                  gameResult.includes("✅")
+                className={`mt-2 font-medium ${gameResult.includes("✅")
                     ? "text-green-400"
                     : "text-red-400"
-                }`}
+                  }`}
               >
                 {gameResult}
               </p>

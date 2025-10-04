@@ -6,6 +6,7 @@ import useAxiosPost from '@/app/utils/useAxiosPost';
 import RichTextEditor from '../../../component/RichTextEditor';
 import useAxiosPostFile from '@/app/utils/useAxiosPostFile';
 import { useEventContext } from '@/app/context/eventContext';
+import axios from 'axios';
 
 export default function CreateEventPage() {
   const [formData, setFormData] = useState({
@@ -17,17 +18,29 @@ export default function CreateEventPage() {
   });
 
   const [, postEvent, loading] = useAxiosPostFile();
-  const {setReload}=useEventContext()
-  const handleSubmit = (e) => {
+  const { setReload } = useEventContext()
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append('title', formData.title);
-    data.append('eventTime', formData.eventTime);
-    data.append('meetLink', formData.meetLink);
-    data.append('description', formData.description);
-    if (formData.poster) data.append('poster', formData.poster);
+    // const imageData = new FormData();
+    // ss
+    const imgData = new FormData();
+    imgData.append("image", formData.poster);
 
-    postEvent('https://deep-sky-server.onrender.com/api/v1/events/create', data, () => {
+    const { data } = await axios.post(
+      "https://deep-sky-server.onrender.com/api/v1/all/upload-image",
+      imgData
+    );
+
+    const imageUrl = data.url;
+    // if (formData.poster) data.append('poster', formData.poster);
+
+    postEvent('https://deep-sky-server.onrender.com/api/v1/events/create', {
+      title: formData?.title,
+      eventTime: formData?.eventTime,
+      meetLink: formData?.meetLink,
+      poster: imageUrl,
+      description: formData?.description
+    }, () => {
       setFormData({
         title: '',
         eventTime: '',
@@ -35,7 +48,7 @@ export default function CreateEventPage() {
         poster: null,
         description: '',
       });
-      setReload(prev=>!prev)
+      setReload(prev => !prev)
     }, true);
   };
 

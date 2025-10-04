@@ -76,7 +76,7 @@ export default function ImageGalleryUpload() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {previews.map((src, idx) => (
               <div
-                key={idx}
+                key={idx+1}
                 className="relative w-full h-32 rounded-xl overflow-hidden border border-white/20 shadow-sm"
               >
                 <Image

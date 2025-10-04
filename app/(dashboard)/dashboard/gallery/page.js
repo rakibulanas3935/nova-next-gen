@@ -12,7 +12,6 @@ import useAxiosGet from "@/app/utils/useAxiosGet";
 export default function ProjectsPage() {
   const { projects, loading, setReload } = useProjectContext();
   const { user } = useUserContext();
-  console.log('user', user)
   const [, updateApproved] = useAxiosPost({}, "patch");
   const [, deleteProject] = useAxiosPost({}, "delete");
   const [gallerys, getAllGalerys, galleryLoading, setGalerrys] = useAxiosGet()
