@@ -124,16 +124,19 @@ const AboutUs = () => {
                             content:
                                 (
                                     <p>
-                                        As my fascination with astronomy grew, I started noticing something surprising: many of my friends were just as curious — but didn’t know where to start. They hadn’t read Hawking, or watched rocket launches, or stayed up late wondering how black holes bend time. Not because they didn’t care — but because no one had ever invited them into that world. <br /><br />
-                                        There were no clubs where we could talk about space, no real access to advanced science, no one to help connect questions to real research. <br /><br />
-                                        So I built what I wished had existed: a community. <br />
-                                        Deep Sky Society began as a small group of classmates at Saint Louis de Gonzague – Franklin, gathering to ask big questions and explore the cosmos together. We hosted talks, trivia nights, telescope sessions, and speaker events. We welcomed anyone who had ever looked up at the stars and wondered.
-                                        And it worked. <br /><br />
-                                        What began as a school initiative soon grew into something much larger — a platform now connecting students across schools, cities, and countries. We all share one belief: <br />
-                                        that the universe belongs to anyone bold enough to ask questions.
-                                        This isn’t just a club. <br />
-                                        It’s a launchpad.
 
+                                        As my fascination with astronomy grew, I started noticing something surprising: many of my friends were just as curious — but didn’t know where to start. They hadn’t read Hawking, or watched rocket launches, or stayed up late wondering how black holes bend time. Not because they didn’t care — but because no one had ever invited them into that world. <br /><br />
+
+There were no clubs where we could talk about space, no real access to advanced science, no one to help connect questions to real research. <br /><br />
+
+So I built what I wished had existed: a community. 
+We began as a small group of friends, gathering to ask big questions and explore the cosmos together. We hosted talks, trivia nights, telescope sessions, and speaker events. We welcomed anyone who had ever looked up at the stars and wondered. And it worked. <br /><br />
+
+What began as a school initiative soon grew into something much larger — a platform now connecting students across schools, cities, and countries. <br /> We all share one belief: <br />
+that the universe belongs to anyone bold enough to ask questions. This isn’t just a club. 
+It’s a launchpad.
+                                        
+                                       
                                     </p>
                                 ),
                         },
