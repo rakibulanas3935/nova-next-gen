@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 const facts = [
     "Founded by Carlos in 2019 after meeting Buzz Aldrin.",
     "AI meets astronomy: from exoplanets to wormholes.",
-    "Expanding beyond Franklin to global student explorers.",
+    // "Expanding beyond Franklin to global student explorers.",
     "Skywatching, coding, and space science for all.",
 ];
 
@@ -103,7 +103,7 @@ const AboutUs = () => {
                 <div className="grid gap-8 md:grid-cols-1">
                     {[
                         {
-                            title: "About Carlos Sarkis",
+                            title: "",
                             content:
                                 (
                                     <p>
