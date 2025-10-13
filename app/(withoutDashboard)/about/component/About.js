@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 
 const facts = [
-    "Founded by Carlos Sarkis in 2019 after meeting Buzz Aldrin.",
+    "Founded by Carlos in 2019 after meeting Buzz Aldrin.",
     "AI meets astronomy: from exoplanets to wormholes.",
     "Expanding beyond Franklin to global student explorers.",
     "Skywatching, coding, and space science for all.",
@@ -29,7 +29,7 @@ const AboutUs = () => {
             className="relative z-30 pb-20 pt-24 px-4 sm:px-6 lg:px-8 !overflow-hidden"
         >
             {/* <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.1),transparent)] pointer-events-none" /> */}
-    
+
 
             {/* <motion.div
                 className="absolute w-32 h-32 !overflow-x-hidden rounded-full opacity-20"
@@ -107,51 +107,37 @@ const AboutUs = () => {
                             content:
                                 (
                                     <p>
-                                        Hello, I’m Carlos Sarkis — and I was starstruck. Literally. <br /> <br />
-                                        It all started when I met Buzz Aldrin in 2019, at the 50th anniversary of the Moon landing. I was 11, wide-eyed and overwhelmed. But it wasn't just about shaking hands with a hero of space history — it was about realizing how much more was out there, waiting to be explored. <br /><br />
-                                        Even before that, I had already begun falling in love with the universe. I spent countless hours devouring books by Stephen Hawking — A Brief History of Time, The Universe in a Nutshell, The Grand Design. Hawking didn’t just explain space; he made it feel personal. <br /><br />
-                                        Since then, I’ve been on a mission — not to the Moon (yet), but to understand the cosmos. <br /><br />
-                                        In summer 2024, I attended an advanced astronomy course at Stanford University, where I studied stellar evolution, planetary formation, and the large-scale structure of the universe, guided by top faculty and surrounded by brilliant peers from across the globe. <br /><br />
-                                        Later that year, I was selected for the Inspirit AI Scholars program, taught by Stanford and MIT researchers. My capstone project focused on using machine learning to detect exoplanets — training an AI to recognize how a planet dims a star’s light as it passes in front of it. That experience opened my eyes to how artificial intelligence is transforming the frontiers of space science. <br /><br />
-                                        In the summer 2025, l continued that journey by working under the mentorship of Professor Romain Teyssier, a leading expert in computational astrophysics at Princeton University. The main objective was to develop a clean and reusable Python-based workflow for analyzing galaxy simulation data produced by his famous RAMSES code. <br />
-                                        But somewhere along the way, I realized something important: I didn’t want to explore the universe alone.
-                                        That’s why I founded Deep Sky Society.
+                                        Hello, I’m Carlos — and I was starstruck. Literally.
+                                        <br /><br />
+                                        It all started when I met Buzz Aldrin in 2019, at the 50th anniversary of the Moon landing. I was 11, wide-eyed and overwhelmed. But it wasn't just about shaking hands with a hero of space history — it was about realizing how much more was out there, waiting to be explored.
+                                        <br /><br />
+                                        Even before that, I had already begun falling in love with the universe. I spent countless hours devouring books by Stephen Hawking — A Brief History of Time, The Universe in a Nutshell, The Grand Design. Hawking didn’t just explain space; he made it feel personal.
+                                        <br /><br />
+                                        Since then, I’ve been on a mission — not to the Moon (yet), but to understand the cosmos. But I didn’t want to explore the universe alone. That’s why I created Deep Sky Society. <br />
+                                        Over the summer 2024, I attended an advanced astronomy course at Stanford University, where I studied stellar evolution, planetary formation, and the large-scale structure of the universe, guided by top faculty and surrounded by brilliant peers from across the globe.
+                                        <br /><br />
+                                        Later that year, I was selected for the Inspirit AI Scholars program, taught by Stanford and MIT researchers. My capstone project focused on using machine learning to detect exoplanets — training an AI to recognize how a planet dims a star’s light as it passes in front of it. That experience opened my eyes to how artificial intelligence is transforming the frontiers of space science.
+                                        <br /><br />
+                                        In the summer 2025, l continued that journey by working under the mentorship of Professor Romain Teyssier, a leading expert in computational astrophysics at Princeton University. The main objective was to develop a clean and reusable Python-based workflow for analyzing galaxy simulation data produced by his famous RAMSES code.
+
+
+
                                     </p>
                                 )
-                        },
-                        {
-                            title: "Why I Started the Club",
-                            content:
-                                (
-                                    <p>
-
-                                        As my fascination with astronomy grew, I started noticing something surprising: many of my friends were just as curious — but didn’t know where to start. They hadn’t read Hawking, or watched rocket launches, or stayed up late wondering how black holes bend time. Not because they didn’t care — but because no one had ever invited them into that world. <br /><br />
-
-There were no clubs where we could talk about space, no real access to advanced science, no one to help connect questions to real research. <br /><br />
-
-So I built what I wished had existed: a community. 
-We began as a small group of friends, gathering to ask big questions and explore the cosmos together. We hosted talks, trivia nights, telescope sessions, and speaker events. We welcomed anyone who had ever looked up at the stars and wondered. And it worked. <br /><br />
-
-What began as a school initiative soon grew into something much larger — a platform now connecting students across schools, cities, and countries. <br /> We all share one belief: <br />
-that the universe belongs to anyone bold enough to ask questions. This isn’t just a club. 
-It’s a launchpad.
-                                        
-                                       
-                                    </p>
-                                ),
                         },
                         {
                             title: "About Deep Sky Society",
                             content:
                                 (
                                     <p>
-                                        Deep Sky Society was born in the halls of Saint Louis de Gonzague – Franklin, but it quickly grew beyond them. What started as a small group of students gazing up at the night sky has become a fast-growing platform for young people passionate about space, science, and shaping the future of exploration.
-                                        <br /> <br />
+
                                         We believe the next generation of scientists, engineers, and innovators is already here — they just need the spark.
-                                        <br /> <br />
+                                        <br /><br />
+
                                         At Deep Sky Society, we create that spark through hands-on learning, collaboration, and exposure to real-world science. Our community includes both complete beginners and experienced student researchers, all united by curiosity and the thrill of discovery.
                                         <br />
                                         Here’s what we do:
+
                                         <br /><br />
                                         <ul className="list-disc pl-5 space-y-1 text-sm">
                                             <li>🔭Host telescope nights and skywatching events</li>
@@ -160,32 +146,65 @@ It’s a launchpad.
                                             <li>🪐 Invite scientists, researchers, and space entrepreneurs to speak and mentor</li>
                                             <li>🌍 Build partnerships and friendships across schools, countries, and backgrounds</li>
                                         </ul>
-                                        <br /><br />
-                                        Deep Sky Society is about more than learning — it's about participating.
-                                        We’re not waiting to be inspired.
-                                        <br /> <br />
-                                        We’re becoming the explorers, coders, and creators of the future — right now.
-                                        <br /> <br />
-                                        Whether you're dreaming of Mars, simulating wormholes, coding AI models, or just learning what a nebula is — you belong at Deep Sky Society.
-                                    </p>
-                                )
 
-                        },
-                        {
-                            title: "About Our School",
-                            content:
-                                (
-                                    <p>
-                                        Saint Louis de Gonzague – Franklin is one of France’s most prestigious secondary schools, renowned for academic excellence, Jesuit values, and a strong culture of leadership and service. Located in Paris, it challenges students to think beyond themselves and act for the common good.
-                                        <br /> <br />
-                                        As a student at Franklin, I’ve been fortunate to learn in an environment that rewards curiosity, values integrity, and encourages bold thinking. It’s where I first imagined what Deep Sky Society could be — and where I found the support to bring it to life.
-                                        <br /> <br />
-                                        With the help of friends, mentors, and teachers, we turned our curiosity into action.
-                                        But the wonder of the cosmos can’t be contained by any one school.
-                                        <br /> <br />Today, Deep Sky Society is expanding well beyond Franklin, welcoming students from many other schools and regions. While we remain proud of our roots, we’re even prouder of how far we’ve come — and how far we still aim to go.
+                                        <br /><br />
+
+
+
+
+                                        Deep Sky Society is about more than learning — it's about participating. We’re not waiting to be inspired.
+                                        <br /><br />
+                                        Whether you're dreaming of Mars, simulating wormholes, coding AI models, or just learning what a nebula is — you belong at Deep Sky Society.
+
                                     </p>
-                                )
+                                ),
                         },
+                        // {
+                        //     title: "About Deep Sky Society",
+                        //     content:
+                        //         (
+                        //             <p>
+                        //                 Deep Sky Society was born in the halls of Saint Louis de Gonzague – Franklin, but it quickly grew beyond them. What started as a small group of students gazing up at the night sky has become a fast-growing platform for young people passionate about space, science, and shaping the future of exploration.
+                        //                 <br /> <br />
+                        //                 We believe the next generation of scientists, engineers, and innovators is already here — they just need the spark.
+                        //                 <br /> <br />
+                        //                 At Deep Sky Society, we create that spark through hands-on learning, collaboration, and exposure to real-world science. Our community includes both complete beginners and experienced student researchers, all united by curiosity and the thrill of discovery.
+                        //                 <br />
+                        //                 Here’s what we do:
+                        //                 <br /><br />
+                        //                 <ul className="list-disc pl-5 space-y-1 text-sm">
+                        //                     <li>🔭Host telescope nights and skywatching events</li>
+                        //                     <li>🌌 Explore deep space topics like black holes, exoplanets, and cosmology</li>
+                        //                     <li>🤖 Run AI-based astrophysics workshops, including projects using NASA data to detect exoplanets via machine learning — like the one I developed through Inspirit AI</li>
+                        //                     <li>🪐 Invite scientists, researchers, and space entrepreneurs to speak and mentor</li>
+                        //                     <li>🌍 Build partnerships and friendships across schools, countries, and backgrounds</li>
+                        //                 </ul>
+                        //                 <br /><br />
+                        //                 Deep Sky Society is about more than learning — it's about participating.
+                        //                 We’re not waiting to be inspired.
+                        //                 <br /> <br />
+                        //                 We’re becoming the explorers, coders, and creators of the future — right now.
+                        //                 <br /> <br />
+                        //                 Whether you're dreaming of Mars, simulating wormholes, coding AI models, or just learning what a nebula is — you belong at Deep Sky Society.
+                        //             </p>
+                        //         )
+
+                        // },
+                        // {
+                        //     title: "About Our School",
+                        //     content:
+                        //         (
+                        //             <p>
+                        //                 Saint Louis de Gonzague – Franklin is one of France’s most prestigious secondary schools, renowned for academic excellence, Jesuit values, and a strong culture of leadership and service. Located in Paris, it challenges students to think beyond themselves and act for the common good.
+                        //                 <br /> <br />
+                        //                 As a student at Franklin, I’ve been fortunate to learn in an environment that rewards curiosity, values integrity, and encourages bold thinking. It’s where I first imagined what Deep Sky Society could be — and where I found the support to bring it to life.
+                        //                 <br /> <br />
+                        //                 With the help of friends, mentors, and teachers, we turned our curiosity into action.
+                        //                 But the wonder of the cosmos can’t be contained by any one school.
+                        //                 <br /> <br />Today, Deep Sky Society is expanding well beyond Franklin, welcoming students from many other schools and regions. While we remain proud of our roots, we’re even prouder of how far we’ve come — and how far we still aim to go.
+                        //             </p>
+                        //         )
+                        // },
                         {
                             title: "Our Goals & Values",
                             content: (
@@ -212,7 +231,6 @@ It’s a launchpad.
                                     <br />
                                     🚀 Lead with Curiosity and Courage <br /> <br />
                                     Leadership starts by asking questions — especially the difficult ones. We empower students to take initiative, challenge ideas, and lead with purpose, not perfection.
-
 
                                 </p>
                             ),
