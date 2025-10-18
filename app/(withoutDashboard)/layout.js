@@ -23,8 +23,32 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Deep Sky Society",
-  description: "Deep Sky Society is a vibrant astronomy club bringing together space enthusiasts, stargazers, and curious minds to explore the wonders of the universe through events, workshops, and stargazing sessions.",
+  description:
+    "Deep Sky Society is a vibrant astronomy club bringing together space enthusiasts, stargazers, and curious minds to explore the wonders of the universe through events, workshops, and stargazing sessions.",
+  keywords: [
+    "Deep Sky Society",
+    "astronomy club",
+    "stargazing community",
+    "space enthusiasts",
+    "astronomy events",
+    "stargazing sessions",
+    "astrophotography club",
+    "learn astronomy",
+    "night sky observation",
+    "astronomy workshops",
+    "space exploration",
+    "telescope community",
+    "star lovers",
+    "cosmos exploration",
+    "astronomy for beginners",
+    "astronomy education",
+    "deep sky observation",
+    "planet watching",
+    "astronomy Bangladesh",
+    "space science club",
+  ],
 };
+
 
 
 export default function RootLayout({ children }) {
