@@ -11,6 +11,8 @@ const nextConfig = {
   },
   experimental: {
     serverActions: { bodySizeLimit: "40mb" }, // gallery uploads go through actions
+    // Tree-shake barrel exports so a page only compiles the icons/components it uses.
+    optimizePackageImports: ["lucide-react", "recharts", "framer-motion", "@tiptap/react", "@tiptap/starter-kit"],
   },
   async headers() {
     return [
