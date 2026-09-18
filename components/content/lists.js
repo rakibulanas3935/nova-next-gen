@@ -1,7 +1,9 @@
 "use client";
 
 import { Newspaper, CalendarDays, FolderKanban } from "lucide-react";
-import { useCachedResource } from "@/lib/client-cache";
+import { useEffect } from "react";
+import { useCachedResource, writeCache } from "@/lib/client-cache";
+import { SEED_EVENTS, withSeedEvents } from "@/lib/seed-events";
 import { ApiNotice, CardSkeleton, EmptyState } from "@/components/ui/primitives";
 import Button from "@/components/ui/Button";
 import { BlogCard, EventCard, ProjectCard } from "./cards";
@@ -35,22 +37,23 @@ export function BlogList({ initial, path = "/blogs?limit=12", cacheKey = "blogs"
   );
 }
 
-const byScope = (scope) => (e) => {
-  if (!scope) return true;
-  const past = new Date(e.eventTime).getTime() < Date.now();
-  return scope === "past" ? past : !past;
-};
+export function EventList({ initial, path = "/events?limit=12", cacheKey = "events", compact = false, max = Infinity, scope, excludeId, emptyText = "No events scheduled yet. Follow us to hear about the next one." }) {
+  const { data, status, refresh } = useCachedResource(cacheKey, path, initial, { select: (j) => j?.data?.events || [] });
+  // Keep the built-in seed events in localStorage too, so they survive offline.
+  useEffect(() => writeCache("seed:events", SEED_EVENTS), []);
 
-export function EventList({ initial, path = "/events?limit=12", cacheKey = "events", compact = false, max = Infinity, scope, emptyText = "No events scheduled yet. Follow us to hear about the next one." }) {
-  const { data, status, refresh } = useCachedResource(cacheKey, path, initial, { select: (j) => (j?.data?.events || []).filter(byScope(scope)).slice(0, max) });
-  if (!data) return status === "error" ? <><ApiNotice status={status} onRetry={refresh} /><EmptyState icon={CalendarDays} title="No events" text={emptyText} /></> : <CardSkeleton count={compact ? 2 : 3} />;
-  if (!data.length) return <EmptyState icon={CalendarDays} title="No events" text={emptyText} />;
+  // API events + built-in seed events (see lib/seed-events.js), never a blank list.
+  const list = withSeedEvents(data || [], { scope }).filter((e) => e._id !== excludeId).slice(0, max);
+  if (!list.length) {
+    if (!data && status !== "error") return <CardSkeleton count={compact ? 2 : 3} />;
+    return <><ApiNotice status={status} onRetry={refresh} /><EmptyState icon={CalendarDays} title="No events" text={emptyText} /></>;
+  }
 
   return (
     <>
-      <ApiNotice status={status} onRetry={refresh} />
+      <ApiNotice status={status === "error" ? "fresh" : status} onRetry={refresh} />
       <div className="grid gap-5 md:grid-cols-2">
-        {data.map((e) => (
+        {list.map((e) => (
           <EventCard key={e._id} event={e} compact={compact} />
         ))}
       </div>

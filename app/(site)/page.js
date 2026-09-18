@@ -10,6 +10,7 @@ import { TiltCard } from "@/components/fx/interactive";
 import { BlogList, EventList, ProjectList } from "@/components/content/lists";
 import Button from "@/components/ui/Button";
 import { Stagger, RevealItem } from "@/components/ui/motion";
+import { withSeedEvents } from "@/lib/seed-events";
 
 export const revalidate = 300;
 
@@ -23,7 +24,7 @@ export default async function HomePage() {
     apiGet("/gallery/approved?limit=8", { tags: ["gallery"] }),
   ]);
 
-  const nextEvent = events?.data?.events?.[0] || null;
+  const nextEvent = withSeedEvents(events?.data?.events || [], { scope: "upcoming" })[0] || null;
   const fact = FUN_FACTS[new Date().getDate() % FUN_FACTS.length];
 
   return (

@@ -10,12 +10,13 @@ import RichText from "@/components/ui/RichText";
 import SmartImage from "@/components/ui/SmartImage";
 import Countdown from "@/components/content/Countdown";
 import { EventList } from "@/components/content/lists";
+import { findSeedEvent, withSeedEvents } from "@/lib/seed-events";
 
 export const revalidate = 300;
 
 async function loadEvent(slug) {
   const res = await apiGet(`/events/${slug}`, { tags: ["events"] });
-  return res?.data?.event || null;
+  return res?.data?.event || findSeedEvent(slug);
 }
 
 export async function generateMetadata({ params }) {
@@ -41,7 +42,7 @@ export default async function EventDetailPage({ params }) {
   const past = isPast(event.eventTime);
   const type = EVENT_TYPES[event.type] || EVENT_TYPES.other;
   const canSeeLink = !event.membersOnly || (user && user.status === "approved");
-  const others = (more?.data?.events || []).filter((e) => e._id !== event._id);
+  const others = withSeedEvents(more?.data?.events || [], { scope: "upcoming" }).filter((e) => e._id !== event._id).slice(0, 2);
 
   return (
     <article className="pt-28 sm:pt-32">
@@ -114,7 +115,7 @@ export default async function EventDetailPage({ params }) {
             {others.length > 0 && (
               <div>
                 <p className="eyebrow mb-3">Also coming up</p>
-                <EventList initial={{ data: { events: others } }} path="/events/upcoming?limit=3" cacheKey="events:sidebar" compact />
+                <EventList initial={{ data: { events: others } }} path="/events/upcoming?limit=3" cacheKey="events:sidebar" compact scope="upcoming" max={2} excludeId={event._id} />
               </div>
             )}
           </aside>

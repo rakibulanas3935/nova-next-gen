@@ -7,6 +7,7 @@ import { Container, Card, Badge, EmptyState, SectionHeader } from "@/components/
 import Button from "@/components/ui/Button";
 import { EventCard } from "@/components/content/cards";
 import PageFx from "@/components/fx/PageFx";
+import { withSeedEvents } from "@/lib/seed-events";
 import { MemberProjectRow, MemberGalleryRow } from "@/components/members/rows";
 
 export const metadata = { title: "Members area", robots: { index: false } };
@@ -25,7 +26,7 @@ export default async function MembersPage() {
 
   const myProjects = projects?.data?.projects || [];
   const myGalleries = galleries?.data?.galleries || [];
-  const upcoming = events?.data?.events || [];
+  const upcoming = withSeedEvents(events?.data?.events || [], { scope: "upcoming" }).slice(0, 4);
 
   return (
     <div className="relative isolate pt-28 pb-20 sm:pt-32">
