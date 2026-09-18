@@ -11,7 +11,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <>
-      <PageHero fx="nebula-gold" eyebrow="Contact" title="Say hello" description="Questions about events, membership, partnerships with your school, or want to give a talk? We'd love to hear from you." />
+      <PageHero video="contact" fx="nebula-gold" eyebrow="Contact" title="Say hello" description="Questions about events, membership, partnerships with your school, or want to give a talk? We'd love to hear from you." />
       <Section className="!pt-0">
         <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
           <div className="space-y-4">

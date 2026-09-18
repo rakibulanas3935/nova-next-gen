@@ -5,21 +5,23 @@ import { STATS } from "@/lib/content";
 import TwinkleField from "@/components/fx/TwinkleField";
 import SolarSystem from "./SolarSystem";
 import { HeroReveal } from "@/components/ui/motion";
+import VideoBackdrop from "@/components/fx/VideoBackdrop";
+import { MouseParallax } from "@/components/fx/interactive";
 
 export default function Hero({ nextEvent }) {
   return (
     <section className="relative isolate flex min-h-[100dvh] items-center overflow-hidden pt-24 lg:max-h-[1100px] lg:min-h-[min(100dvh,1100px)]">
-      {/* Layer 0: faint galaxy photo for texture */}
-      <div className="absolute inset-0 -z-20 bg-[url('/gallery/sky-space-dark-galaxy.jpg')] bg-cover bg-center opacity-25" aria-hidden />
+      {/* Layer 0: looping space video (lazy) */}
+      <VideoBackdrop name="home" className="-z-20" opacity={0.6} />
       {/* Layer 1: twinkling stars + occasional shooting star */}
-      <TwinkleField className="absolute inset-0 -z-10 h-full w-full" density={1.2} shooting />
+      <TwinkleField className="absolute inset-0 -z-10 h-full w-full" density={1.1} shooting />
       {/* Layer 2: vignette + nebula colour */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(70%_60%_at_50%_35%,transparent_20%,rgba(4,6,13,0.75)_100%)]" aria-hidden />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(40%_40%_at_80%_20%,rgba(139,116,245,0.18),transparent),radial-gradient(40%_40%_at_15%_80%,rgba(94,177,255,0.14),transparent)]" aria-hidden />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-b from-transparent to-space-950" aria-hidden />
 
-      <div className="container-x relative grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="max-w-2xl">
+      <MouseParallax className="container-x relative grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]" strength={22}>
+        <div className="max-w-2xl transition-transform duration-300 ease-out" data-depth="0.15">
           <HeroReveal delay={0.05}>
             {nextEvent ? (
               <Link
@@ -39,7 +41,7 @@ export default function Hero({ nextEvent }) {
             <h1 className="text-5xl font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl">
               Look up.
               <br />
-              <span className="text-gradient">Then look deeper.</span>
+              <span className="text-shimmer">Then look deeper.</span>
             </h1>
           </HeroReveal>
 
@@ -69,11 +71,13 @@ export default function Hero({ nextEvent }) {
         </div>
 
         <HeroReveal delay={0.35} className="relative hidden lg:block">
-          <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(245,185,66,0.12),transparent_70%)]" />
-          <SolarSystem className="mx-auto w-full max-w-[34rem] drop-shadow-[0_0_40px_rgba(245,185,66,0.15)]" />
+          <div data-depth="0.6" className="transition-transform duration-300 ease-out will-change-transform">
+            <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(245,185,66,0.14),transparent_70%)]" />
+            <SolarSystem className="mx-auto w-full max-w-[36rem] drop-shadow-[0_0_50px_rgba(245,185,66,0.2)]" />
+          </div>
           <p className="mt-2 text-center font-mono text-[11px] uppercase tracking-[0.25em] text-fg-subtle">Orbits to scale in time, not space</p>
         </HeroReveal>
-      </div>
+      </MouseParallax>
 
       <div className="pointer-events-none absolute bottom-6 left-1/2 hidden -translate-x-1/2 animate-float text-fg-subtle sm:block" aria-hidden>
         <div className="h-9 w-5 rounded-full border border-line-strong p-1">

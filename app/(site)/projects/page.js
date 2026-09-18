@@ -20,7 +20,7 @@ export default async function ProjectsPage({ searchParams }) {
 
   return (
     <>
-      <PageHero fx="planet" eyebrow="Projects" title="Things we're building" description="Real projects by real members: machine learning on NASA data, DIY instruments, simulations, outreach tools. Approved by the club, credited to the maker.">
+      <PageHero video="projects" fx="planet" eyebrow="Projects" title="Things we're building" description="Real projects by real members: machine learning on NASA data, DIY instruments, simulations, outreach tools. Approved by the club, credited to the maker.">
         <Button href={user ? "/members/projects/new" : "/join"}>{user ? "Submit a project" : "Join to submit yours"}</Button>
       </PageHero>
       <Section className="!pt-0">

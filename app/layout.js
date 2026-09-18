@@ -2,6 +2,7 @@ import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import { Toaster } from "sonner";
 import { SITE } from "@/lib/content";
 import SplashScreen from "@/components/fx/SplashScreen";
+import { Spotlight, ScrollProgress } from "@/components/fx/interactive";
 import "./globals.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
@@ -34,6 +35,8 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${geist.variable} ${geistMono.variable} ${grotesk.variable}`}>
       <body>
         <SplashScreen />
+        <ScrollProgress />
+        <Spotlight />
         <div className="starfield" aria-hidden />
         <div className="nebula-bg" aria-hidden>
           <span className="n1" /><span className="n2" /><span className="n3" />

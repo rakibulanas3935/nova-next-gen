@@ -252,6 +252,68 @@ h1, h2, h3, h4 {
   .nebula-bg span, .splash-stars, .splash-rocket, .splash-flame { animation: none; }
 }
 
+/* Video backdrop: slow Ken Burns drift */
+.fx-kenburns { animation: kenburns 28s ease-in-out infinite alternate; transform-origin: 50% 40%; }
+@keyframes kenburns {
+  from { transform: scale(1) translate3d(0, 0, 0); }
+  to { transform: scale(1.12) translate3d(-1.5%, 1.5%, 0); }
+}
+
+/* Shimmer sweep over gradient headings */
+.text-shimmer {
+  background: linear-gradient(100deg, #fff 0%, #ffe08a 30%, #9ed0ff 50%, #ffe08a 70%, #fff 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer-text 7s ease-in-out infinite;
+}
+@keyframes shimmer-text { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
+
+/* Tilt cards: cursor-tracked highlight */
+.tilt-card:hover .tilt-glow { opacity: 1; }
+.tilt-glow { background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.10), transparent 60%); }
+
+/* Aurora divider line between sections */
+.aurora-line {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(148,163,184,0.25), transparent);
+  overflow: visible;
+}
+.aurora-line::after {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0;
+  height: 3px; width: 18%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, #f5b942, #5eb1ff, transparent);
+  filter: blur(1px);
+  animation: aurora-sweep 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes aurora-sweep { 0% { left: -20%; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+
+/* Floating asteroids/dust in feature sections */
+.dust { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.dust i {
+  position: absolute; display: block; border-radius: 9999px;
+  background: radial-gradient(circle at 35% 35%, #fff, #98a4bd 60%, #34446a);
+  opacity: 0.55;
+  animation: dust-float linear infinite;
+}
+@keyframes dust-float {
+  from { transform: translate3d(0, 0, 0) rotate(0deg); }
+  to { transform: translate3d(-40px, -120vh, 0) rotate(360deg); }
+}
+
+/* Page enter */
+.page-enter { animation: page-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes page-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-kenburns, .text-shimmer, .aurora-line::after, .dust i, .page-enter { animation: none; }
+}
+
 /* Page background effects (components/fx) */
 .fx-blob {
   filter: blur(90px);

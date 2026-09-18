@@ -35,8 +35,14 @@ export function BlogList({ initial, path = "/blogs?limit=12", cacheKey = "blogs"
   );
 }
 
-export function EventList({ initial, path = "/events?limit=12", cacheKey = "events", compact = false, max = Infinity, emptyText = "No events scheduled yet. Follow us to hear about the next one." }) {
-  const { data, status, refresh } = useCachedResource(cacheKey, path, initial, { select: (j) => (j?.data?.events || []).slice(0, max) });
+const byScope = (scope) => (e) => {
+  if (!scope) return true;
+  const past = new Date(e.eventTime).getTime() < Date.now();
+  return scope === "past" ? past : !past;
+};
+
+export function EventList({ initial, path = "/events?limit=12", cacheKey = "events", compact = false, max = Infinity, scope, emptyText = "No events scheduled yet. Follow us to hear about the next one." }) {
+  const { data, status, refresh } = useCachedResource(cacheKey, path, initial, { select: (j) => (j?.data?.events || []).filter(byScope(scope)).slice(0, max) });
   if (!data) return status === "error" ? <><ApiNotice status={status} onRetry={refresh} /><EmptyState icon={CalendarDays} title="No events" text={emptyText} /></> : <CardSkeleton count={compact ? 2 : 3} />;
   if (!data.length) return <EmptyState icon={CalendarDays} title="No events" text={emptyText} />;
 

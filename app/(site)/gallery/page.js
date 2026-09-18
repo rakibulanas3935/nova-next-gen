@@ -15,7 +15,7 @@ export default async function GalleryPage() {
   const [gallery, user] = await Promise.all([apiGet("/gallery/approved?limit=24", { tags: ["gallery"] }), getCurrentUser()]);
   return (
     <>
-      <PageHero fx="galaxy" eyebrow="Gallery" title="Through our eyepieces" description="Photos by members: from phone snaps at a telescope to stacked deep-sky images. Every shot is credited to the person who took it.">
+      <PageHero video="gallery" fx="galaxy" eyebrow="Gallery" title="Through our eyepieces" description="Photos by members: from phone snaps at a telescope to stacked deep-sky images. Every shot is credited to the person who took it.">
         <Button href={user ? "/members/photos/new" : "/join"}>{user ? "Upload photos" : "Join to share yours"}</Button>
       </PageHero>
       <Section className="!pt-0">

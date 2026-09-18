@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { ArrowRight, Telescope } from "lucide-react";
 import { Reveal } from "./motion";
 import PageFx from "@/components/fx/PageFx";
+import VideoBackdrop from "@/components/fx/VideoBackdrop";
 
 export function Container({ className, children }) {
   return <div className={clsx("container-x", className)}>{children}</div>;
@@ -74,15 +75,16 @@ export function Section({ className, children, reveal = true, ...props }) {
 }
 
 /** Top-of-page hero used by every inner page. */
-export function PageHero({ eyebrow, title, description, children, className, fx = "twinkle" }) {
+export function PageHero({ eyebrow, title, description, children, className, fx = "twinkle", video }) {
   return (
-    <div className={clsx("relative isolate pt-32 pb-14 sm:pt-40 sm:pb-20", className)}>
+    <div className={clsx("relative isolate pt-32 pb-14 sm:pt-40 sm:pb-20", video && "sm:pb-28", className)}>
+      {video && <VideoBackdrop name={video} className="-z-20" opacity={0.5} />}
       <PageFx variant={fx} />
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[32rem] bg-[radial-gradient(60%_50%_at_50%_0%,rgba(94,177,255,0.10),transparent_70%)]" />
       <Container className="relative">
         <div className="max-w-3xl animate-fade-up">
           {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
-          <h1 className="text-4xl font-semibold leading-[1.05] text-white sm:text-5xl lg:text-6xl">{title}</h1>
+          <h1 className="text-4xl font-semibold leading-[1.05] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.6)] sm:text-5xl lg:text-6xl">{title}</h1>
           {description && <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">{description}</p>}
           {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
         </div>
@@ -140,6 +142,26 @@ export function ApiNotice({ status, onRetry }) {
           Retry
         </button>
       )}
+    </div>
+  );
+}
+
+/** Animated aurora line between sections. */
+export function AuroraLine({ className }) {
+  return <div className={clsx("aurora-line container-x", className)} aria-hidden />;
+}
+
+/** Slowly rising dust/asteroid particles for a section background. */
+export function Dust({ count = 14, className }) {
+  const items = Array.from({ length: count }, (_, i) => {
+    const size = 2 + ((i * 7) % 5);
+    return { left: `${(i * 61) % 100}%`, size, dur: `${18 + ((i * 13) % 20)}s`, delay: `-${(i * 5) % 20}s`, top: `${60 + ((i * 17) % 50)}%` };
+  });
+  return (
+    <div className={clsx("dust", className)} aria-hidden>
+      {items.map((d, i) => (
+        <i key={i} style={{ left: d.left, top: d.top, width: d.size, height: d.size, animationDuration: d.dur, animationDelay: d.delay }} />
+      ))}
     </div>
   );
 }

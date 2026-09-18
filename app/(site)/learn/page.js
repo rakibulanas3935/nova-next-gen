@@ -21,7 +21,7 @@ export default async function LearnPage() {
 
   return (
     <>
-      <PageHero fx="nebula-teal" eyebrow="Learn" title="From first look to first light" description="Self-paced tracks written by members, plus lessons from our workshops. No prerequisites — just curiosity." />
+      <PageHero video="learn" fx="nebula-teal" eyebrow="Learn" title="From first look to first light" description="Self-paced tracks written by members, plus lessons from our workshops. No prerequisites — just curiosity." />
 
       <Section className="!pt-0" id="tracks">
         <SectionHeader eyebrow="Learning tracks" title="Start here" description="Six short tracks that take you from 'what's that bright star?' to training a model on real NASA data." />

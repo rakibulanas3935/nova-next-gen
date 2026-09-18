@@ -1,10 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+import VideoBackdrop from "@/components/fx/VideoBackdrop";
 
 /** Centered card used by login / join / reset pages. */
-export default function AuthShell({ eyebrow, title, description, children, footer }) {
+export default function AuthShell({ eyebrow, title, description, children, footer, video = "login" }) {
   return (
-    <div className="flex min-h-dvh items-center justify-center px-4 pb-16 pt-28">
+    <div className="relative isolate flex min-h-dvh items-center justify-center px-4 pb-16 pt-28">
+      {video && <VideoBackdrop name={video} className="-z-10" opacity={0.4} />}
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <Link href="/" className="inline-flex items-center gap-2">

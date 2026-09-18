@@ -20,7 +20,7 @@ export default async function AboutPage() {
 
   return (
     <>
-      <PageHero fx="nebula" eyebrow="About us" title="Empowering the next generation of explorers" description="We believe the next generation of scientists, engineers and innovators is already here — they just need the spark.">
+      <PageHero video="about" fx="nebula" eyebrow="About us" title="Empowering the next generation of explorers" description="We believe the next generation of scientists, engineers and innovators is already here — they just need the spark.">
         <Button href="/join">Join the society</Button>
         <Button href="/contact" variant="secondary">Get in touch</Button>
       </PageHero>

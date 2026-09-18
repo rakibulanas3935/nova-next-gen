@@ -3,6 +3,7 @@ import { Check } from "lucide-react";
 import { JOIN_BENEFITS } from "@/lib/content";
 import { SignupForm } from "@/components/auth/forms";
 import { Container } from "@/components/ui/primitives";
+import VideoBackdrop from "@/components/fx/VideoBackdrop";
 
 export const metadata = {
   title: "Join the club",
@@ -17,7 +18,8 @@ const STEPS = [
 
 export default function JoinPage() {
   return (
-    <div className="pt-28 pb-20 sm:pt-36">
+    <div className="relative isolate pt-28 pb-20 sm:pt-36">
+      <div className="absolute inset-x-0 top-0 -z-10 h-[40rem]"><VideoBackdrop name="join" opacity={0.45} /></div>
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <div>
