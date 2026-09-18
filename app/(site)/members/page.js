@@ -6,6 +6,7 @@ import { formatDate } from "@/lib/format";
 import { Container, Card, Badge, EmptyState, SectionHeader } from "@/components/ui/primitives";
 import Button from "@/components/ui/Button";
 import { EventCard } from "@/components/content/cards";
+import PageFx from "@/components/fx/PageFx";
 import { MemberProjectRow, MemberGalleryRow } from "@/components/members/rows";
 
 export const metadata = { title: "Members area", robots: { index: false } };
@@ -27,7 +28,8 @@ export default async function MembersPage() {
   const upcoming = events?.data?.events || [];
 
   return (
-    <div className="pt-28 pb-20 sm:pt-32">
+    <div className="relative isolate pt-28 pb-20 sm:pt-32">
+      <PageFx variant="orbits" />
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>

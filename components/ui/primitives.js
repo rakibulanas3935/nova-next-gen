@@ -66,10 +66,11 @@ export function SectionHeader({ eyebrow, title, description, href, linkLabel = "
   );
 }
 
-export function Section({ className, children, reveal = true, ...props }) {
+export function Section({ className, children, reveal = true, space = true, ...props }) {
   return (
-    <section className={clsx("py-16 sm:py-20 lg:py-24", className)} {...props}>
-      <Container>{reveal ? <Reveal>{children}</Reveal> : children}</Container>
+    <section className={clsx("relative py-16 sm:py-20 lg:py-24", space && "section-space", className)} {...props}>
+      {space && <Dust count={8} />}
+      <Container className="relative">{reveal ? <Reveal>{children}</Reveal> : children}</Container>
     </section>
   );
 }

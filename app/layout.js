@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
         <Spotlight />
         <div className="starfield" aria-hidden />
         <div className="nebula-bg" aria-hidden>
-          <span className="n1" /><span className="n2" /><span className="n3" />
+          <span className="galaxy" /><span className="n1" /><span className="n2" /><span className="n3" /><span className="n4" />
         </div>
         {children}
         <Toaster

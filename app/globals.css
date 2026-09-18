@@ -205,13 +205,40 @@ h1, h2, h3, h4 {
   position: absolute;
   border-radius: 9999px;
   filter: blur(110px);
-  opacity: 0.55;
+  opacity: 0.8;
   will-change: transform;
   animation: nebula-drift 48s ease-in-out infinite alternate;
 }
 .nebula-bg .n1 { width: 55vw; height: 55vw; left: -15vw; top: -10vh; background: rgba(147,51,234,0.45); }
 .nebula-bg .n2 { width: 50vw; height: 50vw; right: -15vw; top: 20vh; background: rgba(59,130,246,0.35); animation-delay: -16s; animation-duration: 60s; }
 .nebula-bg .n3 { width: 45vw; height: 45vw; left: 25vw; bottom: -20vh; background: rgba(168,85,247,0.22); animation-delay: -30s; animation-duration: 72s; }
+.nebula-bg .n4 { width: 40vw; height: 40vw; right: 5vw; bottom: 5vh; background: rgba(79,70,229,0.3); animation-delay: -44s; animation-duration: 84s; }
+/* faint slowly-rotating galaxy behind everything */
+.nebula-bg .galaxy {
+  position: absolute; left: 50%; top: 30%;
+  width: 140vw; height: 140vw; max-width: 1800px; max-height: 1800px;
+  margin-left: -70vw; margin-top: -70vw;
+  border-radius: 9999px; filter: blur(60px); opacity: 0.35;
+  background: conic-gradient(from 0deg,
+    transparent 0deg, rgba(147,51,234,0.35) 40deg, transparent 90deg,
+    transparent 130deg, rgba(59,130,246,0.3) 175deg, transparent 220deg,
+    transparent 260deg, rgba(79,70,229,0.3) 300deg, transparent 360deg);
+  mask-image: radial-gradient(circle, black 15%, transparent 60%);
+  -webkit-mask-image: radial-gradient(circle, black 15%, transparent 60%);
+  animation: orbit 240s linear infinite;
+}
+@media (max-width: 1024px) { .nebula-bg .galaxy { display: none; } }
+
+/* every content section gets its own soft nebula, alternating sides */
+.section-space::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(40% 55% at 0% 40%, rgba(147,51,234,0.16), transparent 70%);
+}
+.section-space:nth-of-type(even)::before {
+  background: radial-gradient(40% 55% at 100% 50%, rgba(59,130,246,0.14), transparent 70%);
+}
+.section-space > .container-x { position: relative; z-index: 1; }
 @keyframes nebula-drift {
   0% { transform: translate3d(0, 0, 0) scale(1); }
   50% { transform: translate3d(8vw, -6vh, 0) scale(1.12); }
@@ -249,7 +276,7 @@ h1, h2, h3, h4 {
 .splash-bar { animation: splash-bar 2s cubic-bezier(0.22, 1, 0.36, 1) forwards; transform: scaleX(0); }
 @keyframes splash-bar { to { transform: scaleX(1); } }
 @media (prefers-reduced-motion: reduce) {
-  .nebula-bg span, .splash-stars, .splash-rocket, .splash-flame { animation: none; }
+  .nebula-bg span, .nebula-bg .galaxy, .splash-stars, .splash-rocket, .splash-flame { animation: none; }
 }
 
 /* Fade a background layer out at its bottom edge instead of painting a
