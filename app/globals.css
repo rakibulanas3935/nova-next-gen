@@ -1,26 +1,240 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ------------------------------------------------------------------------
+   Design tokens — one dark "deep sky" theme. Gold = stars, blue = sky.
+   ------------------------------------------------------------------------ */
+@theme {
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-grotesk), var(--font-geist), sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-space-950: #04060d;
+  --color-space-900: #080c18;
+  --color-space-850: #0b1120;
+  --color-space-800: #0f172a;
+  --color-space-700: #17213a;
+  --color-space-600: #22304f;
+  --color-space-500: #34446a;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-star-300: #ffe08a;
+  --color-star-400: #f7c85a;
+  --color-star-500: #f5b942;
+  --color-star-600: #d9a02f;
+
+  --color-sky-300: #9ed0ff;
+  --color-sky-400: #7cc0ff;
+  --color-sky-500: #5eb1ff;
+  --color-sky-600: #3d94e6;
+
+  --color-nebula-400: #b39dff;
+  --color-nebula-500: #8b74f5;
+  --color-nebula-600: #6d56d8;
+
+  --color-fg: #e9eef8;
+  --color-fg-muted: #98a4bd;
+  --color-fg-subtle: #6b7891;
+  --color-line: rgba(148, 163, 184, 0.14);
+  --color-line-strong: rgba(148, 163, 184, 0.28);
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.4rem;
+
+  --shadow-glow: 0 0 0 1px rgba(245, 185, 66, 0.25), 0 20px 60px -20px rgba(245, 185, 66, 0.35);
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 20px 50px -30px rgba(0, 0, 0, 0.8);
+
+  --animate-twinkle: twinkle 6s ease-in-out infinite;
+  --animate-drift: drift 120s linear infinite;
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
+  @keyframes drift {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-600px, -300px, 0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ------------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------------ */
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
 }
+
+body {
+  background-color: var(--color-space-950);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(245, 185, 66, 0.35);
+  color: #fff;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Static, GPU-cheap star field. Three tiled layers of radial-gradient dots,
+   the front layer twinkles. No JS, no hydration mismatch. */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(94, 177, 255, 0.10), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(139, 116, 245, 0.10), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 10% 90%, rgba(245, 185, 66, 0.06), transparent 60%),
+    var(--color-space-950);
+}
+.starfield::before,
+.starfield::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-repeat: repeat;
+}
+.starfield::before {
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1px 1px at 80px 120px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 160px 60px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 230px 190px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 300px 90px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(2px 2px at 350px 250px, rgba(245,185,66,0.8), transparent),
+    radial-gradient(1px 1px at 410px 40px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 470px 160px, rgba(158,208,255,0.8), transparent),
+    radial-gradient(1px 1px at 520px 290px, rgba(255,255,255,0.5), transparent);
+  background-size: 560px 320px;
+  opacity: 0.8;
+  animation: var(--animate-drift);
+}
+.starfield::after {
+  background-image:
+    radial-gradient(1.5px 1.5px at 60px 80px, rgba(255,255,255,0.9), transparent),
+    radial-gradient(2px 2px at 220px 200px, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1.5px 1.5px at 380px 40px, rgba(255,224,138,0.9), transparent),
+    radial-gradient(2px 2px at 640px 300px, rgba(158,208,255,0.9), transparent),
+    radial-gradient(1.5px 1.5px at 760px 120px, rgba(255,255,255,0.8), transparent);
+  background-size: 900px 420px;
+  animation: var(--animate-twinkle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .starfield::before, .starfield::after { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ------------------------------------------------------------------------
+   Utilities
+   ------------------------------------------------------------------------ */
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 76rem;
+  padding-inline: 1rem;
+  @media (min-width: 640px) { padding-inline: 1.5rem; }
+  @media (min-width: 1024px) { padding-inline: 2rem; }
+}
+
+@utility glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+  border: 1px solid var(--color-line);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-card);
+}
+
+@utility text-gradient {
+  background: linear-gradient(92deg, #fff 0%, #ffe08a 45%, #9ed0ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-star-500);
+}
+
+@utility ring-focus {
+  outline: none;
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-space-950), 0 0 0 4px var(--color-sky-500);
+  }
+}
+
+/* Rich text from the editor */
+.prose-sky {
+  --tw-prose-body: var(--color-fg);
+  --tw-prose-headings: #fff;
+  --tw-prose-links: var(--color-sky-400);
+  --tw-prose-bold: #fff;
+  --tw-prose-quotes: var(--color-fg-muted);
+  --tw-prose-quote-borders: var(--color-star-500);
+  --tw-prose-code: var(--color-star-300);
+  --tw-prose-pre-bg: var(--color-space-850);
+  --tw-prose-hr: var(--color-line-strong);
+  --tw-prose-bullets: var(--color-star-500);
+  --tw-prose-counters: var(--color-star-500);
+}
+.prose-sky img { border-radius: 1rem; border: 1px solid var(--color-line); }
+
+/* Tiptap editor surface */
+.tiptap {
+  min-height: 18rem;
+  outline: none;
+}
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--color-fg-subtle);
+  float: left;
+  pointer-events: none;
+  height: 0;
+}
+
+/* Skeleton shimmer */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.05);
+  border-radius: 0.75rem;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+  animation: shimmer 1.6s infinite;
+}
+@keyframes shimmer { to { transform: translateX(100%); } }
+
+/* Thin scrollbars in dashboard tables */
+.scroll-thin::-webkit-scrollbar { height: 8px; width: 8px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: var(--color-space-600); border-radius: 8px; }
