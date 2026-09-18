@@ -4,6 +4,7 @@ import { Newspaper, CalendarDays, FolderKanban } from "lucide-react";
 import { useEffect } from "react";
 import { useCachedResource, writeCache } from "@/lib/client-cache";
 import { SEED_EVENTS, withSeedEvents } from "@/lib/seed-events";
+import { SEED_PROJECTS, withSeedProjects } from "@/lib/seed-projects";
 import { ApiNotice, CardSkeleton, EmptyState } from "@/components/ui/primitives";
 import Button from "@/components/ui/Button";
 import { BlogCard, EventCard, ProjectCard } from "./cards";
@@ -37,7 +38,7 @@ export function BlogList({ initial, path = "/blogs?limit=12", cacheKey = "blogs"
   );
 }
 
-export function EventList({ initial, path = "/events?limit=12", cacheKey = "events", compact = false, max = Infinity, scope, excludeId, emptyText = "No events scheduled yet. Follow us to hear about the next one." }) {
+export function EventList({ initial, path = "/events?limit=12", cacheKey = "events", compact = false, max = Infinity, scope, excludeId, columns = 2, emptyText = "No events scheduled yet. Follow us to hear about the next one." }) {
   const { data, status, refresh } = useCachedResource(cacheKey, path, initial, { select: (j) => j?.data?.events || [] });
   // Keep the built-in seed events in localStorage too, so they survive offline.
   useEffect(() => writeCache("seed:events", SEED_EVENTS), []);
@@ -52,7 +53,7 @@ export function EventList({ initial, path = "/events?limit=12", cacheKey = "even
   return (
     <>
       <ApiNotice status={status === "error" ? "fresh" : status} onRetry={refresh} />
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className={columns === 1 ? "grid gap-4" : "grid gap-5 md:grid-cols-2"}>
         {list.map((e) => (
           <EventCard key={e._id} event={e} compact={compact} />
         ))}
@@ -62,15 +63,21 @@ export function EventList({ initial, path = "/events?limit=12", cacheKey = "even
 }
 
 export function ProjectList({ initial, path = "/projects?limit=12", cacheKey = "projects", max = Infinity }) {
-  const { data, status, refresh } = useCachedResource(cacheKey, path, initial, { select: (j) => (j?.data?.projects || []).slice(0, max) });
-  if (!data) return status === "error" ? <><ApiNotice status={status} onRetry={refresh} /><EmptyState icon={FolderKanban} title="No projects yet" /></> : <CardSkeleton />;
-  if (!data.length) return <EmptyState icon={FolderKanban} title="No projects yet" text="Members can submit their own — log in to share what you're building." action={<Button href="/members" variant="secondary" size="sm">Submit a project</Button>} />;
+  const { data, status, refresh } = useCachedResource(cacheKey, path, initial, { select: (j) => j?.data?.projects || [] });
+  useEffect(() => writeCache("seed:projects", SEED_PROJECTS), []);
+
+  // API projects + built-in seed projects (lib/seed-projects.js).
+  const list = withSeedProjects(data || []).slice(0, max);
+  if (!list.length) {
+    if (!data && status !== "error") return <CardSkeleton />;
+    return <EmptyState icon={FolderKanban} title="No projects yet" text="Members can submit their own — log in to share what you're building." action={<Button href="/members" variant="secondary" size="sm">Submit a project</Button>} />;
+  }
 
   return (
     <>
-      <ApiNotice status={status} onRetry={refresh} />
+      <ApiNotice status={status === "error" ? "fresh" : status} onRetry={refresh} />
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {data.map((p) => (
+        {list.map((p) => (
           <ProjectCard key={p._id} project={p} />
         ))}
       </div>

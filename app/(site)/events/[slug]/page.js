@@ -42,7 +42,7 @@ export default async function EventDetailPage({ params }) {
   const past = isPast(event.eventTime);
   const type = EVENT_TYPES[event.type] || EVENT_TYPES.other;
   const canSeeLink = !event.membersOnly || (user && user.status === "approved");
-  const others = withSeedEvents(more?.data?.events || [], { scope: "upcoming" }).filter((e) => e._id !== event._id).slice(0, 2);
+  const others = withSeedEvents(more?.data?.events || [], { scope: "upcoming" }).filter((e) => e._id !== event._id).slice(0, 1);
 
   return (
     <article className="pt-28 sm:pt-32">
@@ -115,7 +115,7 @@ export default async function EventDetailPage({ params }) {
             {others.length > 0 && (
               <div>
                 <p className="eyebrow mb-3">Also coming up</p>
-                <EventList initial={{ data: { events: others } }} path="/events/upcoming?limit=3" cacheKey="events:sidebar" compact scope="upcoming" max={2} excludeId={event._id} />
+                <EventList initial={{ data: { events: others } }} path="/events/upcoming?limit=3" cacheKey="events:sidebar" compact scope="upcoming" max={1} columns={1} excludeId={event._id} />
               </div>
             )}
           </aside>

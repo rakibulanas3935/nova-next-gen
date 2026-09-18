@@ -8,12 +8,13 @@ import Button from "@/components/ui/Button";
 import RichText from "@/components/ui/RichText";
 import SmartImage from "@/components/ui/SmartImage";
 import ShareBar from "@/components/content/ShareBar";
+import { findSeedProject } from "@/lib/seed-projects";
 
 export const revalidate = 300;
 
 async function loadProject(slug) {
   const res = await apiGet(`/projects/${slug}`, { tags: ["projects"] });
-  return res?.data?.project || null;
+  return res?.data?.project || findSeedProject(slug);
 }
 
 export async function generateMetadata({ params }) {
