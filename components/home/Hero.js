@@ -17,7 +17,7 @@ export default function Hero({ nextEvent }) {
       <TwinkleField className="absolute inset-0 -z-10 h-full w-full" density={1.1} shooting />
       {/* Layer 2: vignette + nebula colour */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(70%_60%_at_50%_35%,transparent_20%,rgba(4,6,13,0.75)_100%)]" aria-hidden />
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(40%_40%_at_80%_20%,rgba(139,116,245,0.18),transparent),radial-gradient(40%_40%_at_15%_80%,rgba(94,177,255,0.14),transparent)]" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(40%_40%_at_80%_20%,rgba(147,51,234,0.18),transparent),radial-gradient(40%_40%_at_15%_80%,rgba(59,130,246,0.14),transparent)]" aria-hidden />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-b from-transparent to-space-950" aria-hidden />
 
       <MouseParallax className="container-x relative grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]" strength={22}>
@@ -28,7 +28,7 @@ export default function Hero({ nextEvent }) {
                 href={`/events/${nextEvent.slug || nextEvent._id}`}
                 className="group mb-7 inline-flex items-center gap-2 rounded-full border border-star-500/30 bg-star-500/10 py-1.5 pl-1.5 pr-3 text-xs text-star-300 backdrop-blur transition-colors hover:bg-star-500/20"
               >
-                <span className="rounded-full bg-star-500 px-2 py-0.5 font-semibold text-space-950">Next</span>
+                <span className="rounded-full bg-star-500 px-2 py-0.5 font-semibold text-white">Next</span>
                 <span className="max-w-[16rem] truncate sm:max-w-none">{nextEvent.title}</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
@@ -72,8 +72,8 @@ export default function Hero({ nextEvent }) {
 
         <HeroReveal delay={0.35} className="relative hidden lg:block">
           <div data-depth="0.6" className="transition-transform duration-300 ease-out will-change-transform">
-            <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(245,185,66,0.14),transparent_70%)]" />
-            <SolarSystem className="mx-auto w-full max-w-[36rem] drop-shadow-[0_0_50px_rgba(245,185,66,0.2)]" />
+            <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(168,85,247,0.14),transparent_70%)]" />
+            <SolarSystem className="mx-auto w-full max-w-[36rem] drop-shadow-[0_0_50px_rgba(168,85,247,0.2)]" />
           </div>
           <p className="mt-2 text-center font-mono text-[11px] uppercase tracking-[0.25em] text-fg-subtle">Orbits to scale in time, not space</p>
         </HeroReveal>

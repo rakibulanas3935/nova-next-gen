@@ -81,7 +81,7 @@ export default async function HomePage() {
       </Section>
 
       <Section className="!pt-0">
-        <div className="relative overflow-hidden rounded-3xl border border-star-500/25 bg-[radial-gradient(80%_100%_at_0%_0%,rgba(245,185,66,0.16),transparent),radial-gradient(60%_80%_at_100%_100%,rgba(94,177,255,0.16),transparent),#0b1120] p-8 sm:p-12 lg:p-16">
+        <div className="relative overflow-hidden rounded-3xl border border-star-500/25 bg-[radial-gradient(80%_100%_at_0%_0%,rgba(168,85,247,0.16),transparent),radial-gradient(60%_80%_at_100%_100%,rgba(59,130,246,0.16),transparent),#0b1120] p-8 sm:p-12 lg:p-16">
           <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
             <Dust count={10} />
             <div className="relative">

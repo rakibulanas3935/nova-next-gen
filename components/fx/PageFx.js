@@ -6,9 +6,9 @@ import Constellation from "./Constellation";
 
 function Nebula({ tone = "violet" }) {
   const tones = {
-    violet: ["rgba(139,116,245,0.35)", "rgba(94,177,255,0.25)", "rgba(245,185,66,0.18)"],
-    gold: ["rgba(245,185,66,0.3)", "rgba(224,122,95,0.2)", "rgba(139,116,245,0.2)"],
-    teal: ["rgba(94,177,255,0.3)", "rgba(159,227,232,0.2)", "rgba(139,116,245,0.18)"],
+    violet: ["rgba(147,51,234,0.35)", "rgba(59,130,246,0.25)", "rgba(168,85,247,0.18)"],
+    gold: ["rgba(168,85,247,0.3)", "rgba(224,122,95,0.2)", "rgba(147,51,234,0.2)"],
+    teal: ["rgba(59,130,246,0.3)", "rgba(159,227,232,0.2)", "rgba(147,51,234,0.18)"],
   }[tone];
   return (
     <div className="absolute inset-0 overflow-hidden" aria-hidden>
@@ -23,7 +23,7 @@ function GalaxySpiral() {
   return (
     <div className="absolute inset-0 overflow-hidden" aria-hidden>
       <div className="fx-galaxy absolute left-1/2 top-[-10rem] h-[60rem] w-[60rem] -translate-x-1/2 rounded-full opacity-70" />
-      <div className="absolute inset-0 bg-[radial-gradient(40%_30%_at_50%_10%,rgba(255,224,138,0.25),transparent)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(40%_30%_at_50%_10%,rgba(216,180,254,0.25),transparent)]" />
     </div>
   );
 }
@@ -43,10 +43,10 @@ function OrbitRings() {
               animation: `orbit ${40 + i * 25}s linear infinite ${i % 2 ? "reverse" : ""}`,
             }}
           >
-            <span className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full" style={{ background: ["#f5b942", "#5eb1ff", "#b39dff", "#e07a5f"][i], boxShadow: `0 0 12px ${["#f5b942", "#5eb1ff", "#b39dff", "#e07a5f"][i]}` }} />
+            <span className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full" style={{ background: ["#a855f7", "#3b82f6", "#818cf8", "#f472b6"][i], boxShadow: `0 0 12px ${["#a855f7", "#3b82f6", "#818cf8", "#f472b6"][i]}` }} />
           </div>
         ))}
-        <div className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#fff3c4,rgba(245,185,66,0.4)_55%,transparent_70%)]" />
+        <div className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#fff3c4,rgba(168,85,247,0.4)_55%,transparent_70%)]" />
       </div>
     </div>
   );

@@ -43,7 +43,7 @@ export default function Sidebar({ user, counts = {} }) {
           >
             <Icon className="h-4 w-4" />
             <span className="flex-1">{label}</span>
-            {n > 0 && <span className="rounded-full bg-star-500 px-1.5 text-[10px] font-semibold text-space-950">{n}</span>}
+            {n > 0 && <span className="rounded-full bg-star-500 px-1.5 text-[10px] font-semibold text-white">{n}</span>}
           </Link>
         );
       })}

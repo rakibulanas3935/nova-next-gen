@@ -26,7 +26,7 @@ export function Spotlight() {
       ref={ref}
       aria-hidden
       className="pointer-events-none fixed left-0 top-0 z-[5] h-[600px] w-[600px] rounded-full opacity-0 transition-opacity duration-500"
-      style={{ background: "radial-gradient(circle, rgba(245,185,66,0.10) 0%, rgba(94,177,255,0.06) 35%, transparent 65%)", mixBlendMode: "screen" }}
+      style={{ background: "radial-gradient(circle, rgba(168,85,247,0.10) 0%, rgba(59,130,246,0.06) 35%, transparent 65%)", mixBlendMode: "screen" }}
     />
   );
 }
@@ -49,7 +49,7 @@ export function ScrollProgress() {
     window.addEventListener("resize", onScroll);
     return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); };
   }, []);
-  return <div ref={ref} aria-hidden className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-star-500 via-sky-500 to-nebula-500 shadow-[0_0_12px_rgba(245,185,66,0.6)]" style={{ transform: "scaleX(0)" }} />;
+  return <div ref={ref} aria-hidden className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-star-500 via-sky-500 to-nebula-500 shadow-[0_0_12px_rgba(168,85,247,0.6)]" style={{ transform: "scaleX(0)" }} />;
 }
 
 /**

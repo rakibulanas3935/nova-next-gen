@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 /** Slowly drifting points joined by faint lines when close — a living star chart. */
-export default function Constellation({ className = "", color = "158,208,255" }) {
+export default function Constellation({ className = "", color = "147,197,253" }) {
   const ref = useRef(null);
 
   useEffect(() => {

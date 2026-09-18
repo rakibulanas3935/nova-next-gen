@@ -4,12 +4,12 @@ import { Loader2 } from "lucide-react";
 
 const variants = {
   primary:
-    "bg-star-500 text-space-950 hover:bg-star-400 shadow-[0_10px_30px_-10px_rgba(245,185,66,0.6)] font-semibold",
+    "bg-gradient-to-r from-[#9333ea] to-[#3b82f6] text-white hover:from-[#a855f7] hover:to-[#60a5fa] shadow-[0_10px_30px_-10px_rgba(147,51,234,0.7)] font-semibold",
   secondary:
     "glass text-fg hover:border-line-strong hover:bg-white/[0.06]",
   ghost: "text-fg-muted hover:text-fg hover:bg-white/5",
   danger: "bg-red-500/15 text-red-300 border border-red-500/30 hover:bg-red-500/25",
-  sky: "bg-sky-500 text-space-950 hover:bg-sky-400 font-semibold",
+  sky: "bg-sky-500 text-white hover:bg-sky-400 font-semibold",
 };
 
 const sizes = {

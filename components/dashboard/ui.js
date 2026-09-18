@@ -35,7 +35,7 @@ export function Tabs({ tabs, current, basePath, param = "status" }) {
         <Link
           key={t.key}
           href={t.key ? `${basePath}?${param}=${t.key}` : basePath}
-          className={clsx("whitespace-nowrap rounded-lg px-4 py-2 text-sm transition-colors", current === t.key ? "bg-star-500 font-semibold text-space-950" : "text-fg-muted hover:text-white")}
+          className={clsx("whitespace-nowrap rounded-lg px-4 py-2 text-sm transition-colors", current === t.key ? "bg-star-500 font-semibold text-white" : "text-fg-muted hover:text-white")}
         >
           {t.label}{typeof t.count === "number" ? ` (${t.count})` : ""}
         </Link>

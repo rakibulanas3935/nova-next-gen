@@ -106,7 +106,7 @@ function MobileSheet({ open, onClose, user, pathname }) {
           exit={{ opacity: 0, transition: { duration: 0.2 } }}
           transition={{ duration: 0.25 }}
         >
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_40%_at_80%_0%,rgba(139,116,245,0.18),transparent),radial-gradient(50%_40%_at_10%_100%,rgba(245,185,66,0.12),transparent)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_40%_at_80%_0%,rgba(147,51,234,0.18),transparent),radial-gradient(50%_40%_at_10%_100%,rgba(168,85,247,0.12),transparent)]" />
           <motion.nav
             className="relative flex flex-1 flex-col px-6 pb-8 pt-24"
             initial="hidden"

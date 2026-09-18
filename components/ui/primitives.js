@@ -80,7 +80,7 @@ export function PageHero({ eyebrow, title, description, children, className, fx 
     <div className={clsx("relative isolate pt-32 pb-14 sm:pt-40 sm:pb-20", video && "sm:pb-28", className)}>
       {video && <VideoBackdrop name={video} className="-z-20" opacity={0.5} />}
       <PageFx variant={fx} />
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[32rem] bg-[radial-gradient(60%_50%_at_50%_0%,rgba(94,177,255,0.10),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[32rem] bg-[radial-gradient(60%_50%_at_50%_0%,rgba(59,130,246,0.10),transparent_70%)]" />
       <Container className="relative">
         <div className="max-w-3xl animate-fade-up">
           {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}

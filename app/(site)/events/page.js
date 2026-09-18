@@ -34,7 +34,7 @@ export default async function EventsPage({ searchParams }) {
             <Link
               key={s.key}
               href={`/events?scope=${s.key}`}
-              className={clsx("flex-1 rounded-lg px-4 py-2 text-center text-sm transition-colors sm:flex-none", scope === s.key ? "bg-star-500 text-space-950 font-semibold" : "text-fg-muted hover:text-white")}
+              className={clsx("flex-1 rounded-lg px-4 py-2 text-center text-sm transition-colors sm:flex-none", scope === s.key ? "bg-star-500 text-white font-semibold" : "text-fg-muted hover:text-white")}
             >
               {s.label}
             </Link>

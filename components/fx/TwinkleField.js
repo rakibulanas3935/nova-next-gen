@@ -16,9 +16,9 @@ export default function TwinkleField({ className = "", density = 1, shooting = t
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const dpr = Math.min(2, window.devicePixelRatio || 1);
     const PALETTE = {
-      gold: ["255,255,255", "255,224,138", "255,255,255", "158,208,255"],
-      blue: ["255,255,255", "158,208,255", "179,157,255", "255,255,255"],
-      violet: ["255,255,255", "179,157,255", "255,224,138", "158,208,255"],
+      gold: ["255,255,255", "216,180,254", "255,255,255", "147,197,253"],
+      blue: ["255,255,255", "147,197,253", "165,180,252", "255,255,255"],
+      violet: ["255,255,255", "165,180,252", "216,180,254", "147,197,253"],
     }[tint] || ["255,255,255"];
 
     let w = 0, h = 0, raf = 0, running = true, t = 0;
