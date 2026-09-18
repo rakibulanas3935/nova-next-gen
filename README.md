@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Deep Sky Society — website (v2)
 
-## Getting Started
+Next.js 15 (App Router) front end for the astronomy club. Talks to
+[`deep-sky-server`](../deep-sky-server) (Express + MongoDB).
 
-First, run the development server:
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.local.example .env.local   # set API_URL, JWT_SECRET (same as the API)
+npm install
+npm run dev                        # http://localhost:3001
 ```
 
-Open [https://deep-sky-server.onrender.com](https://deep-sky-server.onrender.com) with your browser to see the result.
+## How it's put together
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+| Folder | What lives there |
+|---|---|
+| `app/(site)` | Public pages + members area (Navbar/Footer layout) |
+| `app/(dashboard)` | Admin dashboard (sidebar layout, admin-only) |
+| `app/api/auth/*` | Login/signup/logout proxies that turn the API token into an httpOnly cookie |
+| `lib/api.js` | Server-side fetch: ISR caching for public reads, Bearer forwarding for auth |
+| `lib/actions/*` | Server Actions for every mutation (blog, events, projects, gallery, users…) |
+| `lib/client-cache.js` | Browser fetch + localStorage cache + retry (covers Render cold starts) |
+| `lib/astro.js`, `lib/content.js` | Moon phase / meteor showers / seasonal sky; static copy and learning tracks |
+| `components/ui` | Design system: Button, Card, Badge, form fields, RichText (sanitised), motion |
+| `middleware.js` | Verifies the session cookie (jose) and guards `/dashboard` + `/members` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Data flow
 
-## Learn More
+1. Server components call `apiGet()` — cached with `revalidate` + tags, so a
+   sleeping API doesn't block a page that has rendered before.
+2. Lists are client components that receive the server data as `initial`.
+   If it's `null` (API down), they show the localStorage copy from the last
+   visit and retry in the background.
+3. Mutations go through Server Actions → Express with the cookie token, then
+   `revalidateTag/Path` refreshes the cached pages.
 
-To learn more about Next.js, take a look at the following resources:
+### Auth
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Cookie `ds_token` (httpOnly, 7 days) holds the API JWT. The browser never
+  sees the token.
+- `middleware.js` verifies it with `JWT_SECRET` (must match the API) and
+  redirects unauthenticated users to `/login?next=…`.
+- Server pages use `getCurrentUser()` / `requireUser()` / `requireAdmin()`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Vercel: set `API_URL`, `NEXT_PUBLIC_API_URL`, `JWT_SECRET`, `NEXT_PUBLIC_SITE_URL`.
+- Add the site origin to `CORS_ORIGINS` on the API.
+- `public/*.mp4` are leftovers from v1 (≈90 MB). Only `deep_sky_2.mp4` is
+  referenced nowhere now — all videos can be deleted.

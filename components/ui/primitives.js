@@ -1,6 +1,7 @@
 import Link from "next/link";
 import clsx from "clsx";
 import { ArrowRight, Telescope } from "lucide-react";
+import { Reveal } from "./motion";
 
 export function Container({ className, children }) {
   return <div className={clsx("container-x", className)}>{children}</div>;
@@ -63,10 +64,10 @@ export function SectionHeader({ eyebrow, title, description, href, linkLabel = "
   );
 }
 
-export function Section({ className, children, ...props }) {
+export function Section({ className, children, reveal = true, ...props }) {
   return (
     <section className={clsx("py-16 sm:py-20 lg:py-24", className)} {...props}>
-      <Container>{children}</Container>
+      <Container>{reveal ? <Reveal>{children}</Reveal> : children}</Container>
     </section>
   );
 }

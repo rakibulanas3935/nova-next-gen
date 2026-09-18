@@ -66,6 +66,19 @@
   }
 }
 
+/* Solar-system decoration */
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes comet {
+  0% { transform: rotate(0deg) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  50% { opacity: 1; }
+  60% { opacity: 0; }
+  100% { transform: rotate(360deg) scale(1); opacity: 0; }
+}
+
 /* ------------------------------------------------------------------------
    Base
    ------------------------------------------------------------------------ */
@@ -145,8 +158,24 @@ h1, h2, h3, h4 {
 
 @media (prefers-reduced-motion: reduce) {
   .starfield::before, .starfield::after { animation: none; }
+  [style*="orbit"], [style*="comet"] { animation: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* Thin, unobtrusive scrollbars everywhere */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.28) transparent;
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(245,185,66,0.55), rgba(94,177,255,0.45));
+  border-radius: 999px;
+  border: 2px solid var(--color-space-950);
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(245,185,66,0.8); }
+::-webkit-scrollbar-corner { background: transparent; }
 
 /* ------------------------------------------------------------------------
    Utilities
@@ -235,6 +264,3 @@ h1, h2, h3, h4 {
 }
 @keyframes shimmer { to { transform: translateX(100%); } }
 
-/* Thin scrollbars in dashboard tables */
-.scroll-thin::-webkit-scrollbar { height: 8px; width: 8px; }
-.scroll-thin::-webkit-scrollbar-thumb { background: var(--color-space-600); border-radius: 8px; }

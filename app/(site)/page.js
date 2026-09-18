@@ -8,6 +8,7 @@ import GalleryStrip from "@/components/content/GalleryStrip";
 import { Section, SectionHeader, Card } from "@/components/ui/primitives";
 import { BlogList, EventList, ProjectList } from "@/components/content/lists";
 import Button from "@/components/ui/Button";
+import { Stagger, RevealItem } from "@/components/ui/motion";
 
 export const revalidate = 300;
 
@@ -40,20 +41,22 @@ export default async function HomePage() {
 
       <Section className="!pt-0">
         <SectionHeader eyebrow="What we do" title="More than a club — a launchpad" description="We create the spark through hands-on learning, collaboration and exposure to real science." />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {WHAT_WE_DO.map((item) => {
             const Icon = ICONS[item.icon] || Telescope;
             return (
-              <Card key={item.title} hover className="p-6">
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-star-500/10 text-star-400">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-fg-muted">{item.text}</p>
-              </Card>
+              <RevealItem key={item.title}>
+                <Card hover className="h-full p-6">
+                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-star-500/10 text-star-400">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-fg-muted">{item.text}</p>
+                </Card>
+              </RevealItem>
             );
           })}
-        </div>
+        </Stagger>
       </Section>
 
       <Section className="!pt-0">
