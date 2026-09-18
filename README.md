@@ -47,5 +47,5 @@ npm run dev                        # http://localhost:3001
 
 - Vercel: set `API_URL`, `NEXT_PUBLIC_API_URL`, `JWT_SECRET`, `NEXT_PUBLIC_SITE_URL`.
 - Add the site origin to `CORS_ORIGINS` on the API.
-- `public/*.mp4` are leftovers from v1 (≈90 MB). Only `deep_sky_2.mp4` is
-  referenced nowhere now — all videos can be deleted.
+- `public/*.mp4` are leftovers from v1 (≈90 MB). Nothing references them
+  any more — they can all be deleted.
