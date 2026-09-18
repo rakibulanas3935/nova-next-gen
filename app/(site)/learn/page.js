@@ -21,7 +21,7 @@ export default async function LearnPage() {
 
   return (
     <>
-      <PageHero video="learn" fx="nebula-teal" eyebrow="Learn" title="From first look to first light" description="Self-paced tracks written by members, plus lessons from our workshops. No prerequisites — just curiosity." />
+      <PageHero video="learn" fx="nebula-teal" eyebrow="Learn" title="Cosmic Learning" description="Discover fun and easy ways to learn about stars, planets, and the universe with our astronomy resources." />
 
       <Section className="!pt-0" id="tracks">
         <SectionHeader eyebrow="Learning tracks" title="Start here" description="Six short tracks that take you from 'what's that bright star?' to training a model on real NASA data." />
@@ -58,7 +58,7 @@ export default async function LearnPage() {
       <Section className="!pt-0" id="quiz">
         <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
           <div>
-            <SectionHeader eyebrow="Quick quiz" title="Test your sky sense" description="Six questions. No pressure, no leaderboard — just a check on what stuck." />
+            <SectionHeader eyebrow="Quiz" title="🧩 Quiz Time" description="Seven quick questions. No pressure, no leaderboard — just a check on what stuck." />
           </div>
           <Quiz />
         </div>

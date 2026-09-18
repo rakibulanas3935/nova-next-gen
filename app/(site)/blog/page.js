@@ -24,7 +24,7 @@ export default async function BlogPage({ searchParams }) {
 
   return (
     <>
-      <PageHero video="blog" fx="constellation" eyebrow="Blog" title="Notes from the night sky" description="Observing reports, explainers and project logs — written by members, for anyone who looks up." />
+      <PageHero video="blog" fx="constellation" eyebrow="Blog" title="Cosmic Chronicles" description="Read the latest stories, insights, and discoveries from the world of astronomy and space exploration." />
       <Section className="!pt-0">
         <BlogSearch q={q} tag={tag} />
         <BlogList key={path} initial={blogs} path={path} cacheKey={`blogs:${query}`} featuredFirst={page === 1 && !q && !tag} />

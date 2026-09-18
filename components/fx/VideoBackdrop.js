@@ -37,7 +37,7 @@ export default function VideoBackdrop({ name, className, opacity = 0.55, kenBurn
   }, [name, src]);
 
   return (
-    <div className={clsx("absolute inset-0 overflow-hidden", className)} aria-hidden>
+    <div className={clsx("fx-fade-mask absolute inset-0 overflow-hidden", className)} aria-hidden>
       <div className={clsx("absolute inset-0", kenBurns && "fx-kenburns")}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={`/video/${name}.jpg`} alt="" className="absolute inset-0 h-full w-full object-cover" style={{ opacity }} />
@@ -55,9 +55,7 @@ export default function VideoBackdrop({ name, className, opacity = 0.55, kenBurn
           src={src || undefined}
         />
       </div>
-      <div className="absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_40%,transparent_10%,rgba(4,6,13,0.55)_100%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-b from-transparent to-space-950" />
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-space-950/70 to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_40%,transparent_10%,rgba(5,1,14,0.5)_100%)]" />
     </div>
   );
 }

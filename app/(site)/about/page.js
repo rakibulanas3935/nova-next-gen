@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { Telescope, Orbit, Cpu, Mic, Globe2, Camera } from "lucide-react";
 import { apiGet } from "@/lib/api";
-import { FOUNDER_STORY, WHAT_WE_DO, TIMELINE, SITE } from "@/lib/content";
+import { FOUNDER_STORY, ABOUT_DSS, VALUES, TIMELINE, SITE } from "@/lib/content";
 import { PageHero, Section, SectionHeader, Card } from "@/components/ui/primitives";
 import Button from "@/components/ui/Button";
 
@@ -12,17 +11,15 @@ export const metadata = {
   description: `The story behind ${SITE.name}: a student-founded astronomy club that grew from a handshake with Buzz Aldrin into a global community.`,
 };
 
-const ICONS = { telescope: Telescope, orbit: Orbit, cpu: Cpu, mic: Mic, globe: Globe2, camera: Camera };
-
 export default async function AboutPage() {
   const members = await apiGet("/users/members", { tags: ["members"], revalidate: 3600 });
   const team = (members?.data?.users || []).filter((u) => u.role === "admin").slice(0, 8);
 
   return (
     <>
-      <PageHero video="about" fx="nebula" eyebrow="About us" title="Empowering the next generation of explorers" description="We believe the next generation of scientists, engineers and innovators is already here — they just need the spark.">
-        <Button href="/join">Join the society</Button>
-        <Button href="/contact" variant="secondary">Get in touch</Button>
+      <PageHero video="about" fx="nebula" eyebrow="Empowering Student Innovators 🚀" title="Beyond the Stars" description="Learn about our mission, our journey, and the dedicated explorers who bring the wonders of the universe closer to you.">
+        <Button href="/join">Join Club</Button>
+        <Button href="/contact" variant="secondary">Get in Touch</Button>
       </PageHero>
 
       <Section className="!pt-0">
@@ -31,39 +28,50 @@ export default async function AboutPage() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-line">
               <Image src="/gallery/sky-space-dark-galaxy.jpg" alt="Deep-sky view of a galaxy" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 40vw" />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-space-950 to-transparent p-6">
-                <p className="eyebrow">Founder's note</p>
-                <p className="mt-1 font-display text-2xl text-white">"I was starstruck. Literally."</p>
+                <p className="eyebrow">About Us</p>
+                <p className="mt-1 font-display text-2xl text-white">Learn more about our mission, goals, and story.</p>
               </div>
             </div>
           </div>
           <div className="prose prose-invert prose-sky max-w-none prose-p:text-fg-muted prose-p:leading-relaxed">
-            <h2 className="!mt-0">Our story</h2>
+            <h2 className="!mt-0">About Us</h2>
             {FOUNDER_STORY.map((p, i) => (
               <p key={i} className={i === 0 ? "text-xl text-white" : undefined}>{p}</p>
             ))}
-            <p className="text-fg">— Carlos, founder</p>
+            <p className="text-fg">— Carlos</p>
           </div>
         </div>
       </Section>
 
       <Section className="!pt-0">
-        <SectionHeader eyebrow="What we do" title="Learning by participating" description="Deep Sky Society is about more than learning — it's about taking part. We're not waiting to be inspired." />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {WHAT_WE_DO.map((item) => {
-            const Icon = ICONS[item.icon];
-            return (
-              <Card key={item.title} className="p-6">
-                <Icon className="mb-4 h-5 w-5 text-star-400" />
-                <h3 className="font-semibold text-white">{item.title}</h3>
-                <p className="mt-2 text-sm text-fg-muted">{item.text}</p>
-              </Card>
-            );
-          })}
+        <SectionHeader title="About Deep Sky Society" />
+        <div className="prose prose-invert prose-sky max-w-3xl prose-p:text-fg-muted">
+          {ABOUT_DSS.intro.map((p, i) => <p key={i}>{p}</p>)}
+          <p className="text-fg">{ABOUT_DSS.listTitle}</p>
+          <ul>
+            {ABOUT_DSS.list.map((li) => <li key={li}>{li}</li>)}
+          </ul>
+          {ABOUT_DSS.outro.map((p, i) => <p key={i}>{p}</p>)}
         </div>
       </Section>
 
       <Section className="!pt-0">
-        <SectionHeader eyebrow="Timeline" title="How we got here" />
+        <SectionHeader title="Our Goals & Values" />
+        <div className="max-w-3xl space-y-2 text-fg-muted">
+          {VALUES.intro.map((p, i) => <p key={i}>{p}</p>)}
+        </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {VALUES.items.map(([title, text]) => (
+            <Card key={title} className="p-6">
+              <h3 className="font-semibold text-white">{title}</h3>
+              <p className="mt-2 text-sm text-fg-muted">{text}</p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section className="!pt-0">
+        <SectionHeader eyebrow="Timeline" title="Our Journey" />
         <ol className="relative ml-3 border-l border-line pl-8 sm:ml-6">
           {TIMELINE.map((t, i) => (
             <li key={i} className="relative pb-10 last:pb-0">

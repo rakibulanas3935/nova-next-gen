@@ -14,11 +14,10 @@ export default function Hero({ nextEvent }) {
       {/* Layer 0: looping space video (lazy) */}
       <VideoBackdrop name="home" className="-z-20" opacity={0.6} />
       {/* Layer 1: twinkling stars + occasional shooting star */}
-      <TwinkleField className="absolute inset-0 -z-10 h-full w-full" density={1.1} shooting />
+      <TwinkleField className="fx-fade-mask absolute inset-0 -z-10 h-full w-full" density={1.1} shooting />
       {/* Layer 2: vignette + nebula colour */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(70%_60%_at_50%_35%,transparent_20%,rgba(4,6,13,0.75)_100%)]" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(70%_60%_at_50%_35%,transparent_20%,rgba(5,1,14,0.6)_100%)]" aria-hidden />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(40%_40%_at_80%_20%,rgba(147,51,234,0.18),transparent),radial-gradient(40%_40%_at_15%_80%,rgba(59,130,246,0.14),transparent)]" aria-hidden />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-b from-transparent to-space-950" aria-hidden />
 
       <MouseParallax className="container-x relative grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]" strength={22}>
         <div className="max-w-2xl transition-transform duration-300 ease-out" data-depth="0.15">
@@ -39,22 +38,20 @@ export default function Hero({ nextEvent }) {
 
           <HeroReveal delay={0.15}>
             <h1 className="text-5xl font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl">
-              Look up.
-              <br />
-              <span className="text-shimmer">Then look deeper.</span>
+              <span className="text-shimmer">Explore the Cosmos</span>
             </h1>
           </HeroReveal>
 
           <HeroReveal delay={0.3}>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-fg-muted sm:text-xl">
-              Telescope nights, AI-astrophysics workshops, talks with real researchers — and a community that's as curious as you are.
+              Join our community of stargazers and embark on a journey through the wonders of the universe.
             </p>
           </HeroReveal>
 
           <HeroReveal delay={0.42}>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Button href="/join" size="lg">Join the club</Button>
-              <Button href="/events" size="lg" variant="secondary">Upcoming events</Button>
+              <Button href={nextEvent ? `/events/${nextEvent.slug || nextEvent._id}` : "/events"} size="lg">Start Your Journey</Button>
+              <Button href="/join" size="lg" variant="secondary">Join Club</Button>
             </div>
           </HeroReveal>
 

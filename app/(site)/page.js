@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Telescope, Orbit, Cpu, Mic, Globe2, Camera, ArrowRight } from "lucide-react";
 import { apiGet } from "@/lib/api";
-import { WHAT_WE_DO, FUN_FACTS, JOIN_BENEFITS } from "@/lib/content";
+import { WHAT_WE_DO, FUN_FACTS, JOIN_BENEFITS, SITE } from "@/lib/content";
 import Hero from "@/components/home/Hero";
 import SkyTonight from "@/components/home/SkyTonight";
 import GalleryStrip from "@/components/content/GalleryStrip";
@@ -36,14 +36,14 @@ export default async function HomePage() {
       </Section>
 
       <Section className="!pt-0">
-        <SectionHeader eyebrow="Events" title="Upcoming events" description="Telescope nights, workshops and talks. Most are free and open to everyone." href="/events" />
+        <SectionHeader eyebrow="Events" title="Upcoming events" href="/events" linkLabel="View Events" />
         <EventList initial={events} path="/events/upcoming?limit=4" cacheKey="home:events" compact max={4} scope="upcoming" emptyText="Nothing on the calendar right now. Join the club to hear first when we schedule the next night out." />
       </Section>
 
       <AuroraLine />
       <Section className="relative !pt-16">
         <Dust />
-        <SectionHeader eyebrow="What we do" title="More than a club — a launchpad" description="We create the spark through hands-on learning, collaboration and exposure to real science." />
+        <SectionHeader eyebrow="Our Missions" title="Our Missions" description={SITE.mission} />
         <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {WHAT_WE_DO.map((item, i) => {
             const Icon = ICONS[item.icon] || Telescope;
@@ -86,11 +86,11 @@ export default async function HomePage() {
             <Dust count={10} />
             <div className="relative">
               <p className="eyebrow mb-4">Membership</p>
-              <h2 className="text-3xl font-semibold text-white sm:text-4xl lg:text-5xl">Ready to join the society?</h2>
-              <p className="mt-4 max-w-lg text-fg-muted">Open to anyone 13+ who's curious about astronomy, physics or technology. Apply in two minutes; an admin approves your membership.</p>
+              <h2 className="text-3xl font-semibold text-white sm:text-4xl lg:text-5xl">Orbit With Us</h2>
+              <p className="mt-4 max-w-lg text-fg-muted">Step into our cosmic circle and connect with fellow dreamers who are charting new paths among the stars.</p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button href="/join" size="lg">Apply now</Button>
-                <Button href="/about" size="lg" variant="secondary">Our story</Button>
+                <Button href="/join" size="lg">Join Club</Button>
+                <Button href="/events" size="lg" variant="secondary">View Events</Button>
               </div>
             </div>
             <ul className="grid gap-2.5 text-sm">

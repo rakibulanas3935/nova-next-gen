@@ -82,9 +82,8 @@ const VARIANTS = {
 export default function PageFx({ variant = "twinkle", className }) {
   const Fx = VARIANTS[variant] || VARIANTS.twinkle;
   return (
-    <div className={clsx("pointer-events-none absolute inset-x-0 top-0 -z-10 h-[44rem] overflow-hidden", className)} aria-hidden>
+    <div className={clsx("fx-fade-mask pointer-events-none absolute inset-x-0 top-0 -z-10 h-[44rem] overflow-hidden", className)} aria-hidden>
       <Fx />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-space-950" />
     </div>
   );
 }

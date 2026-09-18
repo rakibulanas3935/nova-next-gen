@@ -11,13 +11,13 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <>
-      <PageHero video="contact" fx="nebula-gold" eyebrow="Contact" title="Say hello" description="Questions about events, membership, partnerships with your school, or want to give a talk? We'd love to hear from you." />
+      <PageHero video="contact" fx="nebula-gold" eyebrow="Contact" title="Get in Touch" description="Questions about events, membership, partnerships with your school, or want to give a talk? We’d love to hear from you." />
       <Section className="!pt-0">
         <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
           <div className="space-y-4">
             <Card className="p-5">
               <Mail className="h-5 w-5 text-star-400" />
-              <p className="mt-3 font-semibold text-white">Email</p>
+              <p className="mt-3 font-semibold text-white">Connect with us</p>
               <a href={`mailto:${SITE.email}`} className="mt-1 block text-sm text-sky-400 hover:underline">{SITE.email}</a>
             </Card>
             <Card className="p-5">

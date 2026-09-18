@@ -252,6 +252,13 @@ h1, h2, h3, h4 {
   .nebula-bg span, .splash-stars, .splash-rocket, .splash-flame { animation: none; }
 }
 
+/* Fade a background layer out at its bottom edge instead of painting a
+   solid colour over it — avoids hard seams against the page background. */
+.fx-fade-mask {
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, black 12%, black 62%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, black 12%, black 62%, transparent 100%);
+}
+
 /* Video backdrop: slow Ken Burns drift */
 .fx-kenburns { animation: kenburns 28s ease-in-out infinite alternate; transform-origin: 50% 40%; }
 @keyframes kenburns {

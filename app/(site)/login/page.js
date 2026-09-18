@@ -9,7 +9,7 @@ export default function LoginPage() {
   return (
     <AuthShell
       eyebrow="Welcome back"
-      title="Log in"
+      title="Login To the Deep Sky Society"
       description="Members area, event links and your submissions."
       footer={<>New here? <Link href="/join" className="text-star-300 hover:underline">Apply for membership</Link></>}
     >
