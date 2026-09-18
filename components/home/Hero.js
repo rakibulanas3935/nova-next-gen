@@ -8,7 +8,7 @@ import { HeroReveal } from "@/components/ui/motion";
 
 export default function Hero({ nextEvent }) {
   return (
-    <section className="relative isolate flex min-h-[100dvh] items-center overflow-hidden pt-24">
+    <section className="relative isolate flex min-h-[100dvh] items-center overflow-hidden pt-24 lg:max-h-[1100px] lg:min-h-[min(100dvh,1100px)]">
       {/* Layer 0: faint galaxy photo for texture */}
       <div className="absolute inset-0 -z-20 bg-[url('/gallery/sky-space-dark-galaxy.jpg')] bg-cover bg-center opacity-25" aria-hidden />
       {/* Layer 1: twinkling stars + occasional shooting star */}

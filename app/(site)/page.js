@@ -36,16 +36,16 @@ export default async function HomePage() {
 
       <Section className="!pt-0">
         <SectionHeader eyebrow="Events" title="Upcoming events" description="Telescope nights, workshops and talks. Most are free and open to everyone." href="/events" />
-        <EventList initial={events} path="/events/upcoming?limit=4" cacheKey="home:events" compact emptyText="Nothing on the calendar right now. Join the club to hear first when we schedule the next night out." />
+        <EventList initial={events} path="/events/upcoming?limit=4" cacheKey="home:events" compact max={4} emptyText="Nothing on the calendar right now. Join the club to hear first when we schedule the next night out." />
       </Section>
 
       <Section className="!pt-0">
         <SectionHeader eyebrow="What we do" title="More than a club — a launchpad" description="We create the spark through hands-on learning, collaboration and exposure to real science." />
         <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {WHAT_WE_DO.map((item) => {
+          {WHAT_WE_DO.map((item, i) => {
             const Icon = ICONS[item.icon] || Telescope;
             return (
-              <RevealItem key={item.title}>
+              <RevealItem key={item.title} index={i}>
                 <Card hover className="h-full p-6">
                   <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-star-500/10 text-star-400">
                     <Icon className="h-5 w-5" />
@@ -61,12 +61,12 @@ export default async function HomePage() {
 
       <Section className="!pt-0">
         <SectionHeader eyebrow="Blog" title="Latest from the blog" description="Members writing about what they're observing, building and learning." href="/blog" />
-        <BlogList initial={blogs} path="/blogs?limit=4" cacheKey="home:blogs" featuredFirst />
+        <BlogList initial={blogs} path="/blogs?limit=4" cacheKey="home:blogs" featuredFirst max={4} />
       </Section>
 
       <Section className="!pt-0">
         <SectionHeader eyebrow="Projects" title="Built by members" description="From exoplanet classifiers to homemade spectrographs." href="/projects" />
-        <ProjectList initial={projects} path="/projects?limit=3" cacheKey="home:projects" />
+        <ProjectList initial={projects} path="/projects?limit=3" cacheKey="home:projects" max={3} />
       </Section>
 
       <Section className="!pt-0">

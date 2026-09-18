@@ -12,8 +12,8 @@ import { BlogCard, EventCard, ProjectCard } from "./cards";
  * HTML still contains the data when it was available, so SEO is unaffected.
  */
 
-export function BlogList({ initial, path = "/blogs?limit=12", cacheKey = "blogs", featuredFirst = false, columns = 3 }) {
-  const { data, status, refresh } = useCachedResource(cacheKey, path, initial, { select: (j) => j?.data?.blogs || [] });
+export function BlogList({ initial, path = "/blogs?limit=12", cacheKey = "blogs", featuredFirst = false, columns = 3, max = Infinity }) {
+  const { data, status, refresh } = useCachedResource(cacheKey, path, initial, { select: (j) => (j?.data?.blogs || []).slice(0, max) });
   if (!data) return status === "error" ? <><ApiNotice status={status} onRetry={refresh} /><EmptyState icon={Newspaper} title="No posts yet" text="Check back soon — we're writing." /></> : <CardSkeleton count={columns} />;
   if (!data.length) return <EmptyState icon={Newspaper} title="No posts yet" text="Check back soon — we're writing." />;
 
@@ -35,8 +35,8 @@ export function BlogList({ initial, path = "/blogs?limit=12", cacheKey = "blogs"
   );
 }
 
-export function EventList({ initial, path = "/events?limit=12", cacheKey = "events", compact = false, emptyText = "No events scheduled yet. Follow us to hear about the next one." }) {
-  const { data, status, refresh } = useCachedResource(cacheKey, path, initial, { select: (j) => j?.data?.events || [] });
+export function EventList({ initial, path = "/events?limit=12", cacheKey = "events", compact = false, max = Infinity, emptyText = "No events scheduled yet. Follow us to hear about the next one." }) {
+  const { data, status, refresh } = useCachedResource(cacheKey, path, initial, { select: (j) => (j?.data?.events || []).slice(0, max) });
   if (!data) return status === "error" ? <><ApiNotice status={status} onRetry={refresh} /><EmptyState icon={CalendarDays} title="No events" text={emptyText} /></> : <CardSkeleton count={compact ? 2 : 3} />;
   if (!data.length) return <EmptyState icon={CalendarDays} title="No events" text={emptyText} />;
 
@@ -52,8 +52,8 @@ export function EventList({ initial, path = "/events?limit=12", cacheKey = "even
   );
 }
 
-export function ProjectList({ initial, path = "/projects?limit=12", cacheKey = "projects" }) {
-  const { data, status, refresh } = useCachedResource(cacheKey, path, initial, { select: (j) => j?.data?.projects || [] });
+export function ProjectList({ initial, path = "/projects?limit=12", cacheKey = "projects", max = Infinity }) {
+  const { data, status, refresh } = useCachedResource(cacheKey, path, initial, { select: (j) => (j?.data?.projects || []).slice(0, max) });
   if (!data) return status === "error" ? <><ApiNotice status={status} onRetry={refresh} /><EmptyState icon={FolderKanban} title="No projects yet" /></> : <CardSkeleton />;
   if (!data.length) return <EmptyState icon={FolderKanban} title="No projects yet" text="Members can submit their own — log in to share what you're building." action={<Button href="/members" variant="secondary" size="sm">Submit a project</Button>} />;
 
