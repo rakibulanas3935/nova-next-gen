@@ -26,7 +26,7 @@ export default async function EventsPage({ searchParams }) {
 
   return (
     <>
-      <PageHero eyebrow="Events" title="Nights under the stars" description="Observing sessions, hands-on workshops and conversations with researchers. Members-only events show a lock — log in to get the link." />
+      <PageHero fx="orbits" eyebrow="Events" title="Nights under the stars" description="Observing sessions, hands-on workshops and conversations with researchers. Members-only events show a lock — log in to get the link." />
 
       <Section className="!pt-0">
         <div className="mb-8 flex gap-1 rounded-xl border border-line bg-white/[0.03] p-1 sm:w-fit">

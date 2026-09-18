@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { X, ChevronLeft, ChevronRight, Camera } from "lucide-react";
+import { normalizeImages } from "@/lib/format";
 import { useCachedResource, clientGet } from "@/lib/client-cache";
 import SmartImage from "@/components/ui/SmartImage";
 import { ApiNotice, EmptyState, Skeleton } from "@/components/ui/primitives";
@@ -40,7 +41,7 @@ function Lightbox({ images, index, onClose, onStep }) {
         <img src={img.url} alt={img.caption || "Gallery photo"} className="max-h-[80dvh] w-auto rounded-xl object-contain" />
         <figcaption className="mt-3 flex items-center justify-between text-sm text-fg-muted">
           <span>{img.caption || "Untitled"}</span>
-          <span className="text-xs">© {img.credit} · {formatDate(img.createdAt)} · {index + 1}/{images.length}</span>
+          <span className="text-xs">© {img.credit}{img.createdAt ? ` · ${formatDate(img.createdAt)}` : ""} · {index + 1}/{images.length}</span>
         </figcaption>
       </figure>
     </div>
@@ -54,7 +55,7 @@ export default function GalleryGrid({ initial }) {
   const [loadingMore, setLoadingMore] = useState(false);
   const [open, setOpen] = useState(null);
 
-  const images = [...(data?.data?.images || []), ...extra];
+  const images = [...normalizeImages(data?.data?.images), ...extra];
   const totalPages = data?.pagination?.totalPages || 1;
 
   const loadMore = async () => {
@@ -62,7 +63,7 @@ export default function GalleryGrid({ initial }) {
     try {
       const next = page + 1;
       const json = await clientGet(`/gallery/approved?limit=24&page=${next}`, { retries: 1 });
-      setExtra((e) => [...e, ...(json?.data?.images || [])]);
+      setExtra((e) => [...e, ...normalizeImages(json?.data?.images, e.length + 1000)]);
       setPage(next);
     } finally {
       setLoadingMore(false);

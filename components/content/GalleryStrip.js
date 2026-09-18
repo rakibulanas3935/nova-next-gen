@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { normalizeImages } from "@/lib/format";
 import { useCachedResource } from "@/lib/client-cache";
 import SmartImage from "@/components/ui/SmartImage";
 import { Skeleton } from "@/components/ui/primitives";
 
 /** Horizontal scroll strip of the latest approved gallery photos. */
 export default function GalleryStrip({ initial }) {
-  const { data } = useCachedResource("home:gallery", "/gallery/approved?limit=8", initial, { select: (j) => j?.data?.images || [] });
+  const { data } = useCachedResource("home:gallery", "/gallery/approved?limit=8", initial, { select: (j) => normalizeImages(j?.data?.images) });
 
   if (!data) {
     return (

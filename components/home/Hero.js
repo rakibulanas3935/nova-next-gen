@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { STATS } from "@/lib/content";
-import WarpField from "./WarpField";
+import TwinkleField from "@/components/fx/TwinkleField";
 import SolarSystem from "./SolarSystem";
 import { HeroReveal } from "@/components/ui/motion";
 
@@ -11,8 +11,8 @@ export default function Hero({ nextEvent }) {
     <section className="relative isolate flex min-h-[100dvh] items-center overflow-hidden pt-24">
       {/* Layer 0: faint galaxy photo for texture */}
       <div className="absolute inset-0 -z-20 bg-[url('/gallery/sky-space-dark-galaxy.jpg')] bg-cover bg-center opacity-25" aria-hidden />
-      {/* Layer 1: flying-through-space canvas */}
-      <WarpField className="absolute inset-0 -z-10 h-full w-full opacity-90" />
+      {/* Layer 1: twinkling stars + occasional shooting star */}
+      <TwinkleField className="absolute inset-0 -z-10 h-full w-full" density={1.2} shooting />
       {/* Layer 2: vignette + nebula colour */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(70%_60%_at_50%_35%,transparent_20%,rgba(4,6,13,0.75)_100%)]" aria-hidden />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(40%_40%_at_80%_20%,rgba(139,116,245,0.18),transparent),radial-gradient(40%_40%_at_15%_80%,rgba(94,177,255,0.14),transparent)]" aria-hidden />

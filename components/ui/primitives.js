@@ -2,6 +2,7 @@ import Link from "next/link";
 import clsx from "clsx";
 import { ArrowRight, Telescope } from "lucide-react";
 import { Reveal } from "./motion";
+import PageFx from "@/components/fx/PageFx";
 
 export function Container({ className, children }) {
   return <div className={clsx("container-x", className)}>{children}</div>;
@@ -73,10 +74,11 @@ export function Section({ className, children, reveal = true, ...props }) {
 }
 
 /** Top-of-page hero used by every inner page. */
-export function PageHero({ eyebrow, title, description, children, className }) {
+export function PageHero({ eyebrow, title, description, children, className, fx = "twinkle" }) {
   return (
-    <div className={clsx("relative overflow-hidden pt-32 pb-14 sm:pt-40 sm:pb-20", className)}>
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[32rem] bg-[radial-gradient(60%_50%_at_50%_0%,rgba(94,177,255,0.14),transparent_70%)]" />
+    <div className={clsx("relative isolate pt-32 pb-14 sm:pt-40 sm:pb-20", className)}>
+      <PageFx variant={fx} />
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[32rem] bg-[radial-gradient(60%_50%_at_50%_0%,rgba(94,177,255,0.10),transparent_70%)]" />
       <Container className="relative">
         <div className="max-w-3xl animate-fade-up">
           {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}

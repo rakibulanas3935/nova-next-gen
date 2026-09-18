@@ -177,6 +177,95 @@ h1, h2, h3, h4 {
 ::-webkit-scrollbar-thumb:hover { background: rgba(245,185,66,0.8); }
 ::-webkit-scrollbar-corner { background: transparent; }
 
+/* Global nebula: three slow, blurred colour clouds behind every page */
+.nebula-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.nebula-bg span {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(110px);
+  opacity: 0.55;
+  will-change: transform;
+  animation: nebula-drift 48s ease-in-out infinite alternate;
+}
+.nebula-bg .n1 { width: 55vw; height: 55vw; left: -15vw; top: -10vh; background: rgba(139,116,245,0.45); }
+.nebula-bg .n2 { width: 50vw; height: 50vw; right: -15vw; top: 20vh; background: rgba(94,177,255,0.35); animation-delay: -16s; animation-duration: 60s; }
+.nebula-bg .n3 { width: 45vw; height: 45vw; left: 25vw; bottom: -20vh; background: rgba(245,185,66,0.22); animation-delay: -30s; animation-duration: 72s; }
+@keyframes nebula-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(8vw, -6vh, 0) scale(1.12); }
+  100% { transform: translate3d(-6vw, 8vh, 0) scale(0.94); }
+}
+
+/* Launch splash */
+.splash { transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+.splash-leave { opacity: 0; transform: translateY(-6%) scale(1.04); pointer-events: none; }
+.splash-stars {
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 70% 20%, #ffe08a, transparent),
+    radial-gradient(1px 1px at 40% 70%, #fff, transparent),
+    radial-gradient(1px 1px at 85% 60%, #9ed0ff, transparent),
+    radial-gradient(1.5px 1.5px at 10% 85%, #fff, transparent),
+    radial-gradient(1px 1px at 55% 45%, #fff, transparent);
+  background-size: 100% 100%;
+  animation: splash-stars 1.6s linear infinite;
+  opacity: 0.7;
+}
+@keyframes splash-stars { from { background-position: 0 -100vh; } to { background-position: 0 100vh; } }
+.splash-rocket { animation: rocket-hover 1.2s ease-in-out infinite; filter: drop-shadow(0 0 24px rgba(245,185,66,0.35)); }
+@keyframes rocket-hover {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+.splash-flame { animation: flame 0.12s ease-in-out infinite alternate; }
+@keyframes flame { from { transform: scaleY(0.85) scaleX(0.95); } to { transform: scaleY(1.15) scaleX(1.05); } }
+.splash-bar { animation: splash-bar 2s cubic-bezier(0.22, 1, 0.36, 1) forwards; transform: scaleX(0); }
+@keyframes splash-bar { to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .nebula-bg span, .splash-stars, .splash-rocket, .splash-flame { animation: none; }
+}
+
+/* Page background effects (components/fx) */
+.fx-blob {
+  filter: blur(90px);
+  opacity: 0.9;
+  animation: blob-drift 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes blob-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6%, -4%, 0) scale(1.08); }
+  100% { transform: translate3d(-5%, 5%, 0) scale(0.96); }
+}
+.fx-galaxy {
+  background:
+    conic-gradient(from 0deg,
+      transparent 0deg, rgba(139,116,245,0.28) 40deg, transparent 90deg,
+      transparent 130deg, rgba(94,177,255,0.24) 175deg, transparent 220deg,
+      transparent 260deg, rgba(245,185,66,0.22) 300deg, transparent 360deg);
+  filter: blur(40px);
+  animation: orbit 140s linear infinite;
+  mask-image: radial-gradient(circle, black 20%, transparent 68%);
+  -webkit-mask-image: radial-gradient(circle, black 20%, transparent 68%);
+}
+.fx-planet {
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,0.35), transparent 30%),
+    radial-gradient(circle at 60% 60%, #e6cf9a 0%, #b98a4a 45%, #3b2a17 80%, #120c07 100%);
+  box-shadow: inset -40px -30px 80px rgba(0,0,0,0.75), 0 0 80px rgba(245,185,66,0.15);
+  animation: float 14s ease-in-out infinite;
+}
+.fx-ring { transform: rotate(-18deg); animation: float 14s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .fx-blob, .fx-galaxy, .fx-planet, .fx-ring { animation: none; }
+}
+
 /* ------------------------------------------------------------------------
    Utilities
    ------------------------------------------------------------------------ */

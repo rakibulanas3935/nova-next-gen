@@ -21,7 +21,7 @@ const TIPS = [
 export default function SkyTonightPage() {
   return (
     <>
-      <PageHero eyebrow="Sky tonight" title="Your observing guide" description="Everything here is computed on your device from the date — no API, no clouds, always available." />
+      <PageHero fx="meteors" eyebrow="Sky tonight" title="Your observing guide" description="Everything here is computed on your device from the date — no API, no clouds, always available." />
 
       <Section className="!pt-0">
         <SkyTonight />
