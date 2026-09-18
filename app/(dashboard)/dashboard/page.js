@@ -1,155 +1,78 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import {
-  Home, Calendar, BookOpen, FolderOpen, Image,
-  FileText, ShoppingBag, Users, Eye, TrendingUp
-} from "lucide-react";
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-  PieChart,
-  Pie,
-  Cell,
-  Legend,
-} from "recharts";
-import CommonLoader from "@/app/components/common/CommonLoader";
-import { useUserContext } from "@/app/context/userContext";
+import Link from "next/link";
+import { Users, FolderKanban, Camera, ArrowRight } from "lucide-react";
+import { apiGet } from "@/lib/api";
+import { timeAgo } from "@/lib/format";
+import { Card } from "@/components/ui/primitives";
+import { PageHeader, StatCard } from "@/components/dashboard/ui";
+import GrowthChart from "@/components/dashboard/GrowthChart";
 
-const COLORS = ["#6366f1", "#14b8a6"];
+export default async function DashboardHome() {
+  const res = await apiGet("/dashboard", { auth: true });
+  const d = res?.data;
+  const t = d?.totals || {};
 
-const Dashboard = () => {
-  const [dashboardData, setDashboardData] = useState(null);
-  const {userLoading}=useUserContext()
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  const fetchDashboardData = async () => {
-    try {
-      const res = await axios.get("https://deep-sky-server.onrender.com/api/v1/dashboard");
-      setDashboardData(res.data.data);
-    } catch (err) {
-      setError("Failed to load dashboard data");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchDashboardData();
-  }, []);
-
-  const stats = dashboardData
-    ? [
-        {
-          title: "Total Users",
-          value: dashboardData.totalUsers,
-          change: "+12%",
-          icon: Users,
-        },
-        {
-          title: "Active Projects",
-          value: dashboardData.activeProjects,
-          change: "+8%",
-          icon: FolderOpen,
-        },
-        {
-          title: "Total Blogs",
-          value: dashboardData.totalBlogs,
-          change: "+5%",
-          icon: FileText,
-        },
-        {
-          title: "Total Events",
-          value: dashboardData.totalEvents,
-          change: "+15%",
-          icon: Calendar,
-        },
-      ]
-    : [];
-
-  if (loading) {
-    return <CommonLoader/>
-  }
-
-  if (error) {
-    return <div className="p-6 text-red-500">{error}</div>;
-  }
+  const queue = [
+    { label: "Membership requests", count: t.pendingMembers, href: "/dashboard/members?status=pending", Icon: Users },
+    { label: "Projects awaiting review", count: t.pendingProjects, href: "/dashboard/projects?status=pending", Icon: FolderKanban },
+    { label: "Photos awaiting review", count: t.pendingGalleries, href: "/dashboard/gallery?status=pending", Icon: Camera },
+  ].filter((q) => q.count > 0);
 
   return (
-    <main className="p-6">
-      {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {stats.map(({ title, value, change, icon: Icon }) => (
-          <div
-            key={title}
-            className="bg-white/10 rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all"
-          >
-            <div className="flex justify-between items-center mb-4">
-              <div className="p-2 bg-gradient-to-r from-slate-600 to-slate-500 rounded-lg">
-                <Icon className="text-white" size={20} />
-              </div>
-              <span className="text-green-400 text-sm font-medium">{change}</span>
-            </div>
-            <h3 className="text-gray-300 text-sm mb-1">{title}</h3>
-            <p className="text-white text-2xl font-bold">{value}</p>
-          </div>
-        ))}
+    <>
+      <PageHeader title="Overview" description={d ? "Here's what's happening across the society." : "Couldn't load stats — the API may be waking up. Refresh in a moment."} />
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <StatCard label="Approved members" value={t.totalMembers} hint={t.pendingMembers ? `${t.pendingMembers} pending` : "No pending requests"} href="/dashboard/members" />
+        <StatCard label="Live projects" value={t.approvedProjects} hint={t.pendingProjects ? `${t.pendingProjects} to review` : "All reviewed"} tone="sky" href="/dashboard/projects" />
+        <StatCard label="Blog posts" value={t.totalBlogs} tone="nebula" href="/dashboard/blog" />
+        <StatCard label="Upcoming events" value={t.upcomingEvents} hint={`${t.unreadMessages ?? 0} messages this week`} tone="green" href="/dashboard/events" />
       </div>
 
-      {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Bar Chart */}
-        <div className="lg:col-span-2 bg-white/10 rounded-2xl p-6 border border-white/20">
-          <h3 className="text-xl font-semibold mb-6 text-white">User Growth</h3>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={dashboardData.barData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
-                <XAxis dataKey="name" stroke="#fff" />
-                <YAxis stroke="#fff" />
-                <Tooltip />
-                <Bar dataKey="users" fill="#38bdf8" radius={[8, 8, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
+      <div className="mt-8 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+        <Card className="p-5">
+          <p className="eyebrow mb-4">Member growth · last 6 months</p>
+          <GrowthChart data={d?.memberGrowth || []} />
+        </Card>
 
-        {/* Pie Chart */}
-        <div className="bg-white/10 rounded-2xl p-6 border border-white/20">
-          <h3 className="text-xl font-semibold mb-6 text-white">User Status</h3>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={dashboardData.pieData}
-                  dataKey="value"
-                  nameKey="name"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={80}
-                  label
-                >
-                  {dashboardData.pieData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                    />
-                  ))}
-                </Pie>
-                <Legend />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
+        <div className="space-y-6">
+          {queue.length > 0 && (
+            <Card className="border-star-500/30 p-5">
+              <p className="eyebrow mb-3">Needs your attention</p>
+              <ul className="divide-y divide-line">
+                {queue.map(({ label, count, href, Icon }) => (
+                  <li key={href}>
+                    <Link href={href} className="flex items-center gap-3 py-3 text-sm hover:text-star-300">
+                      <Icon className="h-4 w-4 text-star-400" />
+                      <span className="flex-1">{label}</span>
+                      <span className="rounded-full bg-star-500/20 px-2 text-xs font-semibold text-star-300">{count}</span>
+                      <ArrowRight className="h-4 w-4 text-fg-subtle" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          )}
+
+          <Card className="p-5">
+            <p className="eyebrow mb-3">Recent activity</p>
+            {d?.recentActivity?.length ? (
+              <ul className="space-y-3 text-sm">
+                {d.recentActivity.map((a, i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sky-400" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-fg">{a.action}{a.title ? <span className="text-fg-muted"> — {a.title}</span> : a.who ? <span className="text-fg-muted"> — {a.who}</span> : null}</p>
+                      <p className="text-xs text-fg-subtle">{timeAgo(a.time)}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-sm text-fg-muted">No activity yet.</p>
+            )}
+          </Card>
         </div>
       </div>
-    </main>
+    </>
   );
-};
-
-export default Dashboard;
+}

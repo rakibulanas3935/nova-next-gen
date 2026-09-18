@@ -1,26 +1,472 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ------------------------------------------------------------------------
+   Design tokens — one dark "deep sky" theme. Gold = stars, blue = sky.
+   ------------------------------------------------------------------------ */
+@theme {
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-grotesk), var(--font-geist), sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-space-950: #05010e;
+  --color-space-900: #0a041f;
+  --color-space-850: #0a0f1c;
+  --color-space-800: #111634;
+  --color-space-700: #1b2148;
+  --color-space-600: #2a2f5e;
+  --color-space-500: #3b4180;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-star-300: #d8b4fe;
+  --color-star-400: #c084fc;
+  --color-star-500: #a855f7;
+  --color-star-600: #9333ea;
+
+  --color-sky-300: #93c5fd;
+  --color-sky-400: #60a5fa;
+  --color-sky-500: #3b82f6;
+  --color-sky-600: #2563eb;
+
+  --color-nebula-400: #818cf8;
+  --color-nebula-500: #6366f1;
+  --color-nebula-600: #4f46e5;
+
+  --color-fg: #e9eef8;
+  --color-fg-muted: #98a4bd;
+  --color-fg-subtle: #6b7891;
+  --color-line: rgba(148, 163, 184, 0.14);
+  --color-line-strong: rgba(148, 163, 184, 0.28);
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.4rem;
+
+  --shadow-glow: 0 0 0 1px rgba(168, 85, 247, 0.25), 0 20px 60px -20px rgba(168, 85, 247, 0.35);
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 20px 50px -30px rgba(0, 0, 0, 0.8);
+
+  --animate-twinkle: twinkle 6s ease-in-out infinite;
+  --animate-drift: drift 120s linear infinite;
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
+  @keyframes drift {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-600px, -300px, 0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Solar-system decoration */
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
+@keyframes comet {
+  0% { transform: rotate(0deg) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  50% { opacity: 1; }
+  60% { opacity: 0; }
+  100% { transform: rotate(360deg) scale(1); opacity: 0; }
+}
+
+/* ------------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------------ */
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-space-950);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(168, 85, 247, 0.35);
+  color: #fff;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Static, GPU-cheap star field. Three tiled layers of radial-gradient dots,
+   the front layer twinkles. No JS, no hydration mismatch. */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(59, 130, 246, 0.10), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(147, 51, 234, 0.10), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 10% 90%, rgba(168, 85, 247, 0.06), transparent 60%),
+    var(--color-space-950);
+}
+.starfield::before,
+.starfield::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-repeat: repeat;
+}
+.starfield::before {
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1px 1px at 80px 120px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 160px 60px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 230px 190px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 300px 90px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(2px 2px at 350px 250px, rgba(168,85,247,0.8), transparent),
+    radial-gradient(1px 1px at 410px 40px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 470px 160px, rgba(147,197,253,0.8), transparent),
+    radial-gradient(1px 1px at 520px 290px, rgba(255,255,255,0.5), transparent);
+  background-size: 560px 320px;
+  opacity: 0.8;
+  animation: var(--animate-drift);
+}
+.starfield::after {
+  background-image:
+    radial-gradient(1.5px 1.5px at 60px 80px, rgba(255,255,255,0.9), transparent),
+    radial-gradient(2px 2px at 220px 200px, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1.5px 1.5px at 380px 40px, rgba(216,180,254,0.9), transparent),
+    radial-gradient(2px 2px at 640px 300px, rgba(147,197,253,0.9), transparent),
+    radial-gradient(1.5px 1.5px at 760px 120px, rgba(255,255,255,0.8), transparent);
+  background-size: 900px 420px;
+  animation: var(--animate-twinkle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .starfield::before, .starfield::after { animation: none; }
+  [style*="orbit"], [style*="comet"] { animation: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* Thin, unobtrusive scrollbars everywhere */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.28) transparent;
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(168,85,247,0.55), rgba(59,130,246,0.45));
+  border-radius: 999px;
+  border: 2px solid var(--color-space-950);
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(168,85,247,0.8); }
+::-webkit-scrollbar-corner { background: transparent; }
+
+/* Scroll-driven reveal (progressive enhancement: no-op where unsupported) */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-in linear both;
+    animation-timeline: view();
+    animation-range: entry calc(0% + var(--reveal-shift, 0%)) entry calc(35% + var(--reveal-shift, 0%));
+  }
+  @keyframes reveal-in {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: none; }
+  }
+}
+
+/* Global nebula: three slow, blurred colour clouds behind every page */
+.nebula-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.nebula-bg span {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(110px);
+  opacity: 0.8;
+  will-change: transform;
+  animation: nebula-drift 48s ease-in-out infinite alternate;
+}
+.nebula-bg .n1 { width: 55vw; height: 55vw; left: -15vw; top: -10vh; background: rgba(147,51,234,0.45); }
+.nebula-bg .n2 { width: 50vw; height: 50vw; right: -15vw; top: 20vh; background: rgba(59,130,246,0.35); animation-delay: -16s; animation-duration: 60s; }
+.nebula-bg .n3 { width: 45vw; height: 45vw; left: 25vw; bottom: -20vh; background: rgba(168,85,247,0.22); animation-delay: -30s; animation-duration: 72s; }
+.nebula-bg .n4 { width: 40vw; height: 40vw; right: 5vw; bottom: 5vh; background: rgba(79,70,229,0.3); animation-delay: -44s; animation-duration: 84s; }
+/* faint slowly-rotating galaxy behind everything */
+.nebula-bg .galaxy {
+  position: absolute; left: 50%; top: 30%;
+  width: 140vw; height: 140vw; max-width: 1800px; max-height: 1800px;
+  margin-left: -70vw; margin-top: -70vw;
+  border-radius: 9999px; filter: blur(60px); opacity: 0.35;
+  background: conic-gradient(from 0deg,
+    transparent 0deg, rgba(147,51,234,0.35) 40deg, transparent 90deg,
+    transparent 130deg, rgba(59,130,246,0.3) 175deg, transparent 220deg,
+    transparent 260deg, rgba(79,70,229,0.3) 300deg, transparent 360deg);
+  mask-image: radial-gradient(circle, black 15%, transparent 60%);
+  -webkit-mask-image: radial-gradient(circle, black 15%, transparent 60%);
+  animation: orbit 240s linear infinite;
+}
+@media (max-width: 1024px) { .nebula-bg .galaxy { display: none; } }
+
+/* every content section gets its own soft nebula, alternating sides */
+.section-space::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(40% 55% at 0% 40%, rgba(147,51,234,0.16), transparent 70%);
+}
+.section-space:nth-of-type(even)::before {
+  background: radial-gradient(40% 55% at 100% 50%, rgba(59,130,246,0.14), transparent 70%);
+}
+.section-space > .container-x { position: relative; z-index: 1; }
+@keyframes nebula-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(8vw, -6vh, 0) scale(1.12); }
+  100% { transform: translate3d(-6vw, 8vh, 0) scale(0.94); }
+}
+
+/* Launch splash */
+.splash {
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  /* CSS-only safety net: even if JS is slow to hydrate, the splash lifts away. */
+  animation: splash-auto 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2.2s forwards;
+}
+@keyframes splash-auto { to { opacity: 0; transform: translateY(-6%) scale(1.04); visibility: hidden; pointer-events: none; } }
+.splash-leave { opacity: 0; transform: translateY(-6%) scale(1.04); pointer-events: none; }
+.splash-stars {
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 70% 20%, #d8b4fe, transparent),
+    radial-gradient(1px 1px at 40% 70%, #fff, transparent),
+    radial-gradient(1px 1px at 85% 60%, #93c5fd, transparent),
+    radial-gradient(1.5px 1.5px at 10% 85%, #fff, transparent),
+    radial-gradient(1px 1px at 55% 45%, #fff, transparent);
+  background-size: 100% 100%;
+  animation: splash-stars 1.6s linear infinite;
+  opacity: 0.7;
+}
+@keyframes splash-stars { from { background-position: 0 -100vh; } to { background-position: 0 100vh; } }
+.splash-rocket { animation: rocket-hover 1.2s ease-in-out infinite; filter: drop-shadow(0 0 24px rgba(168,85,247,0.35)); }
+@keyframes rocket-hover {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+.splash-flame { animation: flame 0.12s ease-in-out infinite alternate; }
+@keyframes flame { from { transform: scaleY(0.85) scaleX(0.95); } to { transform: scaleY(1.15) scaleX(1.05); } }
+.splash-bar { animation: splash-bar 2s cubic-bezier(0.22, 1, 0.36, 1) forwards; transform: scaleX(0); }
+@keyframes splash-bar { to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .nebula-bg span, .nebula-bg .galaxy, .splash-stars, .splash-rocket, .splash-flame { animation: none; }
+}
+
+/* Fade a background layer out at its bottom edge instead of painting a
+   solid colour over it — avoids hard seams against the page background. */
+.fx-fade-mask {
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, black 12%, black 62%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, black 12%, black 62%, transparent 100%);
+}
+
+/* Video backdrop: slow Ken Burns drift */
+.fx-kenburns { animation: kenburns 28s ease-in-out infinite alternate; transform-origin: 50% 40%; }
+@keyframes kenburns {
+  from { transform: scale(1) translate3d(0, 0, 0); }
+  to { transform: scale(1.12) translate3d(-1.5%, 1.5%, 0); }
+}
+
+/* Shimmer sweep over gradient headings */
+.text-shimmer {
+  background: linear-gradient(100deg, #c084fc 0%, #60a5fa 35%, #e9d5ff 50%, #60a5fa 65%, #c084fc 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer-text 7s ease-in-out infinite;
+}
+@keyframes shimmer-text { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
+
+/* Tilt cards: cursor-tracked highlight */
+.tilt-card:hover .tilt-glow { opacity: 1; }
+.tilt-glow { background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.10), transparent 60%); }
+
+/* Aurora divider line between sections */
+.aurora-line {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(148,163,184,0.25), transparent);
+  overflow: visible;
+}
+.aurora-line::after {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0;
+  height: 3px; width: 18%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, #a855f7, #3b82f6, transparent);
+  filter: blur(1px);
+  animation: aurora-sweep 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes aurora-sweep { 0% { left: -20%; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+
+/* Floating asteroids/dust in feature sections */
+.dust { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.dust i {
+  position: absolute; display: block; border-radius: 9999px;
+  background: radial-gradient(circle at 35% 35%, #fff, #98a4bd 60%, #34446a);
+  opacity: 0.55;
+  animation: dust-float linear infinite;
+}
+@keyframes dust-float {
+  from { transform: translate3d(0, 0, 0) rotate(0deg); }
+  to { transform: translate3d(-40px, -120vh, 0) rotate(360deg); }
+}
+
+/* Page enter */
+.page-enter { animation: page-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes page-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-kenburns, .text-shimmer, .aurora-line::after, .dust i, .page-enter { animation: none; }
+}
+
+/* Page background effects (components/fx) */
+.fx-blob {
+  filter: blur(90px);
+  opacity: 0.9;
+  animation: blob-drift 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes blob-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6%, -4%, 0) scale(1.08); }
+  100% { transform: translate3d(-5%, 5%, 0) scale(0.96); }
+}
+.fx-galaxy {
+  background:
+    conic-gradient(from 0deg,
+      transparent 0deg, rgba(147,51,234,0.28) 40deg, transparent 90deg,
+      transparent 130deg, rgba(59,130,246,0.24) 175deg, transparent 220deg,
+      transparent 260deg, rgba(168,85,247,0.22) 300deg, transparent 360deg);
+  filter: blur(40px);
+  animation: orbit 140s linear infinite;
+  mask-image: radial-gradient(circle, black 20%, transparent 68%);
+  -webkit-mask-image: radial-gradient(circle, black 20%, transparent 68%);
+}
+.fx-planet {
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,0.35), transparent 30%),
+    radial-gradient(circle at 60% 60%, #e6cf9a 0%, #b98a4a 45%, #3b2a17 80%, #120c07 100%);
+  box-shadow: inset -40px -30px 80px rgba(0,0,0,0.75), 0 0 80px rgba(168,85,247,0.15);
+  animation: float 14s ease-in-out infinite;
+}
+.fx-ring { transform: rotate(-18deg); animation: float 14s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .fx-blob, .fx-galaxy, .fx-planet, .fx-ring { animation: none; }
+}
+
+/* ------------------------------------------------------------------------
+   Utilities
+   ------------------------------------------------------------------------ */
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 76rem;
+  padding-inline: 1rem;
+  @media (min-width: 640px) { padding-inline: 1.5rem; }
+  @media (min-width: 1024px) { padding-inline: 2rem; }
+}
+
+@utility glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+  border: 1px solid var(--color-line);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-card);
+}
+
+@utility text-gradient {
+  background: linear-gradient(92deg, #c084fc 0%, #60a5fa 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-star-500);
+}
+
+@utility ring-focus {
+  outline: none;
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-space-950), 0 0 0 4px var(--color-sky-500);
+  }
+}
+
+/* Rich text from the editor */
+.prose-sky {
+  --tw-prose-body: var(--color-fg);
+  --tw-prose-headings: #fff;
+  --tw-prose-links: var(--color-sky-400);
+  --tw-prose-bold: #fff;
+  --tw-prose-quotes: var(--color-fg-muted);
+  --tw-prose-quote-borders: var(--color-star-500);
+  --tw-prose-code: var(--color-star-300);
+  --tw-prose-pre-bg: var(--color-space-850);
+  --tw-prose-hr: var(--color-line-strong);
+  --tw-prose-bullets: var(--color-star-500);
+  --tw-prose-counters: var(--color-star-500);
+}
+.prose-sky img { border-radius: 1rem; border: 1px solid var(--color-line); }
+
+/* Tiptap editor surface */
+.tiptap {
+  min-height: 18rem;
+  outline: none;
+}
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--color-fg-subtle);
+  float: left;
+  pointer-events: none;
+  height: 0;
+}
+
+/* Skeleton shimmer */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.05);
+  border-radius: 0.75rem;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+  animation: shimmer 1.6s infinite;
+}
+@keyframes shimmer { to { transform: translateX(100%); } }
+

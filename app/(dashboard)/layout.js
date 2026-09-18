@@ -1,55 +1,20 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
-import { ToastContainer } from "react-toastify";
-import { UserProvider } from "../context/userContext";
-import DashboardSidebar from "./component/DashboardSideBar";
-import { EventProvider } from "../context/eventContext";
-import { BlogProvider } from "../context/blogContext";
-import { ProjectProvider } from "../context/projectContext";
-import { GalleryProvider } from "../context/galleryContext";
-import { LearnProvider } from "../context/learnContext";
+import { requireAdmin } from "@/lib/auth";
+import { apiGet } from "@/lib/api";
+import Sidebar from "@/components/dashboard/Sidebar";
+import PageFx from "@/components/fx/PageFx";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+export const metadata = { title: { default: "Dashboard", template: "%s · Admin" }, robots: { index: false, follow: false } };
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata = {
-  title: "Dashboard | Deep Sky Society",
-  description: "Dashboard area of Deep Sky Society",
-};
-
-export default function DashboardLayout({ children }) {
+export default async function DashboardLayout({ children }) {
+  const user = await requireAdmin();
+  const stats = await apiGet("/dashboard", { auth: true });
   return (
-    <html lang="en">
-      <UserProvider>
-        <EventProvider>
-          <BlogProvider>
-            <ProjectProvider>
-              <GalleryProvider>
-                <LearnProvider>
-                <body
-                  className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-                >
-                  <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden text-white">
-                    <DashboardSidebar />
-                    <div className="lg:ml-64">
-                      {children}
-                    </div>
-                  </div>
-                  <ToastContainer />
-                </body>
-                </LearnProvider>
-              </GalleryProvider>
-            </ProjectProvider>
-          </BlogProvider>
-        </EventProvider>
-      </UserProvider>
-    </html>
+    <div className="min-h-dvh">
+      <Sidebar user={user} counts={stats?.data?.totals || {}} />
+      <main className="relative isolate px-4 py-6 sm:px-6 lg:ml-60 lg:px-10 lg:py-10">
+        <PageFx variant="constellation" className="opacity-50" />
+        {children}
+      </main>
+    </div>
   );
 }
