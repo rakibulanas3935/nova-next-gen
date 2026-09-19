@@ -31,7 +31,7 @@ export default async function ProjectDetailPage({ params }) {
   const author = project.createdBy;
 
   return (
-    <article className="pt-28 sm:pt-32">
+    <article className="pt-24 sm:pt-32">
       <Container>
         <Link href="/projects" className="inline-flex items-center gap-1.5 text-sm text-fg-muted hover:text-white">
           <ArrowLeft className="h-4 w-4" /> All projects
@@ -43,7 +43,7 @@ export default async function ProjectDetailPage({ params }) {
               {project.isFeatured && <Badge tone="gold">★ Featured</Badge>}
               {project.tags?.map((t) => <Badge key={t} tone="sky">#{t}</Badge>)}
             </div>
-            <h1 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">{project.title}</h1>
+            <h1 className="mt-4 text-[1.9rem] font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">{project.title}</h1>
             <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-2xl border border-line">
               <SmartImage src={project.projectImage} alt={project.title} priority sizes="(max-width: 1024px) 100vw, 60vw" />
             </div>

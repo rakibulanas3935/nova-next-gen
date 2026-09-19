@@ -10,9 +10,11 @@ import { MouseParallax } from "@/components/fx/interactive";
 
 export default function Hero({ nextEvent }) {
   return (
-    <section className="relative isolate flex min-h-[100dvh] items-center overflow-hidden pt-24 lg:max-h-[1100px] lg:min-h-[min(100dvh,1100px)]">
+    <section className="relative isolate flex min-h-[min(100svh,56rem)] items-center overflow-hidden pb-16 pt-28 sm:pt-32 lg:min-h-[min(100dvh,1100px)]">
       {/* Layer 0: looping space video (lazy) */}
       <VideoBackdrop name="home" className="-z-20" opacity={0.6} />
+      {/* phones: darker scrim so the headline stays readable over the bright sun */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-space-950/45 lg:hidden" aria-hidden />
       {/* Layer 1: twinkling stars + occasional shooting star */}
       <TwinkleField className="fx-fade-mask absolute inset-0 -z-10 h-full w-full" density={1.1} shooting />
       {/* Layer 2: vignette + nebula colour */}
@@ -37,7 +39,7 @@ export default function Hero({ nextEvent }) {
           </HeroReveal>
 
           <HeroReveal delay={0.15}>
-            <h1 className="text-5xl font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl">
+            <h1 className="text-[2.6rem] font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
               <span className="text-shimmer">Explore the Cosmos</span>
             </h1>
           </HeroReveal>
@@ -56,7 +58,7 @@ export default function Hero({ nextEvent }) {
           </HeroReveal>
 
           <HeroReveal delay={0.6}>
-            <dl className="mt-14 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-4">
+            <dl className="mt-10 grid max-w-xl grid-cols-2 gap-3 sm:mt-14 sm:grid-cols-4">
               {STATS.map((s) => (
                 <div key={s.label} className="rounded-xl border border-line bg-space-950/40 px-4 py-3 backdrop-blur">
                   <dt className="text-[11px] text-fg-subtle">{s.label}</dt>
@@ -76,7 +78,7 @@ export default function Hero({ nextEvent }) {
         </HeroReveal>
       </MouseParallax>
 
-      <div className="pointer-events-none absolute bottom-6 left-1/2 hidden -translate-x-1/2 animate-float text-fg-subtle sm:block" aria-hidden>
+      <div className="pointer-events-none absolute bottom-5 left-1/2 hidden -translate-x-1/2 animate-float text-fg-subtle lg:block" aria-hidden>
         <div className="h-9 w-5 rounded-full border border-line-strong p-1">
           <div className="h-2 w-full rounded-full bg-star-500/70" />
         </div>

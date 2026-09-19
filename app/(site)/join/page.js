@@ -18,13 +18,13 @@ const STEPS = [
 
 export default function JoinPage() {
   return (
-    <div className="relative isolate pt-28 pb-20 sm:pt-36">
+    <div className="relative isolate pt-24 pb-20 sm:pt-36">
       <div className="absolute inset-x-0 top-0 -z-10 h-[40rem]"><VideoBackdrop name="join" opacity={0.45} /></div>
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <div>
             <p className="eyebrow mb-4">Join</p>
-            <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl">Orbit With Us</h1>
+            <h1 className="text-[2.4rem] font-semibold leading-tight text-white sm:text-5xl">Orbit With Us</h1>
             <p className="mt-5 text-lg text-fg-muted">Step into our cosmic circle and connect with fellow dreamers who are charting new paths among the stars.</p>
 
             <h2 className="mt-10 text-2xl font-semibold text-white">Who Can Join?</h2>

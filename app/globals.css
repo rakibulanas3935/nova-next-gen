@@ -87,6 +87,17 @@ html {
   scroll-behavior: smooth;
 }
 
+html.nav-open, html.nav-open body { overflow: hidden; }
+
+/* Mobile: lighter effects so scrolling stays 60fps */
+@media (max-width: 767px) {
+  .nebula-bg span { filter: blur(70px); animation: none; }
+  .fx-blob { filter: blur(60px); animation: none; }
+  .fx-kenburns { animation-duration: 40s; }
+  .dust i { display: none; }
+  .starfield::before { animation: none; }
+}
+
 body {
   background-color: var(--color-space-950);
   color: var(--color-fg);
@@ -94,7 +105,13 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   min-height: 100dvh;
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+@supports not (overflow: clip) { body { overflow-x: hidden; } }
+
+/* Comfortable tap targets + no tap flash on touch devices */
+@media (pointer: coarse) {
+  a, button { -webkit-tap-highlight-color: transparent; }
 }
 
 ::selection {
@@ -311,14 +328,14 @@ h1, h2, h3, h4 {
 /* Aurora divider line between sections */
 .aurora-line {
   position: relative;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(148,163,184,0.25), transparent);
-  overflow: visible;
+  height: 5px;
+  overflow: hidden;
+  background: linear-gradient(90deg, transparent, rgba(148,163,184,0.25), transparent) center / 100% 1px no-repeat;
 }
 .aurora-line::after {
   content: "";
   position: absolute;
-  top: -1px; left: 0;
+  top: 1px; left: 0;
   height: 3px; width: 18%;
   border-radius: 999px;
   background: linear-gradient(90deg, transparent, #a855f7, #3b82f6, transparent);

@@ -53,7 +53,7 @@ export function SectionHeader({ eyebrow, title, description, href, linkLabel = "
     <div className={clsx("mb-8 flex flex-col gap-4 sm:mb-10", align === "center" ? "items-center text-center" : "sm:flex-row sm:items-end sm:justify-between", className)}>
       <div className="max-w-2xl">
         {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
-        <h2 className="text-3xl font-semibold text-white sm:text-4xl">{title}</h2>
+        <h2 className="text-[1.75rem] font-semibold leading-tight text-white sm:text-4xl">{title}</h2>
         {description && <p className="mt-3 text-fg-muted leading-relaxed">{description}</p>}
       </div>
       {href && (
@@ -78,14 +78,14 @@ export function Section({ className, children, reveal = true, space = true, ...p
 /** Top-of-page hero used by every inner page. */
 export function PageHero({ eyebrow, title, description, children, className, fx = "twinkle", video }) {
   return (
-    <div className={clsx("relative isolate pt-32 pb-14 sm:pt-40 sm:pb-20", video && "sm:pb-28", className)}>
+    <div className={clsx("relative isolate pt-28 pb-12 sm:pt-40 sm:pb-20", video && "sm:pb-28", className)}>
       {video && <VideoBackdrop name={video} className="-z-20" opacity={0.5} />}
       <PageFx variant={fx} />
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[32rem] bg-[radial-gradient(60%_50%_at_50%_0%,rgba(59,130,246,0.10),transparent_70%)]" />
       <Container className="relative">
         <div className="max-w-3xl animate-fade-up">
           {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
-          <h1 className="text-4xl font-semibold leading-[1.05] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.6)] sm:text-5xl lg:text-6xl">{title}</h1>
+          <h1 className="text-[2.4rem] font-semibold leading-[1.08] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.6)] sm:text-5xl lg:text-6xl">{title}</h1>
           {description && <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">{description}</p>}
           {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
         </div>

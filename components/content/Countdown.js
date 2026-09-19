@@ -28,10 +28,10 @@ export default function Countdown({ to, className = "" }) {
   }
 
   return (
-    <div className={`flex gap-3 ${className}`} role="timer" aria-live="off">
+    <div className={`flex gap-2 sm:gap-3 ${className}`} role="timer" aria-live="off">
       {parts(target - now).map(([label, value]) => (
-        <div key={label} className="glass min-w-[4.25rem] rounded-xl px-3 py-2 text-center">
-          <div className="font-display text-2xl font-semibold tabular-nums text-white">{String(value).padStart(2, "0")}</div>
+        <div key={label} className="glass min-w-0 flex-1 rounded-xl px-2 py-2 text-center sm:min-w-[4.25rem] sm:flex-none sm:px-3">
+          <div className="font-display text-xl font-semibold tabular-nums text-white sm:text-2xl">{String(value).padStart(2, "0")}</div>
           <div className="text-[10px] uppercase tracking-widest text-fg-subtle">{label}</div>
         </div>
       ))}

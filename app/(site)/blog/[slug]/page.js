@@ -47,7 +47,7 @@ export default async function BlogPostPage({ params }) {
   };
 
   return (
-    <article className="pt-28 sm:pt-32">
+    <article className="pt-24 sm:pt-32">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Container className="max-w-3xl">
         <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-fg-muted hover:text-white">
@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }) {
               ))}
             </div>
           )}
-          <h1 className="text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">{blog.title}</h1>
+          <h1 className="text-[1.9rem] font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">{blog.title}</h1>
           <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-fg-muted">
             <span className="inline-flex items-center gap-2">
               <span className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-star-500/20 text-xs font-semibold text-star-300">

@@ -43,12 +43,12 @@ export function EventCard({ event, compact = false }) {
 
   return (
     <Card as="article" hover className="group flex overflow-hidden">
-      <div className="flex w-20 shrink-0 flex-col items-center justify-center border-r border-line bg-white/[0.03] py-5 text-center">
+      <div className="flex w-16 shrink-0 flex-col items-center justify-center border-r border-line bg-white/[0.03] py-4 text-center sm:w-20 sm:py-5">
         <span className="font-mono text-[11px] uppercase tracking-widest text-star-400">{date.toLocaleString("en-US", { month: "short" })}</span>
         <span className="font-display text-3xl font-semibold text-white">{date.getDate()}</span>
         <span className="text-[11px] text-fg-subtle">{date.getFullYear()}</span>
       </div>
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
         <div className="flex flex-wrap items-center gap-2">
           <Badge tone={past ? "muted" : "gold"}>{type.emoji} {type.label}</Badge>
           {event.membersOnly && <Badge tone="nebula"><Lock className="h-3 w-3" /> Members</Badge>}

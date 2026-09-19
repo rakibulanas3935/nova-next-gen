@@ -45,7 +45,7 @@ export default async function EventDetailPage({ params }) {
   const others = withSeedEvents(more?.data?.events || [], { scope: "upcoming" }).filter((e) => e._id !== event._id).slice(0, 1);
 
   return (
-    <article className="pt-28 sm:pt-32">
+    <article className="pt-24 sm:pt-32">
       <Container>
         <Link href="/events" className="inline-flex items-center gap-1.5 text-sm text-fg-muted hover:text-white">
           <ArrowLeft className="h-4 w-4" /> All events
@@ -58,7 +58,7 @@ export default async function EventDetailPage({ params }) {
               {event.membersOnly && <Badge tone="nebula"><Lock className="h-3 w-3" /> Members only</Badge>}
               {past && <Badge tone="muted">Past event</Badge>}
             </div>
-            <h1 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">{event.title}</h1>
+            <h1 className="mt-4 text-[1.9rem] font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">{event.title}</h1>
             <p className="mt-4 inline-flex items-center gap-2 text-fg-muted"><Clock3 className="h-4 w-4 text-star-400" /> {formatDateTime(event.eventTime)}{event.endTime ? ` – ${formatTime(event.endTime)}` : ""}</p>
 
             {event.poster && (

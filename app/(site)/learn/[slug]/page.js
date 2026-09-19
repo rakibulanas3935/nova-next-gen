@@ -36,7 +36,7 @@ export default async function LearnDetailPage({ params }) {
   const nextTrack = idx >= 0 ? LEARN_TRACKS[idx + 1] : null;
 
   return (
-    <article className="pt-28 sm:pt-32">
+    <article className="pt-24 sm:pt-32">
       <Container className="max-w-3xl">
         <Link href="/learn" className="inline-flex items-center gap-1.5 text-sm text-fg-muted hover:text-white">
           <ArrowLeft className="h-4 w-4" /> Learn
@@ -46,7 +46,7 @@ export default async function LearnDetailPage({ params }) {
           <Badge tone={LEVEL_TONE[item.level] || "muted"}>{item.level || "lesson"}</Badge>
           {lesson?.category && <span className="text-xs text-fg-subtle">{lesson.category}</span>}
         </div>
-        <h1 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">{item.title}</h1>
+        <h1 className="mt-4 text-[1.9rem] font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">{item.title}</h1>
         {item.summary && <p className="mt-4 text-lg text-fg-muted">{item.summary}</p>}
 
         {track?.body && (
