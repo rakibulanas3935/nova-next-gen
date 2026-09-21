@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEventContext } from "@/app/context/eventContext";
 import Link from "next/link";
 import { Loader } from "lucide-react";
+import { withSeedEvents } from "@/app/lib/seed-events";
 
 export default function Hero() {
   const [timeLeft, setTimeLeft] = useState({
@@ -14,9 +15,11 @@ export default function Hero() {
     seconds: 0,
   });
   const { upcomingEvent, upComingEventEventLoading } = useEventContext();
+  // Next upcoming event: API first, otherwise the built-in calendar (app/lib/seed-events.js)
+  const nextEvent = withSeedEvents(upcomingEvent?.data?.events || [], { scope: "upcoming" })[0];
 
   useEffect(() => {
-    const eventTime = upcomingEvent?.data?.events[0]?.eventTime;
+    const eventTime = nextEvent?.eventTime;
     if (!eventTime) return;
 
     const targetDate = new Date(eventTime).getTime();
@@ -40,7 +43,7 @@ export default function Hero() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [upcomingEvent?.data?.events[0]?.eventTime]);
+  }, [nextEvent?.eventTime]);
 
   return (
     <div className="relative min-h-screen overflow-hidden text-white">
@@ -132,7 +135,7 @@ export default function Hero() {
         </p>
 
         {/* Countdown box */}
-        <Link href={`/events/${upcomingEvent?.data?.events[0]?._id}`}>
+        <Link href={`/events/${nextEvent?.slug || nextEvent?._id || ""}`}>
           <div className="bg-[#0b1230]/80 border border-purple-500 rounded-xl p-6 w-[350px] h-[180px] shadow-lg shadow-purple-500/30 backdrop-blur-md flex items-center justify-center">
             {upComingEventEventLoading ? (
               <div className="flex flex-col items-center gap-3 text-slate-300">
@@ -142,7 +145,7 @@ export default function Hero() {
             ) : (
               <div className="flex flex-col items-center justify-center w-full">
                 <h2 className="text-xl font-semibold mb-4 text-center">
-                  {upcomingEvent?.data?.events[0]?.title}
+                  {nextEvent?.title || "Next event"}
                 </h2>
                 <div className="flex justify-center gap-4 text-center">
                   {Object.entries(timeLeft).map(([label, value]) => (
