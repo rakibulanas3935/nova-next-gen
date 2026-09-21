@@ -10,7 +10,8 @@ const navLinks = [
   { href: '/about', label: 'About' },
   { href: '/events', label: 'Events' },
   { href: '/projects', label: 'Projects' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/learn', label: 'Learn' },
+  { href: '/sky-tonight', label: 'Sky Tonight' },
   { href: '/contact', label: 'Contact' },
 ];
 

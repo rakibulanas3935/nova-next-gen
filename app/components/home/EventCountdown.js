@@ -7,10 +7,10 @@ const CountdownUnit = ({ value, label }) => (
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="flex flex-col items-center px-4"
+        className="unit flex flex-col items-center px-4"
     >
         <motion.div 
-            className="w-24 h-24 relative bg-gradient-to-br from-purple-600/30 to-blue-600/30 backdrop-blur-xl rounded-2xl flex items-center justify-center mb-2 border border-white/10"
+            className="unit-box w-24 h-24 relative bg-gradient-to-br from-purple-600/30 to-blue-600/30 backdrop-blur-xl rounded-2xl flex items-center justify-center mb-2 border border-white/10"
             whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(88, 28, 235, 0.3)" }}
             transition={{ duration: 0.2 }}
         >
@@ -31,7 +31,7 @@ const CountdownUnit = ({ value, label }) => (
     </motion.div>
 )
 
-const EventCountdown = ({ eventDate, eventName }) => {
+const EventCountdown = ({ eventDate, eventName, compact = false }) => {
     const [timeLeft, setTimeLeft] = useState({
         days: 0,
         hours: 0,
@@ -64,10 +64,10 @@ const EventCountdown = ({ eventDate, eventName }) => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-black/40 backdrop-blur-xl rounded-3xl p-8 mt-12 border border-white/10"
+            className={compact ? "bg-black/40 backdrop-blur-xl rounded-2xl p-4 border border-white/10 [&_.unit-box]:w-16 [&_.unit-box]:h-16 [&_.unit-box_span]:text-2xl [&_.unit]:px-2" : "bg-black/40 backdrop-blur-xl rounded-3xl p-8 mt-12 border border-white/10"}
         >
             <motion.h3 
-                className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 text-center mb-8"
+                className={compact ? "text-sm font-semibold uppercase tracking-widest text-purple-300 text-center mb-4" : "text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 text-center mb-8"}
                 animate={{
                     backgroundPosition: ["0%", "100%"],
                 }}
@@ -79,7 +79,7 @@ const EventCountdown = ({ eventDate, eventName }) => {
             >
                 {eventName}
             </motion.h3>
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className={compact ? "flex flex-wrap justify-center gap-2" : "flex flex-wrap justify-center gap-6"}>
                 <CountdownUnit value={timeLeft.days} label="Days" />
                 <CountdownUnit value={timeLeft.hours} label="Hours" />
                 <CountdownUnit value={timeLeft.minutes} label="Minutes" />

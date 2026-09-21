@@ -59,12 +59,6 @@ const Dashboard = () => {
           icon: FolderOpen,
         },
         {
-          title: "Total Blogs",
-          value: dashboardData.totalBlogs,
-          change: "+5%",
-          icon: FileText,
-        },
-        {
           title: "Total Events",
           value: dashboardData.totalEvents,
           change: "+15%",

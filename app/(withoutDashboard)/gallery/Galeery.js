@@ -9,6 +9,19 @@ const Gallery = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(null);
+
+  // keyboard: Esc closes, arrows navigate
+  useEffect(() => {
+    if (open === null) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") setOpen(null);
+      if (e.key === "ArrowRight") setOpen((i) => (i + 1) % images.length);
+      if (e.key === "ArrowLeft") setOpen((i) => (i - 1 + images.length) % images.length);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, images.length]);
 
   // Fetch images
   const fetchImages = async (pageNumber = 1) => {
@@ -17,10 +30,12 @@ const Gallery = () => {
       const res = await fetch(`https://deep-sky-server.onrender.com/api/v1/gallery/approved?page=${pageNumber}&limit=12`);
       const data = await res.json();
 
+      // API may return plain URLs or { url, caption, credit } objects
+      const list = (data.data.images || []).map((img) => (typeof img === "string" ? { url: img } : img));
       if (pageNumber === 1) {
-        setImages(data.data.images);
+        setImages(list);
       } else {
-        setImages((prev) => [...prev, ...data.data.images]);
+        setImages((prev) => [...prev, ...list]);
       }
 
       setTotalPages(data.pagination.totalPages);
@@ -92,9 +107,10 @@ const Gallery = () => {
           ) : (
             <>
               <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {images.map((src, index) => (
+                {images.map((img, index) => (
                   <motion.div
                     key={index}
+                    onClick={() => setOpen(index)}
                     whileHover={{ scale: 1.05 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -102,8 +118,8 @@ const Gallery = () => {
                     className="relative cursor-pointer overflow-hidden rounded-xl shadow-md border border-white/10 bg-white/5 backdrop-blur-sm"
                   >
                     <Image
-                      src={src}
-                      alt={`Gallery image ${index + 1}`}
+                      src={img.url}
+                      alt={img.caption || `Gallery image ${index + 1}`}
                       width={400}
                       height={240}
                       className="w-full h-60 object-cover transition-transform duration-300 ease-in-out hover:scale-110"
@@ -128,6 +144,22 @@ const Gallery = () => {
           )}
         </div>
       </motion.section>
+
+      {/* Lightbox */}
+      {open !== null && images[open] && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4" onClick={() => setOpen(null)}>
+          <button className="absolute top-4 right-4 text-white text-3xl leading-none" aria-label="Close">×</button>
+          <button className="absolute left-3 top-1/2 -translate-y-1/2 hidden sm:block text-white text-4xl px-3" onClick={(e) => { e.stopPropagation(); setOpen((open - 1 + images.length) % images.length); }} aria-label="Previous">‹</button>
+          <button className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:block text-white text-4xl px-3" onClick={(e) => { e.stopPropagation(); setOpen((open + 1) % images.length); }} aria-label="Next">›</button>
+          <figure onClick={(e) => e.stopPropagation()} className="max-w-5xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={images[open].url} alt={images[open].caption || ""} className="max-h-[80vh] w-auto rounded-xl object-contain" />
+            <figcaption className="mt-3 text-sm text-gray-300 text-center">
+              {images[open].caption || ""}{images[open].credit ? ` · © ${images[open].credit}` : ""} · {open + 1}/{images.length}
+            </figcaption>
+          </figure>
+        </div>
+      )}
     </div>
   );
 };

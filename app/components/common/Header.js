@@ -88,7 +88,7 @@ const Header = () => {
                                 className="relative lg:h-full"
                             >
                                 <div className="grid grid-cols-2 gap-4 h-full">
-                                    {['Members', 'Events', 'Projects', 'Blogs'].map((label, index) => (
+                                    {['Members', 'Events', 'Projects', 'Photos'].map((label, index) => (
                                         <motion.div
                                             key={label}
                                             whileHover={{ scale: 1.05 }}

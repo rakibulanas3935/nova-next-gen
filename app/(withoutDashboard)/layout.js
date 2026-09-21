@@ -6,7 +6,6 @@ import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 import { UserProvider } from "../context/userContext";
 import { EventProvider } from "../context/eventContext";
-import { BlogProvider } from "../context/blogContext";
 import { GalleryProvider } from "../context/galleryContext";
 import { ProjectProvider } from "../context/projectContext";
 import { LearnProvider } from "../context/learnContext";
@@ -61,7 +60,6 @@ export default function RootLayout({ children }) {
       </head>
       <UserProvider>
         <EventProvider>
-          <BlogProvider>
             <ProjectProvider>
               <GalleryProvider>
                 <LearnProvider>
@@ -76,7 +74,6 @@ export default function RootLayout({ children }) {
                 </LearnProvider>
               </GalleryProvider>
             </ProjectProvider>
-          </BlogProvider>
         </EventProvider>
       </UserProvider>
     </html>

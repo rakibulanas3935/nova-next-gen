@@ -32,7 +32,7 @@ const Navbar = () => {
         { href: '/projects', label: 'Projects' },
         { href: '/learn', label: 'Learn' },
         { href: '/gallery', label: 'Gallery' },
-        { href: '/blog', label: 'Blog' },
+        { href: '/sky-tonight', label: 'Sky Tonight' },
         // { href: '/merchantdise', label: 'Merchandise' },
         { href: '/contact', label: 'Contact' },
     ];

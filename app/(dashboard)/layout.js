@@ -4,7 +4,6 @@ import { ToastContainer } from "react-toastify";
 import { UserProvider } from "../context/userContext";
 import DashboardSidebar from "./component/DashboardSideBar";
 import { EventProvider } from "../context/eventContext";
-import { BlogProvider } from "../context/blogContext";
 import { ProjectProvider } from "../context/projectContext";
 import { GalleryProvider } from "../context/galleryContext";
 import { LearnProvider } from "../context/learnContext";
@@ -29,7 +28,6 @@ export default function DashboardLayout({ children }) {
     <html lang="en">
       <UserProvider>
         <EventProvider>
-          <BlogProvider>
             <ProjectProvider>
               <GalleryProvider>
                 <LearnProvider>
@@ -47,7 +45,6 @@ export default function DashboardLayout({ children }) {
                 </LearnProvider>
               </GalleryProvider>
             </ProjectProvider>
-          </BlogProvider>
         </EventProvider>
       </UserProvider>
     </html>

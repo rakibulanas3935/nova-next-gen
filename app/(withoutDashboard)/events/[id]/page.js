@@ -4,7 +4,10 @@ import { useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import {  Clock3, ArrowLeft } from 'lucide-react';
+import { Clock3, ArrowLeft, MapPin, Video, CalendarPlus } from 'lucide-react';
+import { findSeedEvent } from '@/app/lib/seed-events';
+import { icsHref, isPast } from '@/app/lib/event-utils';
+import EventCountdown from '@/app/components/home/EventCountdown';
 import useAxiosGet from '@/app/utils/useAxiosGet';
 import Link from 'next/link';
 import CommonLoader from '@/app/components/common/CommonLoader';
@@ -20,7 +23,8 @@ export default function EventDetailPage() {
     }
   }, [id]);
 
-  const event = singleEvent?.data?.event;
+  // API event, or one from the built-in calendar (app/lib/seed-events.js)
+  const event = singleEvent?.data?.event || findSeedEvent(id);
 
   if (loading) {
     return (
@@ -111,6 +115,29 @@ export default function EventDetailPage() {
                   })}
                 </div>
 
+                {/* Where */}
+                {(event.location || event.meetLink) && (
+                  <div className="flex items-center gap-3 text-slate-400">
+                    {event.location ? <MapPin className="w-4 h-4 text-purple-400" /> : <Video className="w-4 h-4 text-purple-400" />}
+                    {event.location || 'Online'}
+                    {event.endTime && <span className="text-slate-500">· until {new Date(event.endTime).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}</span>}
+                  </div>
+                )}
+
+                {/* Countdown + calendar */}
+                {!isPast(event.eventTime) && (
+                  <div className="space-y-4">
+                    <EventCountdown eventDate={event.eventTime} eventName="Starts in" compact />
+                    <a
+                      href={icsHref(event)}
+                      download={`${event.slug || 'event'}.ics`}
+                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-300 hover:text-white bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 rounded-lg transition"
+                    >
+                      <CalendarPlus className="w-4 h-4" /> Add to calendar
+                    </a>
+                  </div>
+                )}
+
                 {/* Join Link */}
                 {event.meetLink && (
                   <motion.div
@@ -124,7 +151,7 @@ export default function EventDetailPage() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all duration-300 group"
                     >
-                      🔗 Read More
+                      🔗 Join online
                     </Link>
                   </motion.div>
                 )}

@@ -1,13 +1,14 @@
 "use client"
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
-
-import BlogNews from "./Blog";
 import Hero from "../about/component/Hero";
+import SkyTonightPage from "./SkyTonightPage";
 
 
 
-export default function Blog() {
+
+
+export default function SkyTonight() {
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -27,7 +28,7 @@ export default function Blog() {
             transition={{ duration: 0.8 }}
         >
             <motion.div style={{ y: headerY }}>
-                <Hero title="Cosmic Chronicles" description="Read the latest stories, insights, and discoveries from the world of astronomy and space exploration." path="/deep_sky_blog.mp4" />
+                <Hero title="Sky Tonight" description="What is up there right now — the Moon, meteor showers and the season's best sights." path="/nova_next_gen.mp4" />
             </motion.div>
             <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#05010e] via-[#0a041f] to-[#05010e]">
                 {/* Nebula Glow */}
@@ -72,7 +73,7 @@ export default function Blog() {
                 </div>
 
                 {/* Content */}
-                <BlogNews />
+                <SkyTonightPage />
             </div>
 
 

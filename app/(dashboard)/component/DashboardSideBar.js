@@ -60,13 +60,6 @@ const DashboardSidebar = () => {
             icon: Image,
             isAdmin: false,
         },
-        {
-            name: "Blog",
-            value: "blog",
-            route: "/dashboard/blog",
-            icon: FileText,
-            isAdmin: true,
-        },
         // {
         //     name: "Merchandise",
         //     value: "merchandise",
